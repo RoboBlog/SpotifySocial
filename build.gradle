@@ -24,10 +24,15 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-websocket')
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+// https://mvnrepository.com/artifact/com.google.guava/guava
+	compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
 	compile 'org.springframework.security:spring-security-test:4.0.1.RELEASE'
-	compile 'com.squareup.retrofit2:retrofit:2.3.0'
+	compile 'com.google.code.gson:gson:2.8.1'
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile 'org.assertj:assertj-core:3.8.0'

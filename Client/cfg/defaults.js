@@ -24,6 +24,10 @@ function getDefaultModules() {
       }
     ],
     loaders: [
+      { test: /\.(eot|woff|woff2|ttf|svg|png|jpe?g|gif)(\?\S*)?$/
+        , loader: 'url?limit=100000&name=[name].[ext]'
+      },
+      // { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' },
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'

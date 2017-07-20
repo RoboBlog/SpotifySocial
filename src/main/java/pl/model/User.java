@@ -1,12 +1,13 @@
 package pl.model;
 
+import pl.other.POJO.Spotify;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
-/**
- * Created by maciek on 7/8/17.
- */
+
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -18,16 +19,41 @@ public class User implements Serializable {
     private String spotifyAccessToken;
 
     @Column(name = "username", unique = true)
-    private String userName;
+    private String username;
 
     @Column(name = "password")
     private String password;
 
     @Column(name = "email")
     private String email;
+    @OneToMany
+    @JoinColumn(name = "friendId")
+    private List<Friend> friends;
 
     @Column(name ="enabled")
     private int enabled;
+    @OneToOne
+    private Spotify spotify;
+
+    @OneToOne
+    @JoinColumn(name="addressId")
+    private Address address;
+
+    public List<Friend> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<Friend> friends) {
+        this.friends = friends;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
     public String getSpotifyAccessToken() {
         return spotifyAccessToken;
@@ -38,6 +64,15 @@ public class User implements Serializable {
     }
 //    @OneToOne
 //    private UserRole userRole;
+
+
+//    public Spotify getSpotify() {
+//        return spotify;
+//    }
+//
+//    public void setSpotify(Spotify spotify) {
+//        this.spotify = spotify;
+//    }
 
     private String confirmationId;
 
@@ -57,12 +92,25 @@ public class User implements Serializable {
         this.confirmationId = confirmationId;
     }
 
+    public User(String username, String password, String email, int enabled) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.enabled = enabled;
+    }
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
     public User(){
     }
 
     public User(User user) {
         this.userId = user.userId;
-        this.userName = user.userName;
+        this.username = user.username;
         this.email = user.email;
         this.password = user.password;
         this.enabled=user.enabled;
@@ -100,12 +148,12 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
 

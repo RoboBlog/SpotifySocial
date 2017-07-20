@@ -9,7 +9,7 @@ import pl.model.UserRepository;
 import javax.annotation.PostConstruct;
 
 /**
- * Created by maciek on 7/8/17.
+ * Created by maciek on 7/14/17.
  */
 @Component
 public class RunAtStart {
@@ -27,8 +27,8 @@ public class RunAtStart {
     public void runAtStart(){
         User user = new User();
         user.setEmail("testmail@gmail.com");
-        user.setPassword(passwordEncoder.encode("password"));
-        user.setUserName("admin");
+        user.setPassword(passwordEncoder.encode("test"));
+        user.setUsername("maciek");
         user.setEnabled(1);
         //role add
         userRepository.save(user);

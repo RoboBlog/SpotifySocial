@@ -2,9 +2,6 @@ package pl.model;
 
 import javax.persistence.*;
 
-/**
- * Created by maciek on 7/8/17.
- */
 @Entity
 @Table(name="user_roles")
 public class UserRole {

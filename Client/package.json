@@ -53,7 +53,7 @@
     "open": "0.0.5",
     "phantomjs-prebuilt": "^2.0.0",
     "react-addons-test-utils": "^15.0.0",
-    "react-hot-loader": "^1.2.9",
+    "react-hot-loader": "^2.0.0-alpha-4",
     "rimraf": "^2.4.3",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
@@ -61,9 +61,25 @@
     "webpack-dev-server": "^1.12.0"
   },
   "dependencies": {
+    "axios": "latest",
+    "bootstrap": "^3.3.7",
     "core-js": "^2.0.0",
+    "isomorphic-fetch": "latest",
     "normalize.css": "^4.0.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "prop-types": "latest",
+    "react": "^15.6.1",
+    "react-addons-css-transition-group": "^15.6.0",
+    "react-addons-transition-group": "^15.6.0",
+    "react-dom": "^15.6.1",
+    "react-redux": "^5.0.5",
+    "react-router": "latest",
+    "react-router-dom": "^4.1.1",
+    "react-validation": "latest",
+    "reactstrap": "^4.8.0",
+    "redux": "^3.7.1",
+    "redux-form": "latest",
+    "redux-thunk": "latest",
+    "react-cookie": "latest",
+    "jwt-decode": "latest"
   }
 }

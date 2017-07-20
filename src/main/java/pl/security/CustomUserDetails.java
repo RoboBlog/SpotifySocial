@@ -9,9 +9,6 @@ import pl.model.User;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by maciek on 7/8/17.
- */
 
 public class CustomUserDetails extends User implements UserDetails {
 
@@ -53,7 +50,7 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return super.getUserName();
+        return super.getUsername();
     }
 
 

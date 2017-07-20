@@ -20,7 +20,6 @@ public class SpotifyGetServiceTest {
     }
 
 
-    //if my method respons rest and rest exception how to test if respond rest exception not null is not good thing
     @Test
     public void getTopTracksTest() throws UnirestException {
         spotifyGetService.getTopTracks(userAccessToken);
