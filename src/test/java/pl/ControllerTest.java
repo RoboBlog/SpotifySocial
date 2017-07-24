@@ -15,14 +15,14 @@ import org.springframework.test.web.servlet.MockMvc;
 //@SpringBootTest
 public class ControllerTest {
 
-    private MockMvc mockMvc;
+//    private MockMvc mockMvc;
 
-    @Test
-    public void firstEchoTest() throws Exception {
+//    @Test
+//    public void firstEchoTest() throws Exception {
 //        get("/api/echo").then().assertThat().body("message", equals("hello"));
 //        mockMvc.perform(get("/api/echo")).asserThat().body("message", equals("hello"));
 //        assertThat("bpods");
         //                .andExpect(status().isOk())
 
-    }
+//    }
 }
