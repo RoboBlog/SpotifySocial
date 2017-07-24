@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import pl.ProfileService;
 import pl.SecurityContextService;
 import pl.model.User;
@@ -14,11 +14,12 @@ import pl.other.GsonTest;
 import pl.spotify.SpotifyGetService;
 import pl.spotify.SpotifyLoginService;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @CrossOrigin(origins = "http://localhost:8000")
-@RequestMapping("/spotify/")
+@RequestMapping("/api/spotify/")
 @RestController
 public class Controller {
 
@@ -27,32 +28,48 @@ public class Controller {
     private final SecurityContextService securityContextService;
     private final ProfileService profileService;
     private final GsonTest gsonTest;
+    private final SaveMusic saveMusic;
 
     @Autowired
-    public Controller(SpotifyLoginService spotifyLoginService, SpotifyGetService spotifyGetService, SecurityContextService securityContextService, ProfileService profileService, GsonTest gsonTest) {
+    public Controller(SpotifyLoginService spotifyLoginService, SpotifyGetService spotifyGetService, SecurityContextService securityContextService, ProfileService profileService, GsonTest gsonTest, SaveMusic saveMusic) {
         this.spotifyLoginService = spotifyLoginService;
         this.spotifyGetService = spotifyGetService;
         this.securityContextService = securityContextService;
         this.profileService = profileService;
         this.gsonTest = gsonTest;
+        this.saveMusic = saveMusic;
     }
 
-    @RequestMapping("/")
-    public ModelAndView model() throws IOException {
+    @GetMapping("/geturl")
+    public RedirectView model() throws IOException {
         String url = spotifyLoginService.getSpotifyLoginUrl();
-        return new ModelAndView("redirect:" + url);
+//        return new ModelAndView("redirect:" + url);
+//        return url;
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl(url);
+        return redirectView;
     }
 
     //direct !
-    @RequestMapping("/callback")
-    public String Callback(HttpServletRequest request) throws IOException, UnirestException {
+    @GetMapping("/callback")
+    public RedirectView Callback(HttpServletRequest request) throws IOException, UnirestException {
         String code = request.getQueryString().replace("code=","");
+//        Cookie[] cookies = request.getCookies();
+//        String username = cookies[0].getValue();
         String accessToken = spotifyLoginService.getAccessToken(code);
-        profileService.setSpotifyAccessToken(accessToken);
-        return accessToken;
+//        profileService.setSpotifyAccessToken(accessToken, username);
 
+
+        String topTracks = spotifyGetService.getTopTracks(accessToken);
+        saveMusic.update(topTracks);
+        //get username
+
+        RedirectView redirectView = new RedirectView();
+        redirectView.setUrl("http://google.com/");
+        return redirectView;
     }
-    @RequestMapping("/getTopTracks")
+
+    @GetMapping("/gettoptracks")
     public String getTopTracks() throws UnirestException {
         String spotifyAccessToken = profileService.getSpotifyAccessToken();
         System.out.println("GetToken");
@@ -61,6 +78,7 @@ public class Controller {
 
         String topTracks = spotifyGetService.getTopTracks(spotifyAccessToken);
         System.out.println("Get Array");
+        System.out.println(topTracks);
 
 //        HttpResponse<JsonNode> topTracks = spotifyGetService.getTopTracks(spotifyGetService.getLoggedUserAccessToken());
 //        return topTracks.getBody().toString();
@@ -83,17 +101,6 @@ public class Controller {
     return test;
     }
 
-    @GetMapping("/testapi2")
-    public User testapi2(){
-        User test = new User();
-        test.setSpotifyAccessToken("3gdfsgdsg");
-        test.setEnabled(0);
-        test.setPassword("sdkfjkm");
-        test.setConfirmationId("fdsjgdjkfdsafsadshngjdfshfd432");
-        test.setEmail("testapi2@gmail.com");
-        test.setUsername("tesw");
-    return test;
-    }
     @GetMapping("/testlog1")
     public User testlog1(){
         User user = profileService.authTest();

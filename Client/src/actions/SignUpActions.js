@@ -13,7 +13,7 @@ export function loginUserSuccess(token) {
 
 export function loginUserFailure(error) {
   if(error.toString()==='Error: Request failed with status code 401') {
-    alert('Incorrect username or password!');
+    alert('Incorrect username or password!');//invalid
   }
   else{
     alert('Undefined error');

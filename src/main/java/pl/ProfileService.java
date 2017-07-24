@@ -1,5 +1,6 @@
 package pl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.model.Friend;
 import pl.model.FriendRepository;
@@ -15,7 +16,8 @@ public class ProfileService {
     private final SecurityContextService securityContextService;
     private final FriendRepository friendRepository;
 
-    public ProfileService(UserRepository userRepository, SecurityContextService securityContextService, FriendRepository friendRepository) {
+    @Autowired
+    private ProfileService(UserRepository userRepository, SecurityContextService securityContextService, FriendRepository friendRepository) {
         this.userRepository = userRepository;
         this.securityContextService = securityContextService;
         this.friendRepository = friendRepository;
@@ -26,8 +28,8 @@ public class ProfileService {
         User loggedUser = userRepository.findByUsername(username);
         return loggedUser;
     }
-    public void setSpotifyAccessToken(String accessToken){
-        User user = authTest();
+    public void setSpotifyAccessToken(String accessToken, String username){
+        User user = userRepository.findByUsername(username);
         user.setSpotifyAccessToken(accessToken);
         userRepository.save(user);
     }

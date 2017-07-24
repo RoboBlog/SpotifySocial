@@ -3,6 +3,10 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+//
+// import { Router, Route, browserHistory } from 'react-router'
+// import { syncHistoryWithStore, routerReducer } from 'react-router-redux'
+
 import { Provider } from 'react-redux';
 import reducers from './reducers'
 import { createStore, applyMiddleware } from 'redux';
@@ -13,37 +17,44 @@ import Test from './components/Test'
 import About from './components/Text';
 import Profile from './components/Profile';
 import Login from './components/Login';
+import AddSpotify from './components/AddSpotify'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './assets/font-awesome/css/font-awesome.css'
 import  './assets/css/style.css'
 import './assets/css/style-responsive.css'
-
+import { Link } from 'react-router-dom'
+import { CookiesProvider, withCookies, Cookies } from 'react-cookie';
 const store = createStore(reducers, applyMiddleware(thunk));
-
+import GetSpotifyTopTracks from './components/GetSpotifyTopTracks'
 class App extends Component {
+
+
+
+
   render() {
     return (
+  <CookiesProvider>
       <Provider store={store}>
       <Router>
         <div>
           <header className="header black-bg">
-            <a href="index.html" className="logo"><b>SPOTIFY SOCIAL</b></a>
+            <Link to='/' className="logo"><b>SPOTIFY SOCIAL</b></Link>
             <div className="nav notify-row" id="top_menu">
               <ul className="nav top-menu">
                 <li className="dropdown">
-                  <a  href="index.html#">
-                    {/*<i className="fa fa-exclamation-triangle" />*/}
+                  <Link to='/'>
+                        {/*<i className="fa fa-exclamation-triangle" />*/}
                     <i className="fa fa-envelope" />
                     <span className="badge bg-theme">4</span>
-                  </a>
+                  </Link>
                 </li>
 
                 <li className="dropdown ">
-                  <a  href="index.html#">
-                    {/*<i className="fa fa-exclamation-triangle" />*/}
+                  <Link to='/'>
+                        {/*<i className="fa fa-exclamation-triangle" />*/}
                     <i className="fa fa-flag" />
                     <span className="badge bg-theme">4</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -59,11 +70,11 @@ class App extends Component {
               <ul className="nav top-menu">
 
                 <li className="dropdown">
-                  <a  href="index.html#">
-                    {/*<i className="fa fa-exclamation-triangle" />*/}
+                  <Link to='/'>
+                        {/*<i className="fa fa-exclamation-triangle" />*/}
                     <i className="fa fa-cog" />
                     {/*<span className="badge bg-theme">4</span>*/}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -73,6 +84,8 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
+          <Route path="/addspotify" component={AddSpotify} />
+          <Route path="/getspotifytoptracks" component={GetSpotifyTopTracks} />
           <Route path="/signup" component={SignUp} />
           <Route path="/test" component={Test} />
           <Route path="/about" component={About} />
@@ -81,6 +94,7 @@ class App extends Component {
       </Router>
 
       </Provider>
+  </CookiesProvider>
     );
   }
 }

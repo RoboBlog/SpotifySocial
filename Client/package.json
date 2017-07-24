@@ -64,12 +64,15 @@
     "axios": "latest",
     "bootstrap": "^3.3.7",
     "core-js": "^2.0.0",
+    "history": "^4.6.3",
     "isomorphic-fetch": "latest",
+    "jwt-decode": "latest",
     "normalize.css": "^4.0.0",
     "prop-types": "latest",
     "react": "^15.6.1",
     "react-addons-css-transition-group": "^15.6.0",
     "react-addons-transition-group": "^15.6.0",
+    "react-cookie": "latest",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.5",
     "react-router": "latest",
@@ -79,7 +82,6 @@
     "redux": "^3.7.1",
     "redux-form": "latest",
     "redux-thunk": "latest",
-    "react-cookie": "latest",
-    "jwt-decode": "latest"
+    "react-router-redux": "latest"
   }
 }

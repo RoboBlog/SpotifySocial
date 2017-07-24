@@ -11,7 +11,8 @@ import java.io.IOException;
 @Service
 public class SpotifyLoginService {
     private String clientId = "471e3e2552344f56baaae5ecb0752cc8";
-    private String redirectURI = "http://localhost:8080/spotify/callback";
+//    private String redirectURI = "http://localhost:8080/api/spotify/callback";
+    private String redirectURI = "http://109.207.104.156:8080/api/spotify/callback";
 
 
 
@@ -23,7 +24,7 @@ public class SpotifyLoginService {
     public String getAccessToken(String code) throws UnirestException {
 
         HttpResponse<JsonNode> jsonResponse= Unirest.post("https://accounts.spotify.com/api/token")
-                .header("Authorization", "<token>")
+                .header("Authorization", "Basic NDcxZTNlMjU1MjM0NGY1NmJhYWFlNWVjYjA3NTJjYzg6ODI5NTViMjI1Y2NiNGJlYmE0YWIzNDQ5ZmRmNjhhMmU=")
                 .field("code", code)
                 .field("redirect_uri", redirectURI)
                 .field("grant_type", "authorization_code")

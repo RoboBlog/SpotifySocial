@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
 
-class Test extends React.Component{
+class AddSpotify extends React.Component{
   static propTypes = {
     isLoading: PropTypes.bool ,
     isError: PropTypes.bool ,
@@ -25,13 +25,7 @@ class Test extends React.Component{
         <br />
         <br />
         <br />
-        Username : <b>{data.username}</b>
-        <br />
-        Password: <b>{data.password}</b>
-        <br />
-        Email: <b>{data.email}</b>
-        <br />
-        <b>{data.enabled ? 'Account is active' : 'Account is Unactive'}</b>
+        Data : <b><a href={data}>spotify</a></b>
       </div>
     );
   }
@@ -41,8 +35,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getData: () => dispatch(apiActions.getData('http://localhost:8080/api/spotify/testlog1'))
+    getData: () => dispatch(apiActions.getData('http://localhost:8080/api/spotify/geturl'))
   }
 };
-Test = connect(mapStateToProps, mapDispatchToProps)(Test);
-export default Test;
+
+AddSpotify = connect(mapStateToProps, mapDispatchToProps)(AddSpotify);
+export default AddSpotify;

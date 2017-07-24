@@ -1,14 +1,15 @@
 import {LOGIN_USER_REQUEST, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, LOGOUT_USER} from '../constants';
 import axios from 'axios'
 import dispatch from "redux";
-
+import {Link} from "react-router-dom";
 export function loginUserSuccess(token) {
   localStorage.setItem('token', token);
-  return {
+    return {
     type: LOGIN_USER_SUCCESS,
     payload: {
       token: token
     }
+
   }
 }
 
@@ -42,10 +43,16 @@ export function sendData(link,form) {
     password : form.password
   })
     .then((response) => {
-      alert(response.headers['authorization']);
+      // alert(response.headers['authorization']);
       dispatch(loginUserSuccess(response.headers['authorization']));
-    })
+  })
     .catch(function (error) {
+      // if(error.toString()==='Error: Request failed with status code 401') {
+      //   alert('Incorrect username or password!');
+      // }
+      // else{
+      //   alert('Undefined error');
+      // }
     });
 
 

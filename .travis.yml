@@ -1,0 +1,15 @@
+language: java
+jdk:
+  - oraclejdk8
+services:
+  - mysql
+
+before_install:
+  - mysql -e 'CREATE DATABASE spotifysocial;'
+
+
+test:
+  adapter: mysql2
+  database: spotifysocial
+  username: travis
+  encoding: utf8
