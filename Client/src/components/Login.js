@@ -9,7 +9,7 @@ class Login extends React.Component {
     let body = {username : values.username,password : values.password};
     sendFormActions.sendData('http://localhost:8080/login', body);
     const { cookies } = this.props;
-    cookies.set('username', values.username, { path: '/' });
+    cookies.set('username', body.username, { path: '/' });
 
   };
   render() {

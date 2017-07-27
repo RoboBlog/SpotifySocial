@@ -22,16 +22,17 @@ public class SaveMusic {
         return new BigInteger(130, random).toString(32);
     }
     public void update(String tracks){
-        String name = nextSessionId();
-        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(name), "utf-8"))) {
-            writer.write(tracks);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.print(tracks);
+//        String name = nextSessionId();
+//        try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+//                new FileOutputStream(name), "utf-8"))) {
+//            writer.write(tracks);
+//        } catch (UnsupportedEncodingException e) {
+//            e.printStackTrace();
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 }

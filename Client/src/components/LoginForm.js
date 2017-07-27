@@ -58,11 +58,10 @@ let LoginForm = props => {
 
         </div>
       </div>
-      // </div>
     );
 };
 
 
 export default reduxForm({
-  form: 'login' // a unique identifier for this form
+  form: 'login'
 })(LoginForm);

@@ -4,15 +4,22 @@ import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.net.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Service
 public class SpotifyLoginService {
     private String clientId = "471e3e2552344f56baaae5ecb0752cc8";
-//    private String redirectURI = "http://localhost:8080/api/spotify/callback";
-    private String redirectURI = "http://109.207.104.156:8080/api/spotify/callback";
+    private String redirectURI = "http://localhost:8080/api/spotify/callback";
+//    private String redirectURI = "http://109.207.104.156:8080/api/spotify/callback";
 
 
 
@@ -21,16 +28,41 @@ public class SpotifyLoginService {
         return url;
     }
 
-    public String getAccessToken(String code) throws UnirestException {
+    public String getAccessToken(String code) throws IOException {
 
-        HttpResponse<JsonNode> jsonResponse= Unirest.post("https://accounts.spotify.com/api/token")
-                .header("Authorization", "Basic NDcxZTNlMjU1MjM0NGY1NmJhYWFlNWVjYjA3NTJjYzg6ODI5NTViMjI1Y2NiNGJlYmE0YWIzNDQ5ZmRmNjhhMmU=")
-                .field("code", code)
-                .field("redirect_uri", redirectURI)
-                .field("grant_type", "authorization_code")
-                .asJson();
+        URL url = new URL("https://accounts.spotify.com/api/token");
+        Map<String,Object> params = new LinkedHashMap<>();
+        params.put("code", code);
+        params.put("redirect_uri", redirectURI);
+        params.put("grant_type", "authorization_code");
 
-        String accessToken = jsonResponse.getBody().getObject().getString("access_token");
+
+        StringBuilder postData = new StringBuilder();
+        for (Map.Entry<String,Object> param : params.entrySet()) {
+            if (postData.length() != 0) postData.append('&');
+            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
+            postData.append('=');
+            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
+        }
+        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        conn.setRequestMethod("POST");
+        String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
+        conn.setRequestProperty("Authorization", spotifyApiKey);
+        conn.setDoOutput(true);
+        conn.getOutputStream().write(postDataBytes);
+
+        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        StringBuilder sb = new StringBuilder();
+        for (int c; (c = in.read()) >= 0;)
+            sb.append((char)c);
+        String response = sb.toString();
+
+        JSONObject responseJson = new JSONObject(response);
+        String accessToken = responseJson.get("access_token").toString();
+        System.out.print("SPOTIFYLOGINSEVICE"+accessToken);
         return accessToken;
     }
 

@@ -41,50 +41,46 @@ public class Controller {
     }
 
     @GetMapping("/geturl")
-    public RedirectView model() throws IOException {
+    public String model() throws IOException {
         String url = spotifyLoginService.getSpotifyLoginUrl();
+        return url;
 //        return new ModelAndView("redirect:" + url);
 //        return url;
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl(url);
-        return redirectView;
+//        RedirectView redirectView = new RedirectView();
+//        redirectView.setUrl(url);
+//        return redirectView;
     }
 
     //direct !
     @GetMapping("/callback")
-    public RedirectView Callback(HttpServletRequest request) throws IOException, UnirestException {
+    public void Callback(HttpServletRequest request) throws IOException, UnirestException {
         String code = request.getQueryString().replace("code=","");
-//        Cookie[] cookies = request.getCookies();
-//        String username = cookies[0].getValue();
-        String accessToken = spotifyLoginService.getAccessToken(code);
-//        profileService.setSpotifyAccessToken(accessToken, username);
-
+        Cookie[] cookies = request.getCookies();
+        String username = cookies[0].getValue();
+       String accessToken = spotifyLoginService.getAccessToken(code);
+       System.out.println("USERNAME"+username);
+        profileService.setSpotifyAccessToken(accessToken, username);
 
         String topTracks = spotifyGetService.getTopTracks(accessToken);
-        saveMusic.update(topTracks);
+
+//   1.     saveMusic.update(topTracks);
+
+
         //get username
 
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://google.com/");
-        return redirectView;
+//        RedirectView redirectView = new RedirectView();
+//        redirectView.setUrl("http://google.com/");
+//        return redirectView;
     }
 
     @GetMapping("/gettoptracks")
-    public String getTopTracks() throws UnirestException {
+    public String getTopTracks() throws IOException, UnirestException {
         String spotifyAccessToken = profileService.getSpotifyAccessToken();
-        System.out.println("GetToken");
-
-
-
+        System.out.print(spotifyAccessToken);
         String topTracks = spotifyGetService.getTopTracks(spotifyAccessToken);
-        System.out.println("Get Array");
         System.out.println(topTracks);
-
-//        HttpResponse<JsonNode> topTracks = spotifyGetService.getTopTracks(spotifyGetService.getLoggedUserAccessToken());
-//        return topTracks.getBody().toString();
         gsonTest.gson(topTracks);
         System.out.println("mapped");
-//        System.out.println(topTrac?ks);
         return "topTracks";
     }
 

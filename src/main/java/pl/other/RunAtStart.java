@@ -32,5 +32,6 @@ public class RunAtStart {
         user.setEnabled(1);
         //role add
         userRepository.save(user);
+
     }
 }

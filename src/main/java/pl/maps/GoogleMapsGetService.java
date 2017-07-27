@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class GoogleMapsGetService {
-    static String apiKey = "AIzaSyCVjf9g7Ubhwat4EYIAVsKpO5TVAD880cU";
+     String apiKey = System.getenv("GOOGLE_MAPS_API_KEY");
         public JSONObject getCoordinates(String city, String country) throws UnirestException {
             HttpResponse<JsonNode> coordinates = Unirest.get("https://maps.googleapis.com/maps/api/geocode/json?address=" + city+","+country + "&key=" + apiKey).asJson();
             JSONObject coord = coordinates.getBody().getObject().getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");

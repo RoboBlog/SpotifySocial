@@ -4,6 +4,7 @@ import dispatch from "redux";
 import {Link} from "react-router-dom";
 export function loginUserSuccess(token) {
   localStorage.setItem('token', token);
+  window.location.replace('/');
     return {
     type: LOGIN_USER_SUCCESS,
     payload: {
@@ -45,6 +46,8 @@ export function sendData(link,form) {
     .then((response) => {
       // alert(response.headers['authorization']);
       dispatch(loginUserSuccess(response.headers['authorization']));
+
+
   })
     .catch(function (error) {
       // if(error.toString()==='Error: Request failed with status code 401') {
