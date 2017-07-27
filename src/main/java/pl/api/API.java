@@ -19,7 +19,13 @@ import java.nio.file.Paths;
 /**
  * Created by maciek on 7/23/17.
  */
-//@RestController
+
+@RestController
 public class API {
+
+    @RequestMapping
+    public String testController(){
+        return "test";
+    }
 
 }
