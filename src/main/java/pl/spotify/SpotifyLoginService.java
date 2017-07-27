@@ -18,8 +18,8 @@ import java.util.Map;
 @Service
 public class SpotifyLoginService {
     private String clientId = "471e3e2552344f56baaae5ecb0752cc8";
-    private String redirectURI = "http://localhost:8080/api/spotify/callback";
-//    private String redirectURI = "http://109.207.104.156:8080/api/spotify/callback";
+    private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
+    private final String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
 
 
 
@@ -48,7 +48,6 @@ public class SpotifyLoginService {
 
         HttpURLConnection conn = (HttpURLConnection)url.openConnection();
         conn.setRequestMethod("POST");
-        String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
         conn.setRequestProperty("Authorization", spotifyApiKey);
         conn.setDoOutput(true);
         conn.getOutputStream().write(postDataBytes);
@@ -62,7 +61,7 @@ public class SpotifyLoginService {
 
         JSONObject responseJson = new JSONObject(response);
         String accessToken = responseJson.get("access_token").toString();
-        System.out.print("SPOTIFYLOGINSEVICE"+accessToken);
+//        System.out.print("SPOTIFYLOGINSEVICE"+accessToken);
         return accessToken;
     }
 

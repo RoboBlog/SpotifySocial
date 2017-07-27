@@ -4,12 +4,8 @@ jdk:
 services:
   - mysql
 
-before_install:
-  - mysql -e 'CREATE DATABASE spotifysocial;'
-
-
-test:
-  adapter: mysql2
-  database: spotifysocial
-  username: travis
-  encoding: utf8
+deploy:
+  provider: heroku
+  api-key:
+    secure: $HEROKU_API_KEY
+  app: spotifyocial
