@@ -17,6 +17,7 @@ public class User implements Serializable {
     private Long userId;
 
     private String spotifyAccessToken;
+    private String deezerAccessToken;
 
     @Column(name = "username", unique = true)
     private String username;
@@ -38,6 +39,14 @@ public class User implements Serializable {
     @OneToOne
     @JoinColumn(name="addressId")
     private Address address;
+
+    public String getDeezerAccessToken() {
+        return deezerAccessToken;
+    }
+
+    public void setDeezerAccessToken(String deezerAccessToken) {
+        this.deezerAccessToken = deezerAccessToken;
+    }
 
     public List<Friend> getFriends() {
         return friends;

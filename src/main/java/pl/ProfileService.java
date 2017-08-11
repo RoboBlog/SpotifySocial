@@ -28,11 +28,19 @@ public class ProfileService {
         User loggedUser = userRepository.findByUsername(username);
         return loggedUser;
     }
+
     public void setSpotifyAccessToken(String accessToken, String username){
         User user = userRepository.findByUsername(username);
         user.setSpotifyAccessToken(accessToken);
         userRepository.save(user);
     }
+
+    public void setDeezerAccessToken(String accessToken, String username){
+        User user = userRepository.findByUsername(username);
+        user.setDeezerAccessToken(accessToken);
+        userRepository.save(user);
+    }
+
     public String getSpotifyAccessToken(){
         User user = authTest();
         return  user.getSpotifyAccessToken();

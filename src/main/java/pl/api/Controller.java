@@ -53,14 +53,15 @@ public class Controller {
 
     //direct !
     @GetMapping("/callback")
-    public void Callback(HttpServletRequest request) throws IOException, UnirestException {
+    public void callback(HttpServletRequest request) throws IOException, UnirestException {
         String code = request.getQueryString().replace("code=","");
         Cookie[] cookies = request.getCookies();
         String username = cookies[0].getValue();
-       String accessToken = spotifyLoginService.getAccessToken(code);
-       System.out.println("USERNAME"+username);
-        profileService.setSpotifyAccessToken(accessToken, username);
+        String accessToken = spotifyLoginService.getAccessToken(code);
+        System.out.println("USERNAME"+username);
 
+
+        profileService.setSpotifyAccessToken(accessToken, username);
         String topTracks = spotifyGetService.getTopTracks(accessToken);
 
 //   1.     saveMusic.update(topTracks);

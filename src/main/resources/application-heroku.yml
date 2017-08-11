@@ -1,3 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:mysql://185.24.218.5:3306/roboblog_spotifysocial
