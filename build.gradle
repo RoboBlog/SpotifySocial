@@ -24,7 +24,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-websocket')
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
@@ -32,6 +31,46 @@ dependencies {
 
 	compile 'org.springframework.security:spring-security-test:4.0.1.RELEASE'
 	compile 'com.google.code.gson:gson:2.8.1'
+	compile 'com.squareup.okhttp3:okhttp:3.8.1'
+
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.5.3.RELEASE'
+
+
+
+	//swagger
+//	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
+//	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+
+
+
+//	CHATTT
+
+	compile("org.springframework.boot:spring-boot-starter-websocket")
+	compile("org.webjars:webjars-locator")
+	compile("org.webjars:sockjs-client:1.0.2")
+	compile("org.webjars:stomp-websocket:2.3.3")
+	compile("org.webjars:bootstrap:3.3.7")
+	compile("org.webjars:jquery:3.1.0")
+	compile group: 'org.webjars', name: 'momentjs', version: '2.18.1'
+	compile group: 'org.webjars.bower', name: 'socket.io-client', version: '1.4.5'
+
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.4.RELEASE'
+	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
+	// https://mvnrepository.com/artifact/org.json/json
+	compile group: 'org.json', name: 'json', version: '20160810'
+
+//	compile('org.springframework.boot:spring-boot-starter')
+//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '1.5.4.RELEASE'
+//	compile group: 'org.webjars', name: 'webjars-locator', version: '0.32'
+//	compile group: 'org.webjars.bower', name: 'sockjs-client', version: '1.1.4'
+//	compile group: 'org.webjars.bower', name: 'stomp-websocket', version: '2.3.4'
+//	compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
+//	compile group: 'org.webjars.bower', name: 'jquery', version: '3.1.0'
+//
+	compile group: 'com.google.guava', name: 'guava', version: '19.0'
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+
 	runtime('mysql:mysql-connector-java')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile 'org.assertj:assertj-core:3.8.0'

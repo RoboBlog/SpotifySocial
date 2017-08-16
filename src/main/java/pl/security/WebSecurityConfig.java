@@ -47,6 +47,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/spotify/*").permitAll()
                 .antMatchers(HttpMethod.GET, "/**").permitAll()
+                .antMatchers(HttpMethod.PUT, "/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),

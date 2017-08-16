@@ -1,6 +1,7 @@
 package pl.other;
 
 import org.springframework.stereotype.Service;
+import pl.model.User;
 
 import java.util.Date;
 

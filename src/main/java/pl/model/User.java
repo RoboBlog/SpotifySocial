@@ -1,11 +1,12 @@
 package pl.model;
 
-import pl.other.POJO.Spotify;
+import com.fasterxml.jackson.annotation.JsonView;
+import pl.other.Views;
+import pl.spotify.POJO.Spotify;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
+import java.util.UUID;
 
 
 @Entity
@@ -14,31 +15,45 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="userid")
+    @JsonView(Views.Internal.class)
     private Long userId;
 
+    @JsonView(Views.Internal.class)
     private String spotifyAccessToken;
+    @JsonView(Views.Internal.class)
     private String deezerAccessToken;
 
+    @JsonView(Views.Public.class)
     @Column(name = "username", unique = true)
     private String username;
 
+    @JsonView(Views.Internal.class)
     @Column(name = "password")
     private String password;
 
+    @JsonView(Views.Public.class)
     @Column(name = "email")
     private String email;
-    @OneToMany
-    @JoinColumn(name = "friendId")
-    private List<Friend> friends;
+//    @OneToMany
+//    @JoinColumn(name = "friendId")
+//    private List<Friend> friends;
 
+    @JsonView(Views.Public.class)
     @Column(name ="enabled")
     private int enabled;
     @OneToOne
     private Spotify spotify;
 
+    @JsonView(Views.Internal.class)
     @OneToOne
     @JoinColumn(name="addressId")
     private Address address;
+    @JsonView(Views.Internal.class)
+    private String activationCode;
+
+//    private FriendRequest friendRequest;
+
+
 
     public String getDeezerAccessToken() {
         return deezerAccessToken;
@@ -48,13 +63,6 @@ public class User implements Serializable {
         this.deezerAccessToken = deezerAccessToken;
     }
 
-    public List<Friend> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(List<Friend> friends) {
-        this.friends = friends;
-    }
 
     public Address getAddress() {
         return address;
@@ -82,7 +90,7 @@ public class User implements Serializable {
 //    public void setSpotify(Spotify spotify) {
 //        this.spotify = spotify;
 //    }
-
+    @JsonView(Views.Internal.class)
     private String confirmationId;
 
 //    public UserRole getUserRole() {
@@ -106,15 +114,19 @@ public class User implements Serializable {
         this.password = password;
         this.email = email;
         this.enabled = enabled;
+        this.activationCode = UUID.randomUUID().toString();
     }
 
     public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.activationCode = UUID.randomUUID().toString();
+
     }
 
     public User(){
+        this.activationCode = UUID.randomUUID().toString();
     }
 
     public User(User user) {
@@ -123,6 +135,16 @@ public class User implements Serializable {
         this.email = user.email;
         this.password = user.password;
         this.enabled=user.enabled;
+        this.activationCode = UUID.randomUUID().toString();
+
+    }
+
+    public String getActivationCode() {
+        return activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public int getEnabled() {
@@ -165,6 +187,20 @@ public class User implements Serializable {
         this.username = username;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", spotifyAccessToken='" + spotifyAccessToken + '\'' +
+                ", deezerAccessToken='" + deezerAccessToken + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                ", spotify=" + spotify +
+                ", address=" + address +
+                ", activationCode='" + activationCode + '\'' +
+                ", confirmationId='" + confirmationId + '\'' +
+                '}';
+    }
 }

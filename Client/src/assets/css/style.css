@@ -18,6 +18,7 @@ body {
     padding: 0px !important;
     margin: 0px !important;
     font-size:13px;
+  width: 100%;
 }
 
 ul li {
@@ -497,7 +498,14 @@ ul.sidebar-menu li a.active i {
     background: #ffd777;
     border-bottom: 1px solid #c9aa5f;
 }
+.mt60{
+  display: inline-block;
+  margin-top: 60px;
 
+  /*margin: 0px auto;*/
+}
+/*.center {*/
+/*}*/
 .wrapper {
     display: inline-block;
     margin-top: 60px;
@@ -1878,7 +1886,7 @@ label {
 }
 
 .add-on .btn {
-	height: 34px;
+	height: 54px;
 }
 
 /* TOGGLE CONFIGURATION */
@@ -2096,6 +2104,37 @@ label {
 	border-radius: 5px;
 }
 
+.btn-spotify {
+  color: #fff;
+  background-color: #55B05A;
+  border-color: #46a946;
+}
+
+.btn-spotify:hover,
+.btn-spotify:focus,
+.btn-spotify:active,
+.btn-spotify.active,
+.open .dropdown-toggle.btn-spotify {
+  color: #fff;
+  background-color: #4e9c4e;
+  border-color: #439543;
+}
+
+.btn-deezer {
+  color: #fff;
+  background-color: #40BFEF;
+  border-color: #3ebbe9;
+}
+
+.btn-deezer:hover,
+.btn-deezer:focus,
+.btn-deezer:active,
+.btn-deezer.active,
+.open .dropdown-toggle.btn-deezer {
+  color: #fff;
+  background-color: #40abdb;
+  border-color: #3ea8d6;
+}
 
 .btn-facebook {
   color: #fff;

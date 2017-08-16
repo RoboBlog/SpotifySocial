@@ -1,4 +1,3 @@
-// import fetch from 'isomorphic11-fetch';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios'
 export const GET_DATA_REQUESTED = 'GET_DATA_REQUESTED';

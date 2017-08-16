@@ -17,7 +17,7 @@ import java.util.Map;
 
 @Service
 public class SpotifyLoginService {
-    private String clientId = "471e3e2552344f56baaae5ecb0752cc8";
+    private final String clientId = "471e3e2552344f56baaae5ecb0752cc8";
     private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
     private final String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
 
@@ -61,7 +61,6 @@ public class SpotifyLoginService {
 
         JSONObject responseJson = new JSONObject(response);
         String accessToken = responseJson.get("access_token").toString();
-//        System.out.print("SPOTIFYLOGINSEVICE"+accessToken);
         return accessToken;
     }
 

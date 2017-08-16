@@ -1,12 +1,5 @@
 package pl;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
-import pl.SecurityContextService;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**

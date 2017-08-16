@@ -2,48 +2,67 @@ package pl.userProfile;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.ProfileService;
-import pl.SecurityContextService;
-import pl.model.Friend;
-import pl.model.FriendRepository;
-import pl.model.User;
+import pl.other.SecurityContextService;
+import pl.model.FriendRequest;
+import pl.model.FriendRequestRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 
 /**
  * Created by maciek on 7/14/17.
  */
 @Service
 public class FriendsService {
-    private final ProfileService profileService;
-    private final FriendRepository friendRepository;
+    private final SecurityContextService securityContextService;
+    private final FriendRequestRepository friendRequestRepository;
 
     @Autowired
-    public FriendsService(ProfileService profileService, FriendRepository friendRepository) {
-        this.profileService = profileService;
-        this.friendRepository = friendRepository;
+    public FriendsService(SecurityContextService securityContextService, FriendRequestRepository friendRequestRepository) {
+        this.securityContextService = securityContextService;
+        this.friendRequestRepository = friendRequestRepository;
     }
 
-//    public Set<Friend> getAllFriends(){
-//        User user = profileService.authTest();
-//        get friends from repository
-//        return friends;
-//    }
-
-    public void addFriend(User friend){
-        User user = profileService.authTest();
-        Friend newFriend = new Friend(friend);
-        friendRepository.save(newFriend);
-        List<Friend> friends = new ArrayList<>();
-        friends.add(newFriend);
-        //add one friend in repository
-        user.setFriends(friends);
+    public void sendFriendRequest(String invitedUsername){
+        String username = securityContextService.getUsername();
+        FriendRequest request = new FriendRequest(username, invitedUsername);
+        friendRequestRepository.save(request);
     }
 
-    public void removeFriend(int friendId){
+    public List<FriendRequest> getFriendsRequestsList(){
+        String username = securityContextService.getUsername();
+        List<FriendRequest> friendsRequest = friendRequestRepository.getAllByRequestToAndIsAcceptIsFalse(username);
+        return friendsRequest;
+    }
 
+    //@PreAuthorize
+    public String acceptFriendRequest(long requestId){
+        FriendRequest friendRequest = friendRequestRepository.getById(requestId);
+        if(Objects.equals(friendRequest.getRequestFrom(), securityContextService.getUsername())){
+            friendRequest.setAccept(true);
+            friendRequestRepository.save(friendRequest);
+            return "ok";
+        }
+        else{
+            return "error";
+        }
+    }
+
+    public String removeFriendRequest(long requestId){
+        FriendRequest friendRequest = friendRequestRepository.getById(requestId);
+        if(Objects.equals(friendRequest.getRequestFrom(), securityContextService.getUsername())){
+            friendRequestRepository.delete(friendRequest);
+            return "ok";
+        }
+        else{
+            return "error";
+        }
+    }
+
+    public List<FriendRequest> getFriends(){
+        String username = securityContextService.getUsername();
+        List<FriendRequest> friends = friendRequestRepository.getAllByRequestToAndIsAcceptIsTrue(username);
+        return friends;
     }
 
 }

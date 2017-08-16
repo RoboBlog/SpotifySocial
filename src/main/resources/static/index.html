@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello WebSocket</title>
+    <!--<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">-->
+    <link href="main.css" rel="stylesheet">
+    <script src="/webjars/jquery/jquery.min.js"></script>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="webjars/momentjs/2.18.1/moment.js"></script>
+    <script src="app.js"></script>
+    <!--<script src="/app2.js"></script>-->
+</head>
+<body>
+<!--<noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being-->
+    <!--enabled. Please enable-->
+    <!--Javascript and reload this page!</h2></noscript>-->
+<!--&lt;!&ndash;<div id="main-content" class="container">&ndash;&gt;-->
+<!--<div id="container">-->
+    <!--&lt;!&ndash;<div class="row">&ndash;&gt;-->
+    <!--<div id="chat">-->
+        <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+            <!--<form class="form-inline">-->
+                <!--<div class="form-group">-->
+                    <!--<label for="connect">WebSocket connection:</label>-->
+                    <!--<button id="connect" class="btn btn-default" type="submit">Connect</button>-->
+                    <!--<button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect-->
+                    <!--</button>-->
+                <!--</div>-->
+            <!--</form>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+            <!--&lt;!&ndash;<form class="form-inline">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<input type="text" id="message" class="form-control" placeholder="Your message here...">&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</form>&ndash;&gt;-->
+            <!--&lt;!&ndash;<button id="send" class="btn btn-default" type="submit">Send</button>&ndash;&gt;-->
+            <!--<form>-->
+
+                <!--<div class="chat-message clearfix">-->
+                    <!--<input name="message-to-send" autocomplete="off" placeholder="Type your message" id="message" />-->
+
+                    <!--<button type="submit" id="send">Send</button>-->
+                <!--</div>-->
+            <!--</form>-->
+
+
+            <!--&lt;!&ndash;<div class="col-md-6">&ndash;&gt;-->
+                <!--&lt;!&ndash;<form class="form-inline">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                        <!--&lt;!&ndash;<input type="text" id="test" class="form-control" placeholder="Your test here...">&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;</form>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+            <!--<table id="conversation" class="table table-striped">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th>Greetings</th>-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody id="greetings">-->
+                <!--</tbody>-->
+            <!--</table>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+
+
+<div id="container">
+    <div id="chat">
+        <ul id="messages">
+        </ul>
+        <!--<button onClick="connect();">Connect</button>-->
+        <!--Connect on load or error (alert)-->
+        <form>
+            <div class="chat-message clearfix">
+                <input name="message-to-send" autocomplete="off" id="messageInput" placeholder="Type your message" />
+
+                <button type="submit" id="send">Send</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+</body>
+</html>

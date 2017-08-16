@@ -1,11 +1,19 @@
 import React from 'react';
-class HomeComponent extends React.Component {
+import * as apiActions from '../actions/apiActions';
+import {connect} from 'react-redux';
+import Header from '../components/Header'
 
+
+class HomeComponent extends React.Component {
 
   render() {
     return (
-      <section id="main-content">
-        <section className="wrapper">
+      <div>
+        <Header />
+
+        <section id="main-content">
+
+        <section className="wrapper" >
           <div className="col-lg-3 ds">
             <h3>MY LAST MUSIC</h3>
             <div className="desc">
@@ -145,7 +153,7 @@ class HomeComponent extends React.Component {
           </div>
       </section>
   </section>
-
+      </div>
     //
     // {/*<footer class="site-footer">*/}
     //   {/*<div class="text-center">*/}

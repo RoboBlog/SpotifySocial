@@ -15,6 +15,12 @@ public class Address {
     private double latitude;
     private double longtitude;
 
+    public Address(String country, String city, double latitude, double longtitude) {
+        this.country = country;
+        this.city = city;
+        this.latitude = latitude;
+        this.longtitude = longtitude;
+    }
 
     public Address() {
     }

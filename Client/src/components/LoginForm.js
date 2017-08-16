@@ -39,9 +39,9 @@ let LoginForm = props => {
 
               <div className="login-social-link centered">
                 <p>or you can sign in via your social network</p>
-                <button className="btn btn-facebook" type="submit"><i className="fa fa-facebook" /> Facebook</button>
+                <button className="btn btn-facebook"><i className="fa fa-facebook" /> Facebook</button>
                 &nbsp;
-                <button className="btn btn-twitter" type="submit"><i className="fa fa-twitter" /> Twitter</button>
+                <button className="btn btn-twitter"><i className="fa fa-twitter" /> Twitter</button>
               </div>
               <div className="registration">
                 Don't have an account yet?

@@ -82,6 +82,9 @@
     "redux": "^3.7.1",
     "redux-form": "latest",
     "redux-thunk": "latest",
-    "react-router-redux": "latest"
+    "react-router-redux": "latest",
+    "jquery": "latest",
+    "sockjs-client": "latest",
+    "stompjs": "latest"
   }
 }
