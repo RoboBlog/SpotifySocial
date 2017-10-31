@@ -1,8 +1,5 @@
 package pl.spotify;
 
-/**
- * Created by maciek on 8/13/17.
- */
 public class TrackDto {
     private String artist;
     private String name;

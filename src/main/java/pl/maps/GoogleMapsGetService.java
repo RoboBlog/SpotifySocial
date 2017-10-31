@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
-/**
- * Created by maciek on 7/12/17.
- */
 @Service
 public class GoogleMapsGetService {
      private final String apiKey = System.getenv("GOOGLE_MAPS_API_KEY");

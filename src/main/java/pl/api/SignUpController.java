@@ -7,7 +7,6 @@ import pl.model.User;
 import pl.model.UserRepository;
 import pl.userProfile.AccountActivationService;
 
-@CrossOrigin(origins = "http://localhost:8000")
 @RequestMapping("/api/")
 @RestController
 public class SignUpController {

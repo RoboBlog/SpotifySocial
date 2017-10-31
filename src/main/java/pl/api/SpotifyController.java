@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8000")
 @RequestMapping("/api/spotify/")
 @RestController
 public class SpotifyController {

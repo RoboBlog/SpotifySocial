@@ -9,9 +9,6 @@ import pl.model.FriendRequestRepository;
 import java.util.List;
 import java.util.Objects;
 
-/**
- * Created by maciek on 7/14/17.
- */
 @Service
 public class FriendsService {
     private final SecurityContextService securityContextService;

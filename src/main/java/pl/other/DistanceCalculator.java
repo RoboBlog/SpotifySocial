@@ -5,10 +5,6 @@ import pl.model.User;
 
 import java.util.Date;
 
-/**
- * Created by maciek on 7/11/17.
- */
-
 @Service
 public class DistanceCalculator {
 

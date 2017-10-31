@@ -9,9 +9,6 @@ import pl.userProfile.AccountActivationService;
 
 import javax.annotation.PostConstruct;
 
-/**
- * Created by maciek on 7/14/17.
- */
 @Component
 public class RunAtStart {
 
@@ -31,8 +28,8 @@ public class RunAtStart {
     public void runAtStart(){
         User user = new User();
         user.setEmail("robovlogg@gmail.com");
-        user.setPassword(passwordEncoder.encode("test"));
-        user.setUsername("maciek");
+        user.setPassword(passwordEncoder.encode("admin"));
+        user.setUsername("admin");
         //role add
         userRepository.save(user);
         accountActivationService.sendActivationMail(user);

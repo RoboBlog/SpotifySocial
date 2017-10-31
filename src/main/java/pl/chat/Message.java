@@ -5,9 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 
-/**
- * Created by maciek on 8/12/17.
- */
 @Entity
 public class Message {
     @Id

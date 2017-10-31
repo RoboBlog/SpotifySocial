@@ -5,9 +5,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by maciek on 8/13/17.
- */
 @Service
 public class EmailService {
     private final JavaMailSender emailSender;

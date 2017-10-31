@@ -11,9 +11,6 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 
-/**
- * Created by maciek on 7/28/17.
- */
 @Service
 public class DeezerLoginService {
     private final String deezerApiKey = System.getenv("DEEZER_API_KEY");

@@ -9,10 +9,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-/**
- * Created by maciek on 7/28/17.
- */
-@CrossOrigin(origins = "http://localhost:8000")
 @RequestMapping("/api/deezer/")
 @RestController
 public class DeezerController {

@@ -4,10 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pl.userProfile.AccountActivationService;
 
-/**
- * Created by maciek on 8/13/17.
- */
-@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/api/email/")
 public class EmailController {

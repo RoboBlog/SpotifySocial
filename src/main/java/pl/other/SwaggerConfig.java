@@ -39,22 +39,8 @@ public class SwaggerConfig {
                                 .build()));
     }
 
-//    private ApiInfo apiInfo() {
-//        return new ApiInfoBuilder()
-//                .title("Spring Demo with Swagger")
-//                .description("Spring Demo with Swagger")
-//                .contact(new Contact("Krzysztof Chrusciel",
-//                        "http://codecouple.pl",
-//                        "email@here.pl"))
-//                .license("License name here")
-//                .licenseUrl("URL to license")
-//                .version("1.0.1")
-//                .build();
-//    }
-
     private Predicate<String> getSwaggerPaths() {
         return or(
                 regex("/.*"));
-//                regex("/test.*"));
     }
 }

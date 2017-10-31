@@ -12,10 +12,6 @@ import pl.spotify.TrackDto;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Created by maciek on 8/14/17.
- */
-@CrossOrigin(origins = "http://localhost:8000")
 @RequestMapping("/api/")
 @RestController
 public class TestController {
@@ -26,7 +22,7 @@ public class TestController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping("/gettracks") //TODO put spring JAK To ogarniac request param?
+    @GetMapping("/gettracks") //TODO put spring JAK To ogarniac request param?
     public List<TrackDto> getTracks(){
         TrackDto track1 = new TrackDto("AC/DC", "TNT", "1");
         TrackDto track2 = new TrackDto("Pink Floyd", "Another Brick in The Wall", "2");
@@ -49,7 +45,7 @@ public class TestController {
     }
 
     @JsonView(Views.Public.class)
-    @RequestMapping("/usr")
+    @GetMapping("/usr")
     public User usr() throws JsonProcessingException {
         User maciek = userRepository.findByUsername("maciek");
 

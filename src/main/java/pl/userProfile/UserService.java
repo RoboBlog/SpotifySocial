@@ -14,9 +14,6 @@ import pl.model.UserRepository;
 
 import java.io.IOException;
 
-/**
- * Created by maciek on 8/13/17.
- */
 @Service
 public class UserService {
     private final UserRepository userRepository;

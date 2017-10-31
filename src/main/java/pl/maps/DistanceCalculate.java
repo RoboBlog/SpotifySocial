@@ -2,9 +2,6 @@ package pl.maps;
 
 import org.springframework.stereotype.Service;
 
-/**
- * Created by maciek on 7/12/17.
- */
 @Service
 public class DistanceCalculate {
     public boolean distance1To2Check(double lat1, double lon1, double lat2, double lon2, int range) {

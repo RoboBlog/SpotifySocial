@@ -10,9 +10,8 @@ import pl.userProfile.UserService;
 
 import java.io.IOException;
 
-// exception
-@CrossOrigin(origins = "http://localhost:8000")
-@RestController
+//exception
+// @RestController
 @RequestMapping("/api/user/")
 public class UserController {
 

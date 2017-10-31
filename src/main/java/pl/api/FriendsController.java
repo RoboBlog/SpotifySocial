@@ -8,10 +8,6 @@ import pl.userProfile.FriendsService;
 
 import java.util.List;
 
-/**
- * Created by maciek on 8/13/17.
- */
-@CrossOrigin(origins = "http://localhost:8000")
 @RestController
 @RequestMapping("/api/friends/")
 public class FriendsController {

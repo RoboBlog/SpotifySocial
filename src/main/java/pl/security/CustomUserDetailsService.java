@@ -11,10 +11,6 @@ import pl.model.UserRolesRepository;
 
 import java.util.List;
 
-/**
- * Created by maciek on 7/8/17.
- */
-
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;

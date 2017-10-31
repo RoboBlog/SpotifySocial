@@ -2,9 +2,6 @@ package pl.maps;
 
 import org.json.JSONObject;
 
-/**
- * Created by maciek on 8/13/17.
- */
 public class Coordinates {
     private double longtitude;
     private double latitude;
