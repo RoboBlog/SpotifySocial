@@ -3,9 +3,9 @@ package pl.security;
 import org.junit.Test;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import pl.model.User;
+import pl.model.UserRepository;
 import pl.security.service.JwtUserDetailsServiceImpl;
-import pl.user.User;
-import pl.user.UserRepository;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.mock;
