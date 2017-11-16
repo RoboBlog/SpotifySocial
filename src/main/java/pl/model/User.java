@@ -2,10 +2,14 @@ package pl.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import pl.other.Views;
+import pl.security.Authority;
 import pl.spotify.POJO.Spotify;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -40,7 +44,7 @@ public class User implements Serializable {
 
     @JsonView(Views.Public.class)
     @Column(name ="enabled")
-    private int enabled;
+    private boolean enabled;
     @OneToOne
     private Spotify spotify;
 
@@ -51,9 +55,51 @@ public class User implements Serializable {
     @JsonView(Views.Internal.class)
     private String activationCode;
 
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastPasswordResetDate;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_authority",
+            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "userid")},
+            inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
+    private List<Authority> authorities = new LinkedList<>();
+
 //    private FriendRequest friendRequest;
 
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public Spotify getSpotify() {
+        return spotify;
+    }
+
+    public void setSpotify(Spotify spotify) {
+        this.spotify = spotify;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(List<Authority> authorities) {
+        this.authorities = authorities;
+    }
 
     public String getDeezerAccessToken() {
         return deezerAccessToken;
@@ -79,8 +125,6 @@ public class User implements Serializable {
     public void setSpotifyAccessToken(String spotifyAccessToken) {
         this.spotifyAccessToken = spotifyAccessToken;
     }
-//    @OneToOne
-//    private UserRole userRole;
 
 
 //    public Spotify getSpotify() {
@@ -93,13 +137,6 @@ public class User implements Serializable {
     @JsonView(Views.Internal.class)
     private String confirmationId;
 
-//    public UserRole getUserRole() {
-//        return userRole;
-//    }
-//
-//    public void setUserRole(UserRole userRole) {
-//        this.userRole = userRole;
-//    }
 
     public String getConfirmationId() {
         return confirmationId;
@@ -109,7 +146,7 @@ public class User implements Serializable {
         this.confirmationId = confirmationId;
     }
 
-    public User(String username, String password, String email, int enabled) {
+    public User(String username, String password, String email, boolean enabled) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -147,20 +184,12 @@ public class User implements Serializable {
         this.activationCode = activationCode;
     }
 
-    public int getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(int enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
-    }
-
-    public Long getUserid() {
-        return userId;
-    }
-
-    public void setUserid(Long userid) {
-        this.userId = userid;
     }
 
     public String getPassword() {
@@ -194,7 +223,6 @@ public class User implements Serializable {
                 ", spotifyAccessToken='" + spotifyAccessToken + '\'' +
                 ", deezerAccessToken='" + deezerAccessToken + '\'' +
                 ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", spotify=" + spotify +

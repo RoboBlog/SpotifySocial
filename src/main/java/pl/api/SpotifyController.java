@@ -1,9 +1,11 @@
 package pl.api;
 
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.spotify.POJO.Item;
+import pl.spotify.POJO.Spotify;
 import pl.spotify.TrackDto;
 import pl.userProfile.ProfileService;
 import pl.spotify.SpotifyDataService;
@@ -39,21 +41,46 @@ public class SpotifyController {
         return redirectView;
     }
 
+//    @GetMapping("/callback")
+//    public RedirectView callback(HttpServletRequest request, @CookieValue("login") String login) throws IOException {
+//        String code = request.getQueryString().replace("code=","");
+//        System.out.print(login);
+//        String username = "maciek";
+//        String accessToken = spotifyLoginService.getAccessToken(code);
+//        System.out.println("USERNAME"+username);
+//        profileService.setSpotifyAccessToken(accessToken, username);
+//        //FIX
+//        String topTracks = spotifyGetService.getTopTracks(accessToken);
+//        spotifyGetService.saveTopTracks(username, topTracks);
+//
+//        String url = "http://localhost:8000/musicportalstatus"; //TODO FIX IT
+//        RedirectView redirectView = new RedirectView(url);
+//        return redirectView;
+//    }
+
+
     @GetMapping("/callback")
-    public RedirectView callback(HttpServletRequest request, @CookieValue("login") String login) throws IOException {
+    public List<String> callback(HttpServletRequest request) throws IOException {
         String code = request.getQueryString().replace("code=","");
-        System.out.print(login);
         String username = "maciek";
         String accessToken = spotifyLoginService.getAccessToken(code);
         System.out.println("USERNAME"+username);
-        profileService.setSpotifyAccessToken(accessToken, username);
+//        profileService.setSpotifyAccessToken(accessToken, username);
         //FIX
         String topTracks = spotifyGetService.getTopTracks(accessToken);
-        spotifyGetService.saveTopTracks(username, topTracks);
 
-        String url = "http://localhost:8000/musicportalstatus"; //TODO FIX IT
-        RedirectView redirectView = new RedirectView(url);
-        return redirectView;
+        Gson gson = new Gson();
+        Spotify spotify = gson.fromJson(topTracks, Spotify.class);
+        List<Item> items = spotify.getItems();
+
+        List<String> names = new LinkedList<>();
+
+        items.forEach(item->{
+            names.add(item.getName());
+        });
+//        String url = "http://localhost:8080/musicportalstatus"; //TODO FIX IT
+//        RedirectView redirectView = new RedirectView(url);
+        return names;
     }
 
 //    //NOPEEEE

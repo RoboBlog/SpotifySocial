@@ -35,7 +35,7 @@ public class RunAtStart {
         accountActivationService.sendActivationMail(user);
 
 
-        User user2 = new User("karol", passwordEncoder.encode("test"), "karol@gmail.com",1);
+        User user2 = new User("karol", passwordEncoder.encode("test"), "karol@gmail.com",true);
         userRepository.save(user2);
 
     }
