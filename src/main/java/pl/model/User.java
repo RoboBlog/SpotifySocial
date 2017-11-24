@@ -21,6 +21,9 @@ public class User implements Serializable {
     @Column(name="userid")
     @JsonView(Views.Internal.class)
     private Long userId;
+    //background
+    //profile image
+
 
     @JsonView(Views.Internal.class)
     private String spotifyAccessToken;
@@ -38,6 +41,8 @@ public class User implements Serializable {
     @JsonView(Views.Public.class)
     @Column(name = "email")
     private String email;
+
+    private String description;
 //    @OneToMany
 //    @JoinColumn(name = "friendId")
 //    private List<Friend> friends;
@@ -67,7 +72,9 @@ public class User implements Serializable {
     private List<Authority> authorities = new LinkedList<>();
 
 //    private FriendRequest friendRequest;
-
+public void addAuthority(Authority authority){
+    authorities.add(authority);
+}
 
     public Long getUserId() {
         return userId;
@@ -144,6 +151,14 @@ public class User implements Serializable {
 
     public void setConfirmationId(String confirmationId) {
         this.confirmationId = confirmationId;
+    }
+
+    public User(String username, String password, String email, boolean enabled, Date lastPasswordResetDate) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.enabled = enabled;
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     public User(String username, String password, String email, boolean enabled) {

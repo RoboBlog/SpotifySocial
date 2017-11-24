@@ -21,6 +21,15 @@ public class Authority {
     @ManyToMany(mappedBy = "authorities", fetch = FetchType.LAZY)
     private List<User> users;
 
+    public Authority(AuthorityName name, List<User> users) {
+        this.name = name;
+        this.users = users;
+    }
+
+    public Authority() {
+
+    }
+
     public void addUser(User user){
         this.users.add(user);
     }

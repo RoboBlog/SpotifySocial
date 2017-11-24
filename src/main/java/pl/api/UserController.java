@@ -11,7 +11,8 @@ import pl.userProfile.UserService;
 import java.io.IOException;
 
 //exception
-// @RestController
+@CrossOrigin(origins = "${origins}")
+@RestController
 @RequestMapping("/api/user/")
 public class UserController {
 
@@ -22,7 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @JsonView(Views.Public.class)
+//    @JsonView(Views.Public.class)
     @GetMapping("/profile")
     public pl.model.User profile(){
         pl.model.User user = userService.authTest();
