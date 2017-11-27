@@ -42,9 +42,10 @@ public class User implements Serializable {
     private String email;
 
     private String description;
-//    @OneToMany
-//    @JoinColumn(name = "friendId")
-//    private List<Friend> friends;
+
+    //TODO new entity Friend is required?
+    @OneToMany
+    private List<User> friends;
 
     @JsonView(Views.Public.class)
     @Column(name ="enabled")
@@ -75,17 +76,27 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private List<Authority> authorities = new LinkedList<>();
 
-//    private FriendRequest friendRequest;
-public void addAuthority(Authority authority){
-    authorities.add(authority);
-}
+    public void addAuthority(Authority authority){
+        this.authorities.add(authority);
+    }
 
+    public void addFriend(User user){
+        this.friends.add(user);
+    }
     public Long getUserId() {
         return userId;
     }
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<User> friends) {
+        this.friends = friends;
     }
 
     public Spotify getSpotify() {

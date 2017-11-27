@@ -1,64 +1,64 @@
-package pl.userProfile;
+package pl.friends;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import pl.model.User;
 import pl.other.SecurityContextService;
-import pl.model.FriendRequest;
-import pl.model.FriendRequestRepository;
+import pl.userProfile.UserService;
 
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class FriendsService {
-    private final SecurityContextService securityContextService;
+
+    private final UserService userService;
     private final FriendRequestRepository friendRequestRepository;
 
-    @Autowired
-    public FriendsService(SecurityContextService securityContextService, FriendRequestRepository friendRequestRepository) {
-        this.securityContextService = securityContextService;
+    public FriendsService(UserService userService, FriendRequestRepository friendRequestRepository) {
+        this.userService = userService;
         this.friendRequestRepository = friendRequestRepository;
     }
 
+    //TODO relation is necessary?
     public void sendFriendRequest(String invitedUsername){
-        String username = securityContextService.getUsername();
+        String username = userService.getUsername();
         FriendRequest request = new FriendRequest(username, invitedUsername);
         friendRequestRepository.save(request);
     }
 
     public List<FriendRequest> getFriendsRequestsList(){
-        String username = securityContextService.getUsername();
+        String username = userService.getUsername();
         List<FriendRequest> friendsRequest = friendRequestRepository.getAllByRequestToAndIsAcceptIsFalse(username);
         return friendsRequest;
     }
 
-    //@PreAuthorize
-    public String acceptFriendRequest(long requestId){
+
+    public void acceptFriendRequest(long requestId){
         FriendRequest friendRequest = friendRequestRepository.getById(requestId);
-        if(Objects.equals(friendRequest.getRequestFrom(), securityContextService.getUsername())){
+        if(Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())) {
             friendRequest.setAccept(true);
             friendRequestRepository.save(friendRequest);
-            return "ok";
         }
         else{
-            return "error";
+            throw new AccessDeniedException("Access denied!");
         }
     }
 
-    public String removeFriendRequest(long requestId){
+    public void removeFriendRequest(long requestId){
         FriendRequest friendRequest = friendRequestRepository.getById(requestId);
-        if(Objects.equals(friendRequest.getRequestFrom(), securityContextService.getUsername())){
+        if(Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())){
             friendRequestRepository.delete(friendRequest);
-            return "ok";
         }
         else{
-            return "error";
+            throw new AccessDeniedException("Access denied!");
         }
     }
 
-    public List<FriendRequest> getFriends(){
-        String username = securityContextService.getUsername();
-        List<FriendRequest> friends = friendRequestRepository.getAllByRequestToAndIsAcceptIsTrue(username);
+    public List<User> getFriends(){
+        User user = userService.authTest();
+        List<User> friends = user.getFriends();
         return friends;
     }
 
