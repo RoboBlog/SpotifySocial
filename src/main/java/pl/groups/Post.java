@@ -19,10 +19,14 @@ public class Post {
     private User user;
     private LocalDateTime date;
     private String content;
+    //TODO
     //html
     //image or images
-    private Long likes;
+//    private Long likes;
     @OneToMany
     private Set<Comment> comments;
 
+    public void setContent(String content) {
+        this.content = content;
+    }
 }
