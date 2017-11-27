@@ -1,16 +1,15 @@
 package pl.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
+//import pl.groups.Post;
+import pl.groups.Post;
 import pl.other.Views;
 import pl.security.Authority;
 import pl.spotify.POJO.Spotify;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 
 @Entity
@@ -61,8 +60,13 @@ public class User implements Serializable {
     private String activationCode;
 
 
+    @JsonView(Views.Internal.class)
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastPasswordResetDate;
+
+    @JsonView(Views.Internal.class)
+    @OneToMany
+    private Set<Post> posts = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
