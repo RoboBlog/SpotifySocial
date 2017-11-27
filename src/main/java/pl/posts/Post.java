@@ -1,11 +1,9 @@
-package pl.groups;
+package pl.posts;
 
+import pl.comments.Comment;
 import pl.model.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -15,7 +13,7 @@ public class Post {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToMany
+    @ManyToOne
     private User user;
     private LocalDateTime date;
     private String content;
@@ -23,10 +21,25 @@ public class Post {
     //html
     //image or images
 //    private Long likes;
+
     @OneToMany
     private Set<Comment> comments;
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void addComment(Comment comment){
+       this.comments.add(comment);
+    }
+    public Post() {
     }
 }

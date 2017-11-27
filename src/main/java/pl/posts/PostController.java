@@ -1,6 +1,7 @@
-package pl.groups;
+package pl.posts;
 
 import org.springframework.web.bind.annotation.*;
+import pl.comments.Comment;
 
 @RequestMapping("/post/")
 @RestController
@@ -25,6 +26,11 @@ public class PostController {
     @PutMapping("/edit/{postId}")
     public Post editPost(@PathVariable Long postId, @RequestParam String content){
         return postService.editPostContent(postId, content);
+    }
+
+    @PostMapping("/add/comment/{postId}")
+    public Comment addComment(@RequestBody Comment comment, @PathVariable Long postId){
+        return postService.addComment(comment, postId);
     }
 
     @DeleteMapping("/delete/{postId}")

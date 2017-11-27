@@ -1,8 +1,8 @@
 package pl.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-//import pl.groups.Post;
-import pl.groups.Post;
+//import pl.posts.Post;
+import pl.posts.Post;
 import pl.other.Views;
 import pl.security.Authority;
 import pl.spotify.POJO.Spotify;
