@@ -23,7 +23,6 @@ public class User implements Serializable {
     //background
     //profile image
 
-
     @JsonView(Views.Internal.class)
     private String spotifyAccessToken;
     @JsonView(Views.Internal.class)
@@ -68,6 +67,9 @@ public class User implements Serializable {
     @JsonView(Views.Internal.class)
     @OneToMany
     private Set<Post> posts = new HashSet<>();
+
+    @JsonView(Views.Internal.class)
+    private String confirmationId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -156,9 +158,6 @@ public class User implements Serializable {
 //    public void setSpotify(Spotify spotify) {
 //        this.spotify = spotify;
 //    }
-    @JsonView(Views.Internal.class)
-    private String confirmationId;
-
 
     public String getConfirmationId() {
         return confirmationId;
@@ -260,5 +259,25 @@ public class User implements Serializable {
                 ", activationCode='" + activationCode + '\'' +
                 ", confirmationId='" + confirmationId + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (userId != null ? !userId.equals(user.userId) : user.userId != null) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        return email != null ? email.equals(user.email) : user.email == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = userId != null ? userId.hashCode() : 0;
+        result = 31 * result + (username != null ? username.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        return result;
     }
 }

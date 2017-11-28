@@ -62,4 +62,39 @@ public class Message {
     public void setCreatedDate(LocalDateTime createdDate) {
         this.createdDate = createdDate;
     }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", from='" + from + '\'' +
+                ", content='" + content + '\'' +
+                ", createdDate=" + createdDate +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Message message = (Message) o;
+
+        if (id != null ? !id.equals(message.id) : message.id != null) return false;
+        if (name != null ? !name.equals(message.name) : message.name != null) return false;
+        if (from != null ? !from.equals(message.from) : message.from != null) return false;
+        if (content != null ? !content.equals(message.content) : message.content != null) return false;
+        return createdDate != null ? createdDate.equals(message.createdDate) : message.createdDate == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (from != null ? from.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        result = 31 * result + (createdDate != null ? createdDate.hashCode() : 0);
+        return result;
+    }
 }

@@ -44,4 +44,35 @@ public class Authority {
     public AuthorityName getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Authority{" +
+                "id=" + id +
+                ", name=" + name +
+                ", users=" + users +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Authority authority = (Authority) o;
+
+        if (id != null ? !id.equals(authority.id) : authority.id != null) return false;
+        if (name != authority.name) return false;
+        return users != null ? users.equals(authority.users) : authority.users == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (users != null ? users.hashCode() : 0);
+        return result;
+    }
+
+
 }

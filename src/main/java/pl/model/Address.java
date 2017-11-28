@@ -78,4 +78,46 @@ public class Address {
     public void setRangeInKm(int rangeInKm) {
         this.rangeInKm = rangeInKm;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id=" + id +
+                ", country='" + country + '\'' +
+                ", city='" + city + '\'' +
+                ", rangeInKm=" + rangeInKm +
+                ", latitude=" + latitude +
+                ", longtitude=" + longtitude +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Address address = (Address) o;
+
+        if (rangeInKm != address.rangeInKm) return false;
+        if (Double.compare(address.latitude, latitude) != 0) return false;
+        if (Double.compare(address.longtitude, longtitude) != 0) return false;
+        if (id != null ? !id.equals(address.id) : address.id != null) return false;
+        if (country != null ? !country.equals(address.country) : address.country != null) return false;
+        return city != null ? city.equals(address.city) : address.city == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (city != null ? city.hashCode() : 0);
+        result = 31 * result + rangeInKm;
+        temp = Double.doubleToLongBits(latitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(longtitude);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
