@@ -45,7 +45,7 @@ public class FetchdataController {
     @RequestMapping("/callback")
     public Spotify getAccessTokenAndSongs(HttpServletRequest request) throws IOException {
         String code = request.getQueryString().replace("code=","");
-        String accessToken = spotifyLoginService.getAccessToken(code);
+        String accessToken = spotifyLoginService.fetchAccessToken(code);
 
         String topTracks = spotifyApiService.getTopTracks(accessToken);
         String topArtists = spotifyApiService.getTopArtists(accessToken);

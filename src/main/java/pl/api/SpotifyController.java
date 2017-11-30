@@ -63,7 +63,7 @@ public class SpotifyController {
     public List<String> callback(HttpServletRequest request) throws IOException {
         String code = request.getQueryString().replace("code=","");
         String username = "maciek";
-        String accessToken = spotifyLoginService.getAccessToken(code);
+        String accessToken = spotifyLoginService.fetchAccessToken(code);
         System.out.println("USERNAME"+username);
 //        profileService.setSpotifyAccessToken(accessToken, username);
         //FIX

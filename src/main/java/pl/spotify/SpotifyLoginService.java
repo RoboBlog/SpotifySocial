@@ -1,69 +1,80 @@
 package pl.spotify;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
-import com.mashape.unirest.http.Unirest;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import pl.util.HttpClient;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.*;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 @Service
 public class SpotifyLoginService {
+
+    private final HttpClient httpClient;
+
     private final String clientId = "471e3e2552344f56baaae5ecb0752cc8";
 //    private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
     private final String redirectURI = "http://localhost:9000/spotify/fetch/callback";
     private final String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
 
-
-
-    public String getSpotifyLoginUrl() throws IOException {
-        String url = "https://accounts.spotify.com/authorize?response_type=code&client_id="+clientId+"&scope=user-read-private%20user-read-email%20playlist-read-private%20user-library-read%20user-top-read%20user-read-playback-state%20user-read-recently-played&redirect_uri=" + redirectURI;
-        return url;
+    public SpotifyLoginService(HttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
-    public String getAccessToken(String code) throws IOException {
 
-        URL url = new URL("https://accounts.spotify.com/api/token");
+    //TODO refactor this?
+    public String getSpotifyLoginUrl() throws IOException {
+        List<String> scopes = new LinkedList<>();
+        scopes.add("user-read-private");
+        scopes.add("user-read-email");
+        scopes.add("playlist-read-private");
+        scopes.add("user-library-read");
+        scopes.add("user-top-read");
+        scopes.add("user-read-playback-state");
+        scopes.add("user-read-recently-played");
+
+        String scopesText = String.join("%20", scopes);
+
+        StringBuilder stringBuilder = new StringBuilder("https://accounts.spotify.com/authorize?response_type=code&client_id=");
+        stringBuilder.append(clientId);
+        stringBuilder.append("&scope=");
+        stringBuilder.append(scopesText);
+        stringBuilder.append("&redirect_uri=");
+        stringBuilder.append(redirectURI);
+
+        return stringBuilder.toString();
+    }
+
+    public String fetchAccessToken(String code) throws IOException {
+
+        String url = "https://accounts.spotify.com/api/token";
         Map<String,Object> params = new LinkedHashMap<>();
         params.put("code", code);
         params.put("redirect_uri", redirectURI);
         params.put("grant_type", "authorization_code");
 
+        Map<String, String> headers = setApiKeyHeader();
 
-        StringBuilder postData = new StringBuilder();
-        for (Map.Entry<String,Object> param : params.entrySet()) {
-            if (postData.length() != 0) postData.append('&');
-            postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
-            postData.append('=');
-            postData.append(URLEncoder.encode(String.valueOf(param.getValue()), "UTF-8"));
-        }
-        byte[] postDataBytes = postData.toString().getBytes("UTF-8");
+        String response = httpClient.post(url, params, headers);
 
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Authorization", spotifyApiKey);
-        conn.setDoOutput(true);
-        conn.getOutputStream().write(postDataBytes);
-
-        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
-
-        StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;)
-            sb.append((char)c);
-        String response = sb.toString();
-
-        JSONObject responseJson = new JSONObject(response);
-        String accessToken = responseJson.get("access_token").toString();
+        String accessToken = getAccessTokenFromJson(response);
         return accessToken;
     }
 
+
+    private Map<String, String> setApiKeyHeader() {
+        Map<String, String> headers  = new LinkedHashMap<>();
+        headers.put("Authorization", spotifyApiKey);
+        return headers;
+    }
+
+    private String getAccessTokenFromJson(String response) {
+        JSONObject responseJson = new JSONObject(response);
+        return responseJson.get("access_token").toString();
+    }
 }
 
