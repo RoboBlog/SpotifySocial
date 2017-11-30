@@ -17,7 +17,7 @@ import java.io.Reader;
 import java.net.*;
 
 @Service
-public class SpotifyGetService {
+public class SpotifyApiService {
 
     private final ProfileService profileService;
     private final SpotifyRepository spotifyRepository;
@@ -25,14 +25,16 @@ public class SpotifyGetService {
     private final UserRepository userRepository;
 
     @Autowired
-    public SpotifyGetService(ProfileService profileService, SpotifyRepository spotifyRepository, UserService userService, UserRepository userRepository) {
+    public SpotifyApiService(ProfileService profileService, SpotifyRepository spotifyRepository, UserService userService, UserRepository userRepository) {
         this.profileService = profileService;
         this.spotifyRepository = spotifyRepository;
         this.userService = userService;
         this.userRepository = userRepository;
     }
+
+
     public String getTopTracks(String userAccessToken) throws IOException {
-        URL url = new URL("https://api.spotify.com/v1/me/top/tracks");
+        URL url = new URL("https://api.spotify.com/v1/me/top/tracks?limit=50");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Authorization", "Bearer " + userAccessToken);
@@ -48,10 +50,8 @@ public class SpotifyGetService {
         return response;
     }
 
-
-    public String getTopTracks() throws IOException {
-        String userAccessToken = profileService.getSpotifyAccessToken();
-        URL url = new URL("https://api.spotify.com/v1/me/top/tracks");
+    public String getRecentlyPlayed(String userAccessToken) throws IOException {
+        URL url = new URL("https://api.spotify.com/v1/me/player/recently-played?limit=50");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Authorization", "Bearer " + userAccessToken);
@@ -63,7 +63,6 @@ public class SpotifyGetService {
         for (int c; (c = in.read()) >= 0;)
             sb.append((char)c);
         String response = sb.toString();
-//        System.out.print(response);
         return response;
     }
 
@@ -75,6 +74,8 @@ public class SpotifyGetService {
         spotifyRepository.save(spotify);
     }
 
+
+    //TODO DELETE THIS
     public void saveTopTracks(String username, String topTracks){
         Gson gson = new Gson();
         Spotify spotify = gson.fromJson(topTracks, Spotify.class);
@@ -84,7 +85,7 @@ public class SpotifyGetService {
     }
 
     public String getTopArtists(String userAccessToken) throws IOException {
-        URL url = new URL("https://api.spotify.com/v1/me/top/artists");
+        URL url = new URL("https://api.spotify.com/v1/me/top/artists?limit=50");
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
         conn.setRequestProperty("Authorization", "Bearer " + userAccessToken);
@@ -100,9 +101,5 @@ public class SpotifyGetService {
         return response;
 
     }
-    public String getLoggedUserAccessToken(){
-        //if user is logged
-        User user = userService.authTest();
-        return user.getSpotifyAccessToken();
-    }
+
 }

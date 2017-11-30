@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.spotify.POJO.Item;
 import pl.spotify.POJO.Spotify;
+import pl.spotify.SpotifyApiService;
 import pl.spotify.TrackDto;
 import pl.userProfile.ProfileService;
 import pl.spotify.SpotifyDataService;
-import pl.spotify.SpotifyGetService;
 import pl.spotify.SpotifyLoginService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,14 +22,14 @@ import java.util.List;
 public class SpotifyController {
 
     private final ProfileService profileService;
-    private final SpotifyGetService spotifyGetService;
+    private final SpotifyApiService spotifyApiService;
     private final SpotifyLoginService spotifyLoginService;
     private final SpotifyDataService spotifyDataService;
 
     @Autowired
-    public SpotifyController(ProfileService profileService, SpotifyGetService spotifyGetService, SpotifyLoginService spotifyLoginService, SpotifyDataService spotifyDataService) {
+    public SpotifyController(ProfileService profileService, SpotifyApiService spotifyApiService, SpotifyLoginService spotifyLoginService, SpotifyDataService spotifyDataService) {
         this.profileService = profileService;
-        this.spotifyGetService = spotifyGetService;
+        this.spotifyApiService = spotifyApiService;
         this.spotifyLoginService = spotifyLoginService;
         this.spotifyDataService = spotifyDataService;
     }
@@ -67,7 +67,7 @@ public class SpotifyController {
         System.out.println("USERNAME"+username);
 //        profileService.setSpotifyAccessToken(accessToken, username);
         //FIX
-        String topTracks = spotifyGetService.getTopTracks(accessToken);
+        String topTracks = spotifyApiService.getTopTracks(accessToken);
 
         Gson gson = new Gson();
         Spotify spotify = gson.fromJson(topTracks, Spotify.class);

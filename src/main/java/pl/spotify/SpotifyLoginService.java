@@ -18,13 +18,14 @@ import java.util.Map;
 @Service
 public class SpotifyLoginService {
     private final String clientId = "471e3e2552344f56baaae5ecb0752cc8";
-    private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
+//    private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
+    private final String redirectURI = "http://localhost:9000/spotify/fetch/callback";
     private final String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
 
 
 
     public String getSpotifyLoginUrl() throws IOException {
-        String url = "https://accounts.spotify.com/authorize?response_type=code&client_id="+clientId+"&scope=user-read-private%20user-read-email%20playlist-read-private%20user-library-read%20user-top-read&redirect_uri=" + redirectURI;
+        String url = "https://accounts.spotify.com/authorize?response_type=code&client_id="+clientId+"&scope=user-read-private%20user-read-email%20playlist-read-private%20user-library-read%20user-top-read%20user-read-playback-state%20user-read-recently-played&redirect_uri=" + redirectURI;
         return url;
     }
 

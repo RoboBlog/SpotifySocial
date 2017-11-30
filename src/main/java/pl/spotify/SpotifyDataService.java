@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import pl.userProfile.ProfileService;
 import pl.model.User;
 import pl.spotify.POJO.Item;
@@ -53,6 +54,7 @@ public class SpotifyDataService {
         String userAccessToken = profileService.getSpotifyAccessToken();
         String artistsIdList = artistsId.stream().collect(Collectors.joining(","));
         String url = "https://api.spotify.com/v1/artists?ids=" + artistsIdList;
+
         OkHttpClient client = new OkHttpClient();
 
         Request request = new Request.Builder()
