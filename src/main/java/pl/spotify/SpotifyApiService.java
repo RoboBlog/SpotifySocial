@@ -39,31 +39,24 @@ public class SpotifyApiService {
 
     public String getTopTracks(String userAccessToken) throws IOException {
         String url = "https://api.spotify.com/v1/me/top/tracks?limit=50";
-        Map<String, String> headers = setAuthHeader(userAccessToken);
+        Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
         return httpClient.get(url, headers);
     }
 
     public String getRecentlyPlayed(String userAccessToken) throws IOException {
         String url = "https://api.spotify.com/v1/me/player/recently-played?limit=50";
-        Map<String, String> headers = setAuthHeader(userAccessToken);
+        Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
         return httpClient.get(url, headers);
     }
 
     public String getTopArtists(String userAccessToken) throws IOException {
         String url = "https://api.spotify.com/v1/me/top/artists?limit=50";
-        Map<String, String> headers = setAuthHeader(userAccessToken);
+        Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
         return httpClient.get(url, headers);
     }
-
-    private Map<String, String> setAuthHeader(String userAccessToken) {
-        Map<String, String> headers  = new LinkedHashMap<>();
-        headers.put("Authorization", "Bearer " + userAccessToken);
-        return headers;
-    }
-
 
     public void saveTopTracks(String topTracks){
         Gson gson = new Gson();

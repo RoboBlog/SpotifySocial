@@ -7,6 +7,8 @@ import pl.model.User;
 import pl.model.UserRepository;
 import pl.userProfile.AccountActivationService;
 
+import javax.validation.Valid;
+
 @RequestMapping("/api/")
 @RestController
 public class SignUpController {
@@ -22,8 +24,8 @@ public class SignUpController {
         this.accountActivationService = accountActivationService;
     }
 
-    @PostMapping("/signup") // TODO exception or failure and validation
-    public void signUp(@RequestBody User user){
+    @PostMapping("/signup") // TODO exception or failure and test activation
+    public void signUp(@RequestBody @Valid User user){
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         accountActivationService.sendActivationMail(user);

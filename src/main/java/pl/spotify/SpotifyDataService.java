@@ -1,23 +1,21 @@
 package pl.spotify;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import pl.userProfile.ProfileService;
 import pl.model.User;
 import pl.spotify.POJO.Item;
 import pl.spotify.POJO.Spotify;
 import pl.spotify.POJO.SpotifyRepository;
 import pl.userProfile.UserService;
+import pl.util.HttpClient;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,12 +23,14 @@ public class SpotifyDataService {
     private final SpotifyRepository spotifyRepository;
     private final ProfileService profileService;
     private final UserService userService;
+    private final HttpClient httpClient;
 
     @Autowired
-    public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, UserService userService) {
+    public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, UserService userService, HttpClient httpClient) {
         this.spotifyRepository = spotifyRepository;
         this.profileService = profileService;
         this.userService = userService;
+        this.httpClient = httpClient;
     }
 
     public List<Item> getItems(){
@@ -55,17 +55,10 @@ public class SpotifyDataService {
         String artistsIdList = artistsId.stream().collect(Collectors.joining(","));
         String url = "https://api.spotify.com/v1/artists?ids=" + artistsIdList;
 
-        OkHttpClient client = new OkHttpClient();
+        Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
+        String response = httpClient.get(url, headers);
 
-        Request request = new Request.Builder()
-                .url(url)
-                .header("Authorization", "Bearer " + userAccessToken)
-                .build();
-
-        Response response = client.newCall(request).execute();
-        String body = response.body().string();
-
-        return body;
+        return response;
     }
 
     public List<String> getFavoriteMusicGenres() throws IOException {

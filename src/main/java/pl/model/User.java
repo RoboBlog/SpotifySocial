@@ -2,6 +2,8 @@ package pl.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
 //import pl.posts.Post;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import pl.posts.Post;
 import pl.other.Views;
 import pl.security.Authority;
@@ -30,14 +32,17 @@ public class User implements Serializable {
 
     @JsonView(Views.Public.class)
     @Column(name = "username", unique = true)
+    @NotBlank
     private String username;
 
     @JsonView(Views.Internal.class)
     @Column(name = "password")
+    @NotBlank
     private String password;
 
     @JsonView(Views.Public.class)
     @Column(name = "email")
+    @Email
     private String email;
 
     private String description;

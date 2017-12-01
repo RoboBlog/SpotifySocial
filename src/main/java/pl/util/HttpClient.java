@@ -6,8 +6,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+//TODO builder
 @Component
 public class HttpClient {
 
@@ -26,6 +28,21 @@ public class HttpClient {
             sb.append((char)c);
         return sb.toString();
     }
+
+    public String get(String urlText) throws IOException {
+        URL url = new URL(urlText);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+
+        conn.setDoOutput(true);
+        Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+
+        StringBuilder sb = new StringBuilder();
+        for (int c; (c = in.read()) >= 0;)
+            sb.append((char)c);
+        return sb.toString();
+    }
+
 
     public String post(String urlText, Map<String, Object> params, Map<String, String> headers) throws IOException {
         URL url = new URL(urlText);
@@ -52,5 +69,11 @@ public class HttpClient {
             sb.append((char)c);
 
        return sb.toString();
+    }
+
+    public Map<String, String> setAuthHeader(String userAccessToken) {
+        Map<String, String> headers  = new LinkedHashMap<>();
+        headers.put("Authorization", "Bearer " + userAccessToken);
+        return headers;
     }
 }
