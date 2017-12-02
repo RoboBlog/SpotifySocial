@@ -10,11 +10,24 @@ buildscript {
 	}
 }
 
+plugins {
+	id "org.sonarqube" version "2.5"
+}
+
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
+
+sonarqube {
+	properties {
+		property "sonar.host.url", System.getenv('SONAR_URL')
+		property "sonar.login", System.getenv('SONAR_LOGIN')
+		property "sonar.password", System.getenv('SONAR_PASSWORD')
+	}
+}
+
 
 repositories {
 	mavenCentral()
@@ -60,7 +73,8 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.4.RELEASE'
 //	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	compile group: 'org.json', name: 'json', version: '20160810'
-
+	compile 'com.squareup.okhttp3:okhttp:3.9.1'
+	
 //	compile('org.springframework.boot:spring-boot-starter')
 //	compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '1.5.4.RELEASE'
 //	compile group: 'org.webjars', name: 'webjars-locator', version: '0.32'

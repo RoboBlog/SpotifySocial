@@ -1,8 +1,8 @@
 language: java
 jdk:
-- oraclejdk8
+  - oraclejdk8
 services:
-- mysql
+  - mysql
 deploy:
   provider: heroku
   api_key:
@@ -12,3 +12,6 @@ deploy:
 notifications:
   slack:
     secure: Cuq+Kb0u3YUZnFCq+d058yT4m1RU2OD6CYV3vlHgeOzYxKjBXv8EGR56sUAu7WhNRv3zhaoq1QBvnmIyVCZm0Hl8hB76qXzsEiG8/ek1hBhR5JClL2AkvVW8qqNifKSiZ08fWOzDT0VQkGD1aqcBFTcTf9jyNiJaNdCj20qj2Fk73CZNd7pFzy5bzdun05ek8SFmDDt+/z3Mm2oRKnaz6fDMHiumtypt2iJPFUrHnDJ5ijxx11wAPtNyOub5XEAIQZ1xPIHxNaUP2yEZmdXU5SoWGNHEvqcgk0lwung14HT+fkexbKzk+4GdruaRWd5kuMJhwWgMf9m0xJ7bOz9zzJRK/OWUhFnkx3jp3u72A2wqKjomaNx3atrWN2ySXjjS2SqEEjVDDFyvCdPD97vQqgq+aHlV6ipCrGSWt+j4GQXLwoI5QU5v+H5TYHc/I8yX5dJn57t0YkSdZSZHYI257tW80D+hTDrXTcpHJuWMG6cG7TG7y60wSQ8w/ApgBhktLRi3VcDrChUYvPI91Ywxa9OyEkZi7EjOU8VB1UQB/gHusfsJGyvJg4bY6z/iH7vUGQjIK+eOmtOshCfZyNBhzXG+wx0B4NsdE4v9VwWC4VaexNwpYCcJD0MgwtwMkrTIalt3AAbLOHzxsJxp5W6M732AWncB7i0bScZCbDv3DKA=
+
+after_success:
+  - ./gradlew sonarqube
