@@ -1,10 +1,7 @@
 package pl.security;
 
 import io.jsonwebtoken.ExpiredJwtException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -20,9 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Slf4j
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
-
-    private final Logger logger = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -43,7 +39,7 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             try {
                 username = jwtTokenUtil.getUsernameFromToken(authToken);
             } catch (IllegalArgumentException | ExpiredJwtException e) {
-                logger.error("an error occured during getting username from token", e);
+                log.error("an error occured during getting username from token", e);
             }
         }
 //        else {

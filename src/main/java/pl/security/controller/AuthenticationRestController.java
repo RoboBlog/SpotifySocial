@@ -1,13 +1,11 @@
 package pl.security.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,10 +18,10 @@ import pl.security.service.JwtAuthenticationResponse;
 import javax.servlet.http.HttpServletRequest;
 
 @CrossOrigin(origins = "${origins}")
+@Slf4j
 @RestController
 public class AuthenticationRestController {
 
-    private final Logger logger = LoggerFactory.getLogger(AuthenticationRestController.class);
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
     private final UserDetailsService userDetailsService;
@@ -38,7 +36,7 @@ public class AuthenticationRestController {
 
     @PostMapping(value = "${jwt.route.authentication.path}")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest) {
-        logger.debug("User {} crete authToken", authenticationRequest.getUsername());
+        log.debug("User {} crete authToken", authenticationRequest.getUsername());
         final Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authenticationRequest.getUsername(),
