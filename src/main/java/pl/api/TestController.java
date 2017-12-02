@@ -31,6 +31,8 @@ public class TestController {
         TrackDto track5 = new TrackDto("Pink Floyd", "Shipbuilding", "5");
         TrackDto track6 = new TrackDto("Pink Floyd", "Beat It", "6");
         TrackDto track7 = new TrackDto("Pink Floyd", "Kill me", "7");
+        TrackDto track8 = new TrackDto("Pink Floyd2", "Kill me2", "72");
+        TrackDto track9 = new TrackDto("Pink FloydX", "Kill meX", "72");
 
         List<TrackDto> list = new LinkedList<>();
         list.add(track1);
@@ -40,6 +42,8 @@ public class TestController {
         list.add(track5);
         list.add(track6);
         list.add(track7);
+        list.add(track8);
+        list.add(track9);
 
         return list;
     }
