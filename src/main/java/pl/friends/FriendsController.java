@@ -1,7 +1,10 @@
 package pl.friends;
 
-import org.springframework.web.bind.annotation.*;
-import pl.model.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import pl.model.User;
 
 import java.util.List;
 
@@ -17,28 +20,28 @@ public class FriendsController {
 
     //TODO void is ok?
     @GetMapping("/friendrequest/send/{invitedUsername}")
-    public void sendFriendRequest(@PathVariable String invitedUsername){
-       friendsService.sendFriendRequest(invitedUsername);
+    public void sendFriendRequest(@PathVariable String invitedUsername) {
+        friendsService.sendFriendRequest(invitedUsername);
     }
 
     @GetMapping("/friendsrequest/get/all")
-    public List<FriendRequest> getFriendsRequestsList(){
+    public List<FriendRequest> getFriendsRequestsList() {
         List<FriendRequest> friendsRequestsList = friendsService.getFriendsRequestsList();
         return friendsRequestsList;
     }
 
     @GetMapping("/firendrequest/accept/{requestId}")
-    public void acceptRequest(@PathVariable long requestId){
+    public void acceptRequest(@PathVariable long requestId) {
         friendsService.acceptFriendRequest(requestId);
     }
 
     @GetMapping("/removerequest/{requestId}")
-    public void removeRequest(@PathVariable long requestId){
+    public void removeRequest(@PathVariable long requestId) {
         friendsService.removeFriendRequest(requestId);
     }
 
     @GetMapping("/get/all")
-    public List<User> getFriends(){
+    public List<User> getFriends() {
         List<User> friends = friendsService.getFriends();
         return friends;
     }

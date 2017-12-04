@@ -1,8 +1,6 @@
 package pl.posts;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
 import pl.comments.Comment;
 import pl.model.User;
 
@@ -28,7 +26,7 @@ public class Post {
     @OneToMany
     private Set<Comment> comments;
 
-    public void addComment(Comment comment){
-       this.comments.add(comment);
+    public void addComment(Comment comment) {
+        this.comments.add(comment);
     }
 }

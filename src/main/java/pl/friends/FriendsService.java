@@ -1,10 +1,8 @@
 package pl.friends;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.model.User;
-import pl.other.SecurityContextService;
 import pl.userProfile.UserService;
 
 import java.util.List;
@@ -22,41 +20,39 @@ public class FriendsService {
     }
 
     //TODO relation is necessary?
-    public void sendFriendRequest(String invitedUsername){
+    public void sendFriendRequest(String invitedUsername) {
         String username = userService.getUsername();
         FriendRequest request = new FriendRequest(username, invitedUsername);
         friendRequestRepository.save(request);
     }
 
-    public List<FriendRequest> getFriendsRequestsList(){
+    public List<FriendRequest> getFriendsRequestsList() {
         String username = userService.getUsername();
         List<FriendRequest> friendsRequest = friendRequestRepository.getAllByRequestToAndIsAcceptIsFalse(username);
         return friendsRequest;
     }
 
 
-    public void acceptFriendRequest(long requestId){
+    public void acceptFriendRequest(long requestId) {
         FriendRequest friendRequest = friendRequestRepository.getById(requestId);
-        if(Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())) {
+        if (Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())) {
             friendRequest.setAccept(true);
             friendRequestRepository.save(friendRequest);
-        }
-        else{
+        } else {
             throw new AccessDeniedException("Access denied!");
         }
     }
 
-    public void removeFriendRequest(long requestId){
+    public void removeFriendRequest(long requestId) {
         FriendRequest friendRequest = friendRequestRepository.getById(requestId);
-        if(Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())){
+        if (Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())) {
             friendRequestRepository.delete(friendRequest);
-        }
-        else{
+        } else {
             throw new AccessDeniedException("Access denied!");
         }
     }
 
-    public List<User> getFriends(){
+    public List<User> getFriends() {
         User user = userService.authTest();
         List<User> friends = user.getFriends();
         return friends;

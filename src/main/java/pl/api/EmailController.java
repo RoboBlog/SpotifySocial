@@ -1,7 +1,9 @@
 package pl.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.userProfile.AccountActivationService;
 
 @RestController
@@ -9,13 +11,12 @@ import pl.userProfile.AccountActivationService;
 public class EmailController {
     private final AccountActivationService accountActivationService;
 
-    @Autowired
-    public EmailController( AccountActivationService accountActivationService) {
+    public EmailController(AccountActivationService accountActivationService) {
         this.accountActivationService = accountActivationService;
     }
 
     @GetMapping("/active/{username}/{activationCode}")
-    public String active(@PathVariable String username, @PathVariable String activationCode){
+    public String active(@PathVariable String username, @PathVariable String activationCode) {
         String response = accountActivationService.accountActivation(username, activationCode);
         return response;
     }

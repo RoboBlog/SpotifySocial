@@ -1,6 +1,5 @@
 package pl.userProfile;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.email.EmailService;
 import pl.model.User;
@@ -21,27 +20,25 @@ public class AccountActivationService {
     }
 
     //Where use stringBuilder TODO
-    public String getUrl(User user){
+    public String getUrl(User user) {
         return serverUrl + "/api/email/active/" + user.getUsername() + "/" + user.getActivationCode();
     }
 
-    public void sendActivationMail(User user){
+    public void sendActivationMail(User user) {
         String url = getUrl(user);
         emailService.sendSimpleMessage(user.getEmail(), "Active account mail", "Click to active account: " + url);
     }
 
     //TODO refactor this
-    public String accountActivation(String username, String activationCode){
+    public String accountActivation(String username, String activationCode) {
         User user = userRepository.findByUsername(username);
-        if(Objects.equals(user.getActivationCode(), activationCode) && !user.getEnabled()){
+        if (Objects.equals(user.getActivationCode(), activationCode) && !user.getEnabled()) {
             user.setEnabled(true);
             userRepository.save(user);
             return "OK";
-        }
-        else if(user.getEnabled()) {
+        } else if (user.getEnabled()) {
             return "Your account is active";
-        }
-        else{
+        } else {
             return "error";
         }
     }

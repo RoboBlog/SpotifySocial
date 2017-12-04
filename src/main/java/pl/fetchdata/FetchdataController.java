@@ -43,7 +43,7 @@ public class FetchdataController {
 
     @RequestMapping("/callback")
     public Spotify getAccessTokenAndSongs(HttpServletRequest request) throws IOException {
-        String code = request.getQueryString().replace("code=","");
+        String code = request.getQueryString().replace("code=", "");
         String accessToken = spotifyLoginService.fetchAccessToken(code);
 
         String topTracks = spotifyApiService.getTopTracks(accessToken);
@@ -51,15 +51,15 @@ public class FetchdataController {
         String recentlyPlayed = spotifyApiService.getRecentlyPlayed(accessToken);
 
         LocalDateTime now = LocalDateTime.now();
-        try(PrintWriter topArtistsFile = new PrintWriter(now + " - topArtists.txt")){
+        try (PrintWriter topArtistsFile = new PrintWriter(now + " - topArtists.txt")) {
             topArtistsFile.println(topArtists);
         }
 
-        try(PrintWriter topTracksFile = new PrintWriter(now  + " - topTracks.txt")) {
+        try (PrintWriter topTracksFile = new PrintWriter(now + " - topTracks.txt")) {
             topTracksFile.println(topTracks);
         }
 
-        try(PrintWriter topTracksFile = new PrintWriter(now  + " - recentlyPlayed.txt")) {
+        try (PrintWriter topTracksFile = new PrintWriter(now + " - recentlyPlayed.txt")) {
             topTracksFile.println(recentlyPlayed);
         }
 
@@ -87,20 +87,20 @@ public class FetchdataController {
         String stringIds = String.join(",", ids);
         String audioFeatures = spotifySongInfoService.getAudioFeatures(accessToken, stringIds);
 
-        try(PrintWriter topTracksFile = new PrintWriter(now  + " - audiofeatures.txt")) {
+        try (PrintWriter topTracksFile = new PrintWriter(now + " - audiofeatures.txt")) {
             topTracksFile.println(audioFeatures);
         }
 
         String genreSeeds = spotifySongInfoService.getGenreSeeds(accessToken);
 
-        try(PrintWriter topTracksFile = new PrintWriter(now  + " - genreSeeds.txt")) {
+        try (PrintWriter topTracksFile = new PrintWriter(now + " - genreSeeds.txt")) {
             topTracksFile.println(genreSeeds);
         }
 
         String playlists = spotifySongInfoService.getPlaylists(accessToken);
 
 
-        try(PrintWriter topTracksFile = new PrintWriter(now  + " - playlists.txt")) {
+        try (PrintWriter topTracksFile = new PrintWriter(now + " - playlists.txt")) {
             topTracksFile.println(playlists);
         }
         return spotify;

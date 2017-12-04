@@ -8,7 +8,8 @@ public class JwtAuthenticationRequest {
     public JwtAuthenticationRequest() {
         super();
     }
-//
+
+    //
     public JwtAuthenticationRequest(String username, String password) {
         this.setUsername(username);
         this.setPassword(password);

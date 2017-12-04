@@ -1,6 +1,5 @@
 package pl.social_integration;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.facebook.api.Facebook;
 import org.springframework.social.facebook.api.impl.FacebookTemplate;
@@ -18,7 +17,7 @@ public class FacebookService {
     @Value("${spring.social.facebook.appSecret}")
     private String facebookSecret;
 
-    public String createFacebookAuthorizationURL(){
+    public String createFacebookAuthorizationURL() {
         FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory(facebookAppId, facebookSecret);
         OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
         OAuth2Parameters params = new OAuth2Parameters();

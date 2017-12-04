@@ -18,7 +18,7 @@ public class GreetingController {
     @MessageMapping("/hello/{room}")
     @SendTo("/topic/{room}")
     public Greeting content(@DestinationVariable String room, String message) throws Exception {
-        JSONObject js=new JSONObject(message);
+        JSONObject js = new JSONObject(message);
 
 //        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //        System.out.println("AUTH" + authentication);
@@ -37,7 +37,7 @@ public class GreetingController {
 //    public Greeting name(HelloMessage message) throws Exception {
 //        System.out.println("Content" + message.getTest());
 //        return new Greeting(  message.getTest());
-        //  return new Message()
+    //  return new Message()
 //
 //    }
 }

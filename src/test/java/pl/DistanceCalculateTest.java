@@ -3,7 +3,6 @@
 //import org.junit.Before;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;
-//import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 //import org.springframework.security.core.Authentication;
@@ -21,7 +20,6 @@
 ////@RunWith(SpringRunner.class)
 ////@SpringBootTest
 //public class DistanceCalculateTest {
-////    @Autowired
 ////    DistanceCalculate distanceCalculate;
 ////
 ////

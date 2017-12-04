@@ -1,16 +1,15 @@
 package pl.userProfile;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import pl.other.SecurityContextService;
 import pl.maps.Coordinates;
 import pl.maps.GoogleMapsGetService;
 import pl.model.Address;
 import pl.model.AddressRepository;
 import pl.model.User;
 import pl.model.UserRepository;
+import pl.other.SecurityContextService;
 
 import java.io.IOException;
 
@@ -21,7 +20,6 @@ public class UserService {
     private final GoogleMapsGetService googleMapsGetService;
     private final SecurityContextService securityContextService;
 
-    @Autowired
     public UserService(UserRepository userRepository, AddressRepository addressRepository, GoogleMapsGetService googleMapsGetService, SecurityContextService securityContextService) {
         this.userRepository = userRepository;
         this.addressRepository = addressRepository;
@@ -33,6 +31,7 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return authentication.getName();
     }
+
     public User authTest() {
         String username = securityContextService.getUsername();
         User loggedUser = userRepository.findByUsername(username);
@@ -41,7 +40,7 @@ public class UserService {
 
     public void addAddress(String city, String country) throws IOException {
         Coordinates coordinates = googleMapsGetService.getCoordinates(city, country);
-        Address address = new Address(country,city,coordinates.getLatitude(), coordinates.getLongtitude());
+        Address address = new Address(country, city, coordinates.getLatitude(), coordinates.getLongtitude());
         addressRepository.save(address);
         User user = authTest();
         user.setAddress(address);

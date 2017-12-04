@@ -1,10 +1,11 @@
 
 package pl.spotify.POJO;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class Album {

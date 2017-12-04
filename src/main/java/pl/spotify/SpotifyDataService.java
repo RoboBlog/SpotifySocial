@@ -2,13 +2,12 @@ package pl.spotify;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.userProfile.ProfileService;
 import pl.model.User;
 import pl.spotify.POJO.Item;
 import pl.spotify.POJO.Spotify;
 import pl.spotify.POJO.SpotifyRepository;
+import pl.userProfile.ProfileService;
 import pl.userProfile.UserService;
 import pl.util.HttpClient;
 
@@ -25,7 +24,6 @@ public class SpotifyDataService {
     private final UserService userService;
     private final HttpClient httpClient;
 
-    @Autowired
     public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, UserService userService, HttpClient httpClient) {
         this.spotifyRepository = spotifyRepository;
         this.profileService = profileService;
@@ -33,14 +31,14 @@ public class SpotifyDataService {
         this.httpClient = httpClient;
     }
 
-    public List<Item> getItems(){
+    public List<Item> getItems() {
         User user = userService.authTest();
         Spotify spotifyData = spotifyRepository.getByUserUserId(user.getUserId());
         List<Item> items = spotifyData.getItems();
         return items;
     }
 
-    public List<String> getArtists(List<Item> items){
+    public List<String> getArtists(List<Item> items) {
         List<String> artistsId = new LinkedList<>();
 
         items.forEach(item -> {
@@ -70,7 +68,7 @@ public class SpotifyDataService {
         JSONArray artists = js.getJSONArray("artists");
         List<String> genresList = new LinkedList<>();
 
-        for(int i=0; i<artists.length(); i++){
+        for (int i = 0; i < artists.length(); i++) {
             JSONArray genres = artists.getJSONObject(i).getJSONArray("genres");
             genres.forEach(genre -> genresList.add(genre.toString()));
         }

@@ -1,13 +1,13 @@
 
 package pl.spotify.POJO;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 import pl.model.User;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,7 +28,7 @@ public class Spotify {
     @SerializedName("offset")
     @Expose
     private Integer offset;
-//    @SerializedName("previous")
+    //    @SerializedName("previous")
 //    @Expose
 //    private Object previous;
     @SerializedName("limit")
@@ -38,7 +38,7 @@ public class Spotify {
     @Expose
     private String href;
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @SerializedName("items")
     @Expose
     private List<Item> items = null;

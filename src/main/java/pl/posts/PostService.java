@@ -23,12 +23,12 @@ public class PostService {
 //
 //    }
 
-    public Post getPost(Long id){
+    public Post getPost(Long id) {
         return postRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No such Post!"));
     }
 
-    public Post createNewPost(Post post){
+    public Post createNewPost(Post post) {
         User user = userService.authTest();
         post.setUser(user);
         postRepository.save(post);

@@ -3,12 +3,7 @@ package pl.spotify;
 import org.springframework.stereotype.Service;
 import pl.util.HttpClient;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Map;
 
 @Service
@@ -20,7 +15,7 @@ public class SpotifySongInfoService {
     }
 
     public String getAudioAnalysisParameters(String userAccessToken, String songId) throws IOException {
-        String url = "https://api.spotify.com/v1/audio-analysis/"+songId;
+        String url = "https://api.spotify.com/v1/audio-analysis/" + songId;
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
         return httpClient.get(url, headers);
@@ -28,7 +23,7 @@ public class SpotifySongInfoService {
 
 
     public String getAudioFeatures(String userAccessToken, String songsId) throws IOException {
-        String url = "https://api.spotify.com/v1/audio-features/?ids="+songsId;
+        String url = "https://api.spotify.com/v1/audio-features/?ids=" + songsId;
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
         return httpClient.get(url, headers);

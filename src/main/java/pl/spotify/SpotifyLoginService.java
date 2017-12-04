@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.util.HttpClient;
 
 import java.io.IOException;
-import java.net.*;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class SpotifyLoginService {
     private final HttpClient httpClient;
 
     private final String clientId = "471e3e2552344f56baaae5ecb0752cc8";
-//    private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
+    //    private final String redirectURI = System.getenv("SPOTIFY_REDIRECT_URL");
     private final String redirectURI = "http://localhost:9000/spotify/fetch/callback";
     private final String spotifyApiKey = System.getenv("SPOTIFY_API_KEY");
 
@@ -52,7 +51,7 @@ public class SpotifyLoginService {
     public String fetchAccessToken(String code) throws IOException {
 
         String url = "https://accounts.spotify.com/api/token";
-        Map<String,Object> params = new LinkedHashMap<>();
+        Map<String, Object> params = new LinkedHashMap<>();
         params.put("code", code);
         params.put("redirect_uri", redirectURI);
         params.put("grant_type", "authorization_code");
@@ -67,7 +66,7 @@ public class SpotifyLoginService {
 
 
     private Map<String, String> setApiKeyHeader() {
-        Map<String, String> headers  = new LinkedHashMap<>();
+        Map<String, String> headers = new LinkedHashMap<>();
         headers.put("Authorization", spotifyApiKey);
         return headers;
     }

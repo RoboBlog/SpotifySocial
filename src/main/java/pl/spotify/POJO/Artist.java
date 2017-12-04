@@ -5,7 +5,10 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Data
 @Entity
@@ -27,7 +30,7 @@ public class Artist {
     @SerializedName("type")
     @Expose
     private String type;
-//    @SerializedName("external_urls")
+    //    @SerializedName("external_urls")
 //    @Expose
 //    private ExternalUrls_ externalUrls;
     @SerializedName("uri")

@@ -1,8 +1,10 @@
 package pl.api;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.model.User;
 import pl.model.UserRepository;
 import pl.userProfile.AccountActivationService;
@@ -16,8 +18,6 @@ public class SignUpController {
     private final UserRepository userRepository;
     private final AccountActivationService accountActivationService;
 
-
-    @Autowired
     public SignUpController(PasswordEncoder passwordEncoder, UserRepository userRepository, AccountActivationService accountActivationService) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
@@ -25,7 +25,7 @@ public class SignUpController {
     }
 
     @PostMapping("/signup") // TODO exception or failure and test activation
-    public void signUp(@RequestBody @Valid User user){
+    public void signUp(@RequestBody @Valid User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
         accountActivationService.sendActivationMail(user);

@@ -1,16 +1,17 @@
 package pl.api;
 
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.spotify.POJO.Item;
 import pl.spotify.POJO.Spotify;
 import pl.spotify.SpotifyApiService;
-import pl.spotify.TrackDto;
-import pl.userProfile.ProfileService;
 import pl.spotify.SpotifyDataService;
 import pl.spotify.SpotifyLoginService;
+import pl.spotify.TrackDto;
+import pl.userProfile.ProfileService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -26,7 +27,6 @@ public class SpotifyController {
     private final SpotifyLoginService spotifyLoginService;
     private final SpotifyDataService spotifyDataService;
 
-    @Autowired
     public SpotifyController(ProfileService profileService, SpotifyApiService spotifyApiService, SpotifyLoginService spotifyLoginService, SpotifyDataService spotifyDataService) {
         this.profileService = profileService;
         this.spotifyApiService = spotifyApiService;
@@ -61,10 +61,10 @@ public class SpotifyController {
 
     @GetMapping("/callback")
     public List<String> callback(HttpServletRequest request) throws IOException {
-        String code = request.getQueryString().replace("code=","");
+        String code = request.getQueryString().replace("code=", "");
         String username = "maciek";
         String accessToken = spotifyLoginService.fetchAccessToken(code);
-        System.out.println("USERNAME"+username);
+        System.out.println("USERNAME" + username);
 //        profileService.setSpotifyAccessToken(accessToken, username);
         //FIX
         String topTracks = spotifyApiService.getTopTracks(accessToken);
@@ -75,7 +75,7 @@ public class SpotifyController {
 
         List<String> names = new LinkedList<>();
 
-        items.forEach(item->{
+        items.forEach(item -> {
             names.add(item.getName());
         });
 //        String url = "http://localhost:8080/musicportalstatus"; //TODO FIX IT
@@ -99,13 +99,13 @@ public class SpotifyController {
 
     //SERVICE
     @GetMapping("/gettoptrackslist")
-    public List<TrackDto> getTopTracksList(){
+    public List<TrackDto> getTopTracksList() {
         List<Item> items = spotifyDataService.getItems();
 
         List<TrackDto> tracksList = new LinkedList<>();
 
         items.forEach(item -> {
-            TrackDto track = new TrackDto(item.getArtists().get(0).getName(),item.getName(), item.getId());
+            TrackDto track = new TrackDto(item.getArtists().get(0).getName(), item.getName(), item.getId());
             tracksList.add(track);
         });
 

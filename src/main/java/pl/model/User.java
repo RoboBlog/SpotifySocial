@@ -1,11 +1,10 @@
 package pl.model;
 
 import com.fasterxml.jackson.annotation.JsonView;
-//import pl.posts.Post;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import pl.posts.Post;
 import pl.other.Views;
+import pl.posts.Post;
 import pl.security.Authority;
 import pl.spotify.POJO.Spotify;
 
@@ -13,13 +12,15 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
+//import pl.posts.Post;
+
 
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="userid")
+    @Column(name = "userid")
     @JsonView(Views.Internal.class)
     private Long userId;
     //background
@@ -52,14 +53,14 @@ public class User implements Serializable {
     private List<User> friends;
 
     @JsonView(Views.Public.class)
-    @Column(name ="enabled")
+    @Column(name = "enabled")
     private boolean enabled;
     @OneToOne
     private Spotify spotify;
 
     @JsonView(Views.Internal.class)
     @OneToOne
-    @JoinColumn(name="addressId")
+    @JoinColumn(name = "addressId")
     private Address address;
     @JsonView(Views.Internal.class)
     private String activationCode;
@@ -83,13 +84,14 @@ public class User implements Serializable {
             inverseJoinColumns = {@JoinColumn(name = "authority_id", referencedColumnName = "id")})
     private List<Authority> authorities = new LinkedList<>();
 
-    public void addAuthority(Authority authority){
+    public void addAuthority(Authority authority) {
         this.authorities.add(authority);
     }
 
-    public void addFriend(User user){
+    public void addFriend(User user) {
         this.friends.add(user);
     }
+
     public Long getUserId() {
         return userId;
     }
@@ -196,7 +198,7 @@ public class User implements Serializable {
 
     }
 
-    public User(){
+    public User() {
         this.activationCode = UUID.randomUUID().toString();
     }
 
@@ -205,7 +207,7 @@ public class User implements Serializable {
         this.username = user.username;
         this.email = user.email;
         this.password = user.password;
-        this.enabled=user.enabled;
+        this.enabled = user.enabled;
         this.activationCode = UUID.randomUUID().toString();
 
     }

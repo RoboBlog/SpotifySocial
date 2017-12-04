@@ -2,8 +2,9 @@ package pl.api;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import pl.model.User;
 import pl.model.UserRepository;
 import pl.other.Views;
@@ -17,13 +18,12 @@ import java.util.List;
 public class TestController {
     private final UserRepository userRepository;
 
-    @Autowired
     public TestController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
     @GetMapping("/gettracks") //TODO put spring JAK To ogarniac request param?
-    public List<TrackDto> getTracks(){
+    public List<TrackDto> getTracks() {
         TrackDto track1 = new TrackDto("AC/DC", "TNT", "1");
         TrackDto track2 = new TrackDto("Pink Floyd", "Another Brick in The Wall", "2");
         TrackDto track3 = new TrackDto("Pink Floyd", "Take On Me", "3");
@@ -60,7 +60,7 @@ public class TestController {
 
         return maciek;
 
-        }
+    }
 
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 //    @PutMapping("/usr/{id}")

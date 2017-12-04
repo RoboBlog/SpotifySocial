@@ -1,12 +1,12 @@
 
 package pl.spotify.POJO;
 
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -18,13 +18,13 @@ public class Item {
     @SerializedName("disc_number")
     @Expose
     private Integer discNumber;
-//    @SerializedName("album")
+    //    @SerializedName("album")
 //    @Expose
 //    private Album album;
     @SerializedName("type")
     @Expose
     private String type;
-//    @SerializedName("external_ids")
+    //    @SerializedName("external_ids")
 //    @Expose
 //    private ExternalIds externalIds;
     @SerializedName("uri")
@@ -41,7 +41,7 @@ public class Item {
     private Boolean isPlayable;
 
 
-    @OneToMany(cascade=CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @SerializedName("artists")
     @Expose
     private List<Artist> artists = null;

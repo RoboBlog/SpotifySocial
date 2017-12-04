@@ -2,7 +2,10 @@ package pl.util;
 
 import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -24,8 +27,8 @@ public class HttpClient {
         Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
         StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;)
-            sb.append((char)c);
+        for (int c; (c = in.read()) >= 0; )
+            sb.append((char) c);
         return sb.toString();
     }
 
@@ -38,8 +41,8 @@ public class HttpClient {
         Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
         StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;)
-            sb.append((char)c);
+        for (int c; (c = in.read()) >= 0; )
+            sb.append((char) c);
         return sb.toString();
     }
 
@@ -48,7 +51,7 @@ public class HttpClient {
         URL url = new URL(urlText);
 
         StringBuilder postData = new StringBuilder();
-        for (Map.Entry<String,Object> param : params.entrySet()) {
+        for (Map.Entry<String, Object> param : params.entrySet()) {
             if (postData.length() != 0) postData.append('&');
             postData.append(URLEncoder.encode(param.getKey(), "UTF-8"));
             postData.append('=');
@@ -56,7 +59,7 @@ public class HttpClient {
         }
         byte[] postDataBytes = postData.toString().getBytes("UTF-8");
 
-        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
         headers.forEach(conn::setRequestProperty);
         conn.setDoOutput(true);
@@ -65,14 +68,14 @@ public class HttpClient {
         Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
 
         StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;)
-            sb.append((char)c);
+        for (int c; (c = in.read()) >= 0; )
+            sb.append((char) c);
 
-       return sb.toString();
+        return sb.toString();
     }
 
     public Map<String, String> setAuthHeader(String userAccessToken) {
-        Map<String, String> headers  = new LinkedHashMap<>();
+        Map<String, String> headers = new LinkedHashMap<>();
         headers.put("Authorization", "Bearer " + userAccessToken);
         return headers;
     }

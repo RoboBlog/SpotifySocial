@@ -3,12 +3,7 @@ package pl.deezer;
 import org.springframework.stereotype.Service;
 import pl.util.HttpClient;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 @Service
 public class DeezerLoginService {
@@ -22,14 +17,14 @@ public class DeezerLoginService {
     }
 
 
-    public String getDeezerLoginUrl(){
-        String url = "https://connect.deezer.com/oauth/auth.php?app_id="+deezerAppId+"&redirect_uri="+deezerRedirectUrl+"&perms=basic_access,email";
+    public String getDeezerLoginUrl() {
+        String url = "https://connect.deezer.com/oauth/auth.php?app_id=" + deezerAppId + "&redirect_uri=" + deezerRedirectUrl + "&perms=basic_access,email";
         return url;
     }
 
 
     public String getAccessToken(String code) throws IOException {
-        String url = "https://connect.deezer.com/oauth/access_token.php?app_id="+deezerAppId+"&secret="+deezerApiKey+"&code="+code;
+        String url = "https://connect.deezer.com/oauth/access_token.php?app_id=" + deezerAppId + "&secret=" + deezerApiKey + "&code=" + code;
         return httpClient.get(url);
     }
 }

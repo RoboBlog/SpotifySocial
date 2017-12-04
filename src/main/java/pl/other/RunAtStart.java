@@ -23,6 +23,7 @@ public class RunAtStart {
     private final UserRepository userRepository;
     private final AccountActivationService accountActivationService;
     private final AuthorityRepository authorityRepository;
+
     @Autowired
     public RunAtStart(PasswordEncoder passwordEncoder, UserRepository userRepository, AccountActivationService accountActivationService, AuthorityRepository authorityRepository) {
         this.passwordEncoder = passwordEncoder;
@@ -32,7 +33,7 @@ public class RunAtStart {
     }
 
     @PostConstruct
-    public void runAtStart(){
+    public void runAtStart() {
         User user = new User("admin", passwordEncoder.encode("admin"), "admin@admin.com", true, new Date());
 
         List<User> users = new LinkedList<>();

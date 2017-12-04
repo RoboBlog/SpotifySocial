@@ -14,22 +14,22 @@ public class PostController {
     }
 
     @GetMapping("/get/{postId}")
-    public Post getPost(@PathVariable Long postId){
+    public Post getPost(@PathVariable Long postId) {
         return postService.getPost(postId);
     }
 
     @PostMapping("/create")
-    public Post createNewPost(@RequestBody Post post){
+    public Post createNewPost(@RequestBody Post post) {
         return postService.createNewPost(post);
     }
 
     @PutMapping("/edit/{postId}")
-    public Post editPost(@PathVariable Long postId, @RequestParam String content){
+    public Post editPost(@PathVariable Long postId, @RequestParam String content) {
         return postService.editPostContent(postId, content);
     }
 
     @PostMapping("/add/comment/{postId}")
-    public Comment addComment(@RequestBody Comment comment, @PathVariable Long postId){
+    public Comment addComment(@RequestBody Comment comment, @PathVariable Long postId) {
         return postService.addComment(comment, postId);
     }
 

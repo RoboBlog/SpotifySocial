@@ -1,7 +1,6 @@
 package pl.other;
 
 import org.springframework.stereotype.Service;
-import pl.model.User;
 
 import java.util.Date;
 
@@ -15,7 +14,7 @@ public class DistanceCalculator {
     //https://postgis.net/docs/ST_DWithin.html
     //https://boundlessgeo.com/2012/07/making-geography-faster/
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
         double lat1 = 50.03437;
         double lon1 = 19.21037;
         double lat2 = 50.13717;
@@ -25,24 +24,24 @@ public class DistanceCalculator {
         long startTime = System.currentTimeMillis();
         long elapsedTime = 0L;
         int j = 1;
-        for(int i = 0; i<1000000000; i++) {
-            lat1-=i*(elapsedTime/10000);
-            lon1-=i*(elapsedTime/1000);
-            lon2+=i*(elapsedTime/10000);
-            lat2-=i*(elapsedTime/1000);
+        for (int i = 0; i < 1000000000; i++) {
+            lat1 -= i * (elapsedTime / 10000);
+            lon1 -= i * (elapsedTime / 1000);
+            lon2 += i * (elapsedTime / 10000);
+            lat2 -= i * (elapsedTime / 1000);
             double distanceInKilometer = 6371 * 2 * Math.atan2(Math.sqrt(Math.sin(((Math.PI / 180) * (lat2 - lat1)) / 2) *
                     Math.sin(((Math.PI / 180) * (lat2 - lat1)) / 2) + Math.cos((Math.PI / 180) * (lat1)) * Math.cos((Math.PI / 180) * (lat2)) *
                     Math.sin(((Math.PI / 180) * (lon2 - lon1)) / 2) * Math.sin(((Math.PI / 180) * (lon2 - lon1)) / 2)), Math.sqrt(1 - Math.sin(((Math.PI / 180) *
                     (lat2 - lat1)) / 2) * Math.sin(((Math.PI / 180) * (lat2 - lat1)) / 2) + Math.cos((Math.PI / 180) * (lat1)) * Math.cos((Math.PI / 180) * (lat2)) *
                     Math.sin(((Math.PI / 180) * (lon2 - lon1)) / 2) * Math.sin(((Math.PI / 180) * (lon2 - lon1)) / 2)));
 
-            if(distanceInKilometer<range) {
+            if (distanceInKilometer < range) {
 //                System.out.println(j+ ". " + distanceInKilometer);
                 j++;
             }
         }
         elapsedTime = (new Date()).getTime() - startTime;
-        System.out.print(elapsedTime/1000.0);
+        System.out.print(elapsedTime / 1000.0);
 //        System.out.print(distanceInKilometer);
     }
 }
