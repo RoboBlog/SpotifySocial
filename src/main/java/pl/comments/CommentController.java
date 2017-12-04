@@ -2,8 +2,6 @@ package pl.comments;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RequestMapping("/comment/")
 @RestController
 public class CommentController {

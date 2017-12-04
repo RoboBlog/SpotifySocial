@@ -1,6 +1,8 @@
 package pl.posts;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import pl.comments.Comment;
 import pl.model.User;
 
@@ -10,6 +12,8 @@ import java.util.Set;
 
 @Data
 @Entity
+@SQLDelete(sql="Update post SET deleted = true where id=?")
+@Where(clause="deleted != true")
 public class Post {
 
     @Id
@@ -25,6 +29,7 @@ public class Post {
 //    private Long likes;
     @OneToMany
     private Set<Comment> comments;
+    private boolean deleted;
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
