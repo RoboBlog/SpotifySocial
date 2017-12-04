@@ -31,6 +31,9 @@ sonarqube {
 repositories {
 	mavenCentral()
 	maven { url 'https://jitpack.io' }
+	maven {
+		url 'https://repo.spring.io/libs-milestone'
+	}
 }
 
 
@@ -58,6 +61,15 @@ dependencies {
 	//swagger
 //	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
 //	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+
+
+	//SOCIAL
+//	compile group: 'org.springframework.social', name: 'spring-social-core', version: '1.1.4.RELEASE'
+//	compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
+//	compile 'org.springframework.social:spring-social-core:1.1.4.RELEASE'
+
+	compile 'org.springframework.social:spring-social-core:2.0.0.M4'
+	compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
 
 
 
