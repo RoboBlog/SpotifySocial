@@ -4,6 +4,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.userProfile.UserService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -26,7 +27,7 @@ public class CommentService {
             throw new AccessDeniedException("Access denied!");
         } else {
             //TODO it is bad?
-            commentRepository.delete(id);
+            commentRepository.delete(comment);
         }
     }
 }

@@ -3,6 +3,8 @@ package pl.other;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.comments.Comment;
+import pl.comments.CommentRepository;
 import pl.model.User;
 import pl.model.UserRepository;
 import pl.security.Authority;
@@ -23,13 +25,15 @@ public class RunAtStart {
     private final UserRepository userRepository;
     private final AccountActivationService accountActivationService;
     private final AuthorityRepository authorityRepository;
+    private final CommentRepository commentRepository;
 
-    @Autowired
-    public RunAtStart(PasswordEncoder passwordEncoder, UserRepository userRepository, AccountActivationService accountActivationService, AuthorityRepository authorityRepository) {
+
+    public RunAtStart(PasswordEncoder passwordEncoder, UserRepository userRepository, AccountActivationService accountActivationService, AuthorityRepository authorityRepository, CommentRepository commentRepository) {
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
         this.accountActivationService = accountActivationService;
         this.authorityRepository = authorityRepository;
+        this.commentRepository = commentRepository;
     }
 
     @PostConstruct
@@ -42,6 +46,10 @@ public class RunAtStart {
         user.addAuthority(authority);
         authorityRepository.save(authority);
         userRepository.save(user);
+
+        Comment comment = new Comment();
+        comment.setContent("test");
+        commentRepository.save(comment);
 
     }
 }

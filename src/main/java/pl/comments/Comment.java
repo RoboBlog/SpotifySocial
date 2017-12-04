@@ -1,6 +1,8 @@
 package pl.comments;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import pl.model.User;
 
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
+@SQLDelete(sql="Update comment SET deleted = true where id=?")
+@Where(clause="deleted != true")
 public class Comment {
     @Id
     @GeneratedValue
@@ -21,6 +25,6 @@ public class Comment {
     private String content;
     private LocalDateTime date;
     private Long likes;
-
+    private boolean deleted;
     //Todo add date in constructor
 }
