@@ -7,7 +7,6 @@ import pl.model.User;
 import pl.userProfile.UserService;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class PostService {
@@ -36,7 +35,7 @@ public class PostService {
         return post;
     }
 
-    public Post editPostContent(Long id, String content){
+    public Post editPostContent(Long id, String content) {
         //TODO update date
         Post post = postRepository
                 .findById(id)
@@ -52,8 +51,18 @@ public class PostService {
         return post;
     }
 
-    public void deletePost(){
-        //TODO delete post
+
+    //TODO test it
+    public void deletePost(Long id) {
+        Post post = postRepository
+                .findById(id)
+                .orElseThrow(() -> new NoSuchElementException("No such Post!"));
+
+        if (!(userService.authTest().equals(post.getUser()))) {
+            throw new AccessDeniedException("Access denied!");
+        } else {
+            postRepository.delete(post);
+        }
     }
 
     //TODO null pointer if user is no login?
