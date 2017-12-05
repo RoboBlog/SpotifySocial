@@ -32,11 +32,11 @@ public class AccountActivationService {
     //TODO refactor this
     public String accountActivation(String username, String activationCode) {
         User user = userRepository.findByUsername(username);
-        if (Objects.equals(user.getActivationCode(), activationCode) && !user.getEnabled()) {
-            user.setEnabled(true);
+        if (Objects.equals(user.getActivationCode(), activationCode) && !user.isAccountEnabled()) {
+            user.setAccountEnabled(true);
             userRepository.save(user);
             return "OK";
-        } else if (user.getEnabled()) {
+        } else if (user.isAccountEnabled()) {
             return "Your account is active";
         } else {
             return "error";
