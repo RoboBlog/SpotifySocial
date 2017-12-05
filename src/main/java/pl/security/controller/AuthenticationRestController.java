@@ -2,6 +2,7 @@ package pl.security.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,11 +10,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.social.connect.mem.InMemoryUsersConnectionRepository;
+import org.springframework.social.connect.web.ProviderSignInController;
 import org.springframework.web.bind.annotation.*;
 import pl.security.JwtAuthenticationRequest;
 import pl.security.JwtTokenUtil;
 import pl.security.JwtUser;
 import pl.security.service.JwtAuthenticationResponse;
+import pl.security.service.JwtUserDetailsServiceImpl;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,11 +28,11 @@ public class AuthenticationRestController {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
-    private final UserDetailsService userDetailsService;
+    private final JwtUserDetailsServiceImpl userDetailsService;
     @Value("${jwt.header}")
     private String tokenHeader;
 
-    public AuthenticationRestController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, UserDetailsService userDetailsService) {
+    public AuthenticationRestController(AuthenticationManager authenticationManager, JwtTokenUtil jwtTokenUtil, JwtUserDetailsServiceImpl userDetailsService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
@@ -64,5 +68,7 @@ public class AuthenticationRestController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+
 
 }

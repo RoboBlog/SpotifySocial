@@ -64,7 +64,6 @@ public class SpotifyController {
         String code = request.getQueryString().replace("code=", "");
         String username = "maciek";
         String accessToken = spotifyLoginService.fetchAccessToken(code);
-        System.out.println("USERNAME" + username);
 //        profileService.setSpotifyAccessToken(accessToken, username);
         //FIX
         String topTracks = spotifyApiService.getTopTracks(accessToken);

@@ -17,6 +17,7 @@ public class FacebookService {
     @Value("${spring.social.facebook.appSecret}")
     private String facebookSecret;
 
+    //change redirect URI todo
     public String createFacebookAuthorizationURL() {
         FacebookConnectionFactory connectionFactory = new FacebookConnectionFactory(facebookAppId, facebookSecret);
         OAuth2Operations oauthOperations = connectionFactory.getOAuthOperations();
