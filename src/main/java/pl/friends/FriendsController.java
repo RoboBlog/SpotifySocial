@@ -9,7 +9,7 @@ import pl.model.User;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/friends/")
+@RequestMapping("${ver}/friends/")
 public class FriendsController {
 
     private final FriendsService friendsService;

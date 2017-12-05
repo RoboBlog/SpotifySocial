@@ -10,7 +10,7 @@ import java.io.IOException;
 //exception
 @CrossOrigin(origins = "${origins}")
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("${ver}/user/")
 public class UserController {
 
     private final UserService userService;

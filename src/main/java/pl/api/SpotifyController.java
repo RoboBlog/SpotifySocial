@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
-@RequestMapping("/api/spotify/")
+@RequestMapping("${ver}/spotify/")
 @RestController
 public class SpotifyController {
 

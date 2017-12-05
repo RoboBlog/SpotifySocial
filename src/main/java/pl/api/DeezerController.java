@@ -11,7 +11,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@RequestMapping("/api/deezer/")
+@RequestMapping("${ver}/deezer/")
 @RestController
 public class DeezerController {
     private final DeezerLoginService deezerLoginService;

@@ -8,3 +8,4 @@ jwt:
       refresh: refresh
 
 origins: http://localhost:3000
+ver: /api/v.0.0.0/

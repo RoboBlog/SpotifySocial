@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.userProfile.AccountActivationService;
 
 @RestController
-@RequestMapping("/api/email/")
+@RequestMapping("${ver}/email/")
 public class EmailController {
     private final AccountActivationService accountActivationService;
 

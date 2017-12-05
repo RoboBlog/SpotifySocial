@@ -3,7 +3,7 @@ package pl.posts;
 import org.springframework.web.bind.annotation.*;
 import pl.comments.Comment;
 
-@RequestMapping("/post/")
+@RequestMapping("${ver}/post/")
 @RestController
 public class PostController {
 

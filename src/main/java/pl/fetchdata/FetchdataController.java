@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 //TODO it is test...not production code
-@RequestMapping("/spotify/fetch/")
+@RequestMapping("${ver}/spotify/fetch/")
 @RestController
 public class FetchdataController {
 

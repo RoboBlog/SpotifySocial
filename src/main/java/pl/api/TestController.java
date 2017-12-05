@@ -13,7 +13,7 @@ import pl.spotify.TrackDto;
 import java.util.LinkedList;
 import java.util.List;
 
-@RequestMapping("/api/")
+@RequestMapping("${ver}")
 @RestController
 public class TestController {
     private final UserRepository userRepository;

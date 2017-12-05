@@ -11,7 +11,7 @@ import pl.userProfile.AccountActivationService;
 
 import javax.validation.Valid;
 
-@RequestMapping("/api/")
+@RequestMapping("${ver}")
 @RestController
 public class SignUpController {
     private final PasswordEncoder passwordEncoder;
