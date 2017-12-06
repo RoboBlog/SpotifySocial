@@ -34,21 +34,21 @@ public class SpotifyApiService {
         String url = "https://api.spotify.com/v1/me/top/tracks?limit=50";
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
     public String getRecentlyPlayed(String userAccessToken) throws IOException {
         String url = "https://api.spotify.com/v1/me/player/recently-played?limit=50";
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
     public String getTopArtists(String userAccessToken) throws IOException {
         String url = "https://api.spotify.com/v1/me/top/artists?limit=50";
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
     public void saveTopTracks(String topTracks) {

@@ -18,7 +18,7 @@ public class SpotifySongInfoService {
         String url = "https://api.spotify.com/v1/audio-analysis/" + songId;
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
 
@@ -26,14 +26,14 @@ public class SpotifySongInfoService {
         String url = "https://api.spotify.com/v1/audio-features/?ids=" + songsId;
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
     public String getGenreSeeds(String userAccessToken) throws IOException {
         String url = "https://api.spotify.com/v1/recommendations/available-genre-seeds";
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
 
@@ -42,7 +42,7 @@ public class SpotifySongInfoService {
         String url = "https://api.spotify.com/v1/me/playlists?limit=50";
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
 
-        return httpClient.get(url, headers);
+        return httpClient.get(url, headers, 5000, 5000);
     }
 
 

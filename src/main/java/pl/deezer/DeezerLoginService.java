@@ -25,6 +25,6 @@ public class DeezerLoginService {
 
     public String getAccessToken(String code) throws IOException {
         String url = "https://connect.deezer.com/oauth/access_token.php?app_id=" + deezerAppId + "&secret=" + deezerApiKey + "&code=" + code;
-        return httpClient.get(url);
+        return httpClient.get(url, 5000, 5000);
     }
 }

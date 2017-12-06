@@ -54,7 +54,7 @@ public class SpotifyDataService {
         String url = "https://api.spotify.com/v1/artists?ids=" + artistsIdList;
 
         Map<String, String> headers = httpClient.setAuthHeader(userAccessToken);
-        String response = httpClient.get(url, headers);
+        String response = httpClient.get(url, headers, 5000, 5000);
 
         return response;
     }

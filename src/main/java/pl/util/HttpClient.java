@@ -16,10 +16,12 @@ import java.util.Map;
 @Component
 public class HttpClient {
 
-    public String get(String urlText, Map<String, String> headers) throws IOException {
+    public String get(String urlText, Map<String, String> headers, int connectTimeout, int readTimeout) throws IOException {
         URL url = new URL(urlText);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setConnectTimeout(connectTimeout);
+        conn.setReadTimeout(readTimeout);
 
         headers.forEach(conn::setRequestProperty);
 
@@ -32,10 +34,12 @@ public class HttpClient {
         return sb.toString();
     }
 
-    public String get(String urlText) throws IOException {
+    public String get(String urlText, int connectTimeout, int readTimeout) throws IOException {
         URL url = new URL(urlText);
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
+        conn.setConnectTimeout(connectTimeout);
+        conn.setReadTimeout(readTimeout);
 
         conn.setDoOutput(true);
         Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
@@ -47,7 +51,7 @@ public class HttpClient {
     }
 
 
-    public String post(String urlText, Map<String, Object> params, Map<String, String> headers) throws IOException {
+    public String post(String urlText, Map<String, Object> params, Map<String, String> headers, int connectTimeout, int readTimeout) throws IOException {
         URL url = new URL(urlText);
 
         StringBuilder postData = new StringBuilder();
@@ -61,6 +65,9 @@ public class HttpClient {
 
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("POST");
+        conn.setConnectTimeout(connectTimeout);
+        conn.setReadTimeout(readTimeout);
+
         headers.forEach(conn::setRequestProperty);
         conn.setDoOutput(true);
         conn.getOutputStream().write(postDataBytes);

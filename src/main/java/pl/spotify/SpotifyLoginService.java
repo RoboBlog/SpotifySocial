@@ -58,7 +58,7 @@ public class SpotifyLoginService {
 
         Map<String, String> headers = setApiKeyHeader();
 
-        String response = httpClient.post(url, params, headers);
+        String response = httpClient.post(url, params, headers, 5000, 5000);
 
         String accessToken = getAccessTokenFromJson(response);
         return accessToken;
