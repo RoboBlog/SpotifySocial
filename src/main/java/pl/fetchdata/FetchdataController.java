@@ -4,12 +4,12 @@ import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import pl.spotify.POJO.Item;
-import pl.spotify.POJO.Spotify;
-import pl.spotify.SpotifyApiService;
-import pl.spotify.SpotifyDataService;
-import pl.spotify.SpotifyLoginService;
-import pl.spotify.SpotifySongInfoService;
+import pl.music_portal.spotify.POJO.Item;
+import pl.music_portal.spotify.POJO.Spotify;
+import pl.music_portal.spotify.SpotifyApiService;
+import pl.music_portal.spotify.SpotifyDataService;
+import pl.music_portal.spotify.SpotifyLoginService;
+import pl.music_portal.spotify.SpotifySongInfoService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

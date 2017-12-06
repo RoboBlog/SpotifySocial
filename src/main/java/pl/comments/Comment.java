@@ -3,7 +3,7 @@ package pl.comments;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import pl.model.User;
+import pl.user.User;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

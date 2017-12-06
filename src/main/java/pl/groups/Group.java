@@ -1,16 +1,16 @@
 package pl.groups;
 import lombok.Data;
-import pl.model.User;
-import pl.posts.Post;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data
 @Entity
+@SQLDelete(sql="Update group SET deleted = true where id=?")
+@Where(clause="deleted != true")
 public class Group {
 
     @Id
@@ -18,6 +18,7 @@ public class Group {
     private Long id;
     private String name;
     private String description;
+    private boolean deleted;
 //    private tags
     //backgrond, icon
     //todo

@@ -4,7 +4,7 @@ import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 import pl.comments.Comment;
-import pl.model.User;
+import pl.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

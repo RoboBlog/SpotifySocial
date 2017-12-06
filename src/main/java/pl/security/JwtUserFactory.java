@@ -2,7 +2,7 @@ package pl.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import pl.model.User;
+import pl.user.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

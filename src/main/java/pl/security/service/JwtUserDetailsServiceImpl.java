@@ -4,8 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.model.User;
-import pl.model.UserRepository;
+import pl.user.User;
+import pl.user.UserRepository;
 import pl.security.JwtUserFactory;
 
 @Service

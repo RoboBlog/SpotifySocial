@@ -1,12 +1,11 @@
 package pl.other;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.comments.Comment;
 import pl.comments.CommentRepository;
-import pl.model.User;
-import pl.model.UserRepository;
+import pl.user.User;
+import pl.user.UserRepository;
 import pl.security.Authority;
 import pl.security.AuthorityName;
 import pl.security.AuthorityRepository;

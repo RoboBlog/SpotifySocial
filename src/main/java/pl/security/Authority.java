@@ -1,7 +1,7 @@
 package pl.security;
 
 
-import pl.model.User;
+import pl.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
