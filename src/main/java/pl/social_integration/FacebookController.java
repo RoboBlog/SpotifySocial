@@ -35,7 +35,7 @@ public class FacebookController {
 
 
     @GetMapping("/token/{accessToken}")
-    public ResponseEntity<JwtAuthenticationResponse> getNameResonse(@PathVariable String accessToken) {
+    public ResponseEntity<JwtAuthenticationResponse> returnToken(@PathVariable String accessToken) {
         return ResponseEntity.ok(new JwtAuthenticationResponse(accessToken));
     }
 }
