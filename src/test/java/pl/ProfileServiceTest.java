@@ -1,10 +1,8 @@
 package pl;
 
-import spock.lang.Specification;
-
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
-public class ProfileServiceTest extends Specification {
+public class ProfileServiceTest {
 //    @Test
 //    @WithMockUser(username = "maciek")
 //    public void authTestTest(){
