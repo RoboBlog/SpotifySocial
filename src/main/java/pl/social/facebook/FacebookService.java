@@ -1,4 +1,4 @@
-package pl.social_integration;
+package pl.social_integration.facebook;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.social.facebook.api.Facebook;

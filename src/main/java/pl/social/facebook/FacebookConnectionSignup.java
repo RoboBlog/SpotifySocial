@@ -1,4 +1,4 @@
-package pl.social_integration;
+package pl.social_integration.facebook;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Service;
-import pl.model.User;
-import pl.model.UserRepository;
+import pl.user.User;
+import pl.user.UserRepository;
 
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 

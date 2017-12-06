@@ -12,7 +12,7 @@
 //import static org.assertj.core.api.Assertions.*;
 //
 //import pl.maps.DistanceCalculate;
-//import pl.model.User;
+//import pl.user.User;
 //
 ///**
 // * Created by maciek on 7/14/17.

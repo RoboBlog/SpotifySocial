@@ -1,8 +1,5 @@
 package pl;
 
-import org.junit.Test;
-import pl.spotify.SpotifyLoginService;
-
 /**
  * Created by maciek on 7/8/17.
  */

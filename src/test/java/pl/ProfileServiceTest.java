@@ -1,20 +1,17 @@
 package pl;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit4.SpringRunner;
-import pl.model.User;
+import spock.lang.Specification;
 
 //@RunWith(SpringRunner.class)
 //@SpringBootTest
-public class ProfileServiceTest {
+public class ProfileServiceTest extends Specification {
 //    @Test
 //    @WithMockUser(username = "maciek")
 //    public void authTestTest(){
 //        ProfileService profileService = new ProfileService();
 //        User user = profileService.authTest();
+
+//    }
 
 //    }
 }
