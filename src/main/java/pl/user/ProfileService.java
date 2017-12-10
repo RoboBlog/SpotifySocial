@@ -1,4 +1,4 @@
-package pl.userProfile;
+package pl.user;
 
 import org.springframework.stereotype.Service;
 import pl.user.User;

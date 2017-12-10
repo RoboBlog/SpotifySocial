@@ -1,7 +1,6 @@
 package pl.user;
 
 import org.springframework.web.bind.annotation.*;
-import pl.userProfile.UserService;
 
 import java.io.IOException;
 

@@ -9,7 +9,7 @@ import pl.user.UserRepository;
 import pl.security.Authority;
 import pl.security.AuthorityName;
 import pl.security.AuthorityRepository;
-import pl.userProfile.AccountActivationService;
+import pl.user.AccountActivationService;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;

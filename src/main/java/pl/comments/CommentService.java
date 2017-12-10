@@ -2,7 +2,7 @@ package pl.comments;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
-import pl.userProfile.UserService;
+import pl.user.UserService;
 
 import java.util.List;
 import java.util.NoSuchElementException;

@@ -11,7 +11,7 @@ import pl.music_portal.spotify.SpotifyApiService;
 import pl.music_portal.spotify.SpotifyDataService;
 import pl.music_portal.spotify.SpotifyLoginService;
 import pl.music_portal.spotify.TrackDto;
-import pl.userProfile.ProfileService;
+import pl.user.ProfileService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

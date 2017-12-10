@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import pl.user.UserRepository;
 import pl.music_portal.spotify.POJO.Spotify;
 import pl.music_portal.spotify.POJO.SpotifyRepository;
-import pl.userProfile.ProfileService;
-import pl.userProfile.UserService;
+import pl.user.ProfileService;
+import pl.user.UserService;
 import pl.util.HttpClient;
 
 import java.io.IOException;

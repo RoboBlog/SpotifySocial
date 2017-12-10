@@ -3,7 +3,7 @@ package pl.friends;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.user.User;
-import pl.userProfile.UserService;
+import pl.user.UserService;
 
 import java.util.List;
 import java.util.Objects;

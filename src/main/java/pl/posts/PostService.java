@@ -4,7 +4,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.comments.Comment;
 import pl.user.User;
-import pl.userProfile.UserService;
+import pl.user.UserService;
 
 import java.util.NoSuchElementException;
 
