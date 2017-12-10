@@ -1,6 +1,8 @@
 package pl.user;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.*;
+import pl.other.Views;
 
 import java.io.IOException;
 
@@ -11,37 +13,51 @@ import java.io.IOException;
 public class UserController {
 
     private final UserService userService;
+    private final UserProfileService userProfileService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserProfileService userProfileService) {
         this.userService = userService;
+        this.userProfileService = userProfileService;
     }
 
-    //    @JsonView(Views.Public.class)
+
+    @JsonView(Views.Public.class)
     @GetMapping("/profile")
     public User profile() {
+        //TODO change name to getUser
         User user = userService.authTest();
         return user;
     }
 
 
-    @PutMapping("/editAddress")
+    @PutMapping("/edit/address")
     public void editAddress(@RequestBody Address address) {
     }
 
-    @PutMapping("/editPassword")
+//    @PostMapping("/reset/password")
+//    public void resetPassword(@RequestParam String userEmail) {
+//        userService.resetPassword(userEmail);
+//    }
+
+    @PutMapping("/edit/password")
     public void editPassword() {
 
     }
 
-    @PutMapping("/editEmail")
+    @PutMapping("/edit/email")
     public void editEmail(@RequestBody User user) { //@RequestParam?
         System.out.print(user);
         String email = user.getEmail();
 
     }
 
-    @PostMapping("/addaddress")
-    public void addAddress(@RequestParam String city, @RequestParam String country) throws IOException {
-        userService.addAddress(city, country);
+    @PostMapping("/add/address")
+    public Address addAddress(@RequestParam String city, @RequestParam String country) throws IOException {
+        return userService.addAddress(city, country);
+    }
+
+    @PutMapping("/add/description")
+    public void addDescription(@RequestParam String description) {
+        userProfileService.addDescription(description);
     }
 }

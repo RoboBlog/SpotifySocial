@@ -12,6 +12,9 @@ import pl.user.UserRepository;
 import pl.security.SecurityContextService;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -19,6 +22,7 @@ public class UserService {
     private final AddressRepository addressRepository;
     private final GoogleMapsGetService googleMapsGetService;
     private final SecurityContextService securityContextService;
+
 
     public UserService(UserRepository userRepository, AddressRepository addressRepository, GoogleMapsGetService googleMapsGetService, SecurityContextService securityContextService) {
         this.userRepository = userRepository;
@@ -38,12 +42,14 @@ public class UserService {
         return loggedUser;
     }
 
-    public void addAddress(String city, String country) throws IOException {
+    public Address addAddress(String city, String country) throws IOException {
         Coordinates coordinates = googleMapsGetService.getCoordinates(city, country);
         Address address = new Address(country, city, coordinates.getLatitude(), coordinates.getLongtitude());
         addressRepository.save(address);
         User user = authTest();
         user.setAddress(address);
         userRepository.save(user);
+
+        return address;
     }
 }
