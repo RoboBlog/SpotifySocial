@@ -1,23 +1,39 @@
 package pl.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import org.apache.catalina.connector.Connector;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.embedded.EmbeddedWebApplicationContext;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import pl.other.Views;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 //exception
-@CrossOrigin(origins = "${origins}")
+//@CrossOrigin(origins = "${origins}")
 @RestController
 @RequestMapping("${ver}/user/")
 public class UserController {
 
     private final UserService userService;
     private final UserProfileService userProfileService;
+    private final PasswordResetService passwordResetService;
 
-    public UserController(UserService userService, UserProfileService userProfileService) {
+    public UserController(UserService userService, UserProfileService userProfileService, PasswordResetService passwordResetService) {
         this.userService = userService;
         this.userProfileService = userProfileService;
+        this.passwordResetService = passwordResetService;
     }
 
 
@@ -34,22 +50,29 @@ public class UserController {
     public void editAddress(@RequestBody Address address) {
     }
 
-//    @PostMapping("/reset/password")
-//    public void resetPassword(@RequestParam String userEmail) {
-//        userService.resetPassword(userEmail);
-//    }
+    @PostMapping("/reset/password")
+    public void resetPassword(@RequestParam String userEmail) throws UnknownHostException {
+        passwordResetService.resetPassword(userEmail);
+    }
+
+
+    @PostMapping("/changePassword")
+    public void validatePasswordResetTokenAndChangeNewPassword(@RequestParam Long id,
+                                                               @RequestParam String token,
+                                                               @RequestParam String password) throws UnknownHostException {
+        passwordResetService.validatePasswordResetToken(token, password, id);
+    }
 
     @PutMapping("/edit/password")
     public void editPassword() {
 
     }
 
-    @PutMapping("/edit/email")
-    public void editEmail(@RequestBody User user) { //@RequestParam?
-        System.out.print(user);
-        String email = user.getEmail();
-
-    }
+//    @PutMapping("/edit/email")
+//    public void editEmail(@RequestBody User user) { //@RequestParam?
+//        System.out.print(user);
+//        String email = user.getEmail();
+//    }
 
     @PostMapping("/add/address")
     public Address addAddress(@RequestParam String city, @RequestParam String country) throws IOException {

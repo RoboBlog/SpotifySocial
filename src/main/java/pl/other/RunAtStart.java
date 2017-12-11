@@ -1,5 +1,6 @@
 package pl.other;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import pl.comments.Comment;
@@ -19,7 +20,6 @@ import java.util.List;
 @Component
 public class RunAtStart {
 
-
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
     private final AccountActivationService accountActivationService;
@@ -37,6 +37,7 @@ public class RunAtStart {
 
     @PostConstruct
     public void runAtStart() {
+
         User user = new User("admin", passwordEncoder.encode("admin"), "admin@admin.com", true, new Date());
 
         List<User> users = new LinkedList<>();
