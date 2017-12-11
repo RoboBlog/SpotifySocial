@@ -64,8 +64,9 @@ public class UserController {
     }
 
     @PutMapping("/edit/password")
-    public void editPassword() {
-
+    public void editPassword(@RequestParam String oldPassword,
+                             @RequestParam String newPassword) {
+        userProfileService.editPassword(newPassword, oldPassword);
     }
 
     @PutMapping("/edit/email")
@@ -74,7 +75,8 @@ public class UserController {
     }
 
     @PostMapping("/add/address")
-    public Address addAddress(@RequestParam String city, @RequestParam String country) throws IOException {
+    public Address addAddress(@RequestParam String city,
+                              @RequestParam String country) throws IOException {
         return userService.addAddress(city, country);
     }
 
