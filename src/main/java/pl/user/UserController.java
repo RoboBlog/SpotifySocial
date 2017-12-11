@@ -68,11 +68,10 @@ public class UserController {
 
     }
 
-//    @PutMapping("/edit/email")
-//    public void editEmail(@RequestBody User user) { //@RequestParam?
-//        System.out.print(user);
-//        String email = user.getEmail();
-//    }
+    @PutMapping("/edit/email")
+    public void editEmail(@RequestParam String email) {
+        userProfileService.editEmail(email);
+    }
 
     @PostMapping("/add/address")
     public Address addAddress(@RequestParam String city, @RequestParam String country) throws IOException {

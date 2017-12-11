@@ -17,4 +17,10 @@ public class UserProfileService {
         user.setDescription(description);
         userRepository.save(user);
     }
+
+    public void editEmail(String email) {
+        User user = userService.authTest();
+        user.setEmail(email);
+        userRepository.save(user);
+    }
 }
