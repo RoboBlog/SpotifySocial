@@ -21,7 +21,7 @@ public class Post {
     private Long id;
     @ManyToOne
     private User user;
-    private LocalDateTime date;
+    private LocalDateTime dateAdded = LocalDateTime.now();
     private String content;
     //TODO
     //html
@@ -33,5 +33,13 @@ public class Post {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
+    }
+
+    public Post() {
+    }
+
+    public Post(User user, String content) {
+        this.user = user;
+        this.content = content;
     }
 }

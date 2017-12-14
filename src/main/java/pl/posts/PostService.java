@@ -1,11 +1,14 @@
 package pl.posts;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.comments.Comment;
 import pl.user.User;
 import pl.user.UserService;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -77,5 +80,14 @@ public class PostService {
 
         postRepository.save(post);
         return comment;
+    }
+
+    public Page<Post> getAllPaginated(int page, int size) {
+        return postRepository.findAll(new PageRequest(page, size));
+    }
+
+    public List<Post> getAllUserPost(Long userId) {
+        List<Post> allUserPosts = postRepository.findAllByUser_UserIdOrderByDateAdded(userId);
+        return allUserPosts;
     }
 }
