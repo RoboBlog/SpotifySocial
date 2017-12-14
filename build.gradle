@@ -35,8 +35,6 @@ repositories {
 		url 'https://repo.spring.io/libs-milestone'
 	}
 }
-
-
 dependencies {
 	compileOnly('org.projectlombok:lombok:1.16.18')
 	compile("org.springframework.boot:spring-boot-devtools")
