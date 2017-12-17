@@ -1,4 +1,4 @@
-package pl.social_integration.facebook;
+package pl.social.facebook;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
