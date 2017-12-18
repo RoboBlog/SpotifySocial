@@ -28,13 +28,13 @@ public class FriendsService {
 
     public List<FriendRequest> getFriendsRequestsList() {
         String username = userService.getUsername();
-        List<FriendRequest> friendsRequest = friendRequestRepository.getAllByRequestToAndIsAcceptIsFalse(username);
+        List<FriendRequest> friendsRequest = friendRequestRepository.findAllByRequestToAndIsAcceptIsFalse(username);
         return friendsRequest;
     }
 
 
     public void acceptFriendRequest(long requestId) {
-        FriendRequest friendRequest = friendRequestRepository.getById(requestId);
+        FriendRequest friendRequest = friendRequestRepository.findById(requestId);
         if (Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())) {
             friendRequest.setAccept(true);
             friendRequestRepository.save(friendRequest);
@@ -44,7 +44,7 @@ public class FriendsService {
     }
 
     public void removeFriendRequest(long requestId) {
-        FriendRequest friendRequest = friendRequestRepository.getById(requestId);
+        FriendRequest friendRequest = friendRequestRepository.findById(requestId);
         if (Objects.equals(friendRequest.getRequestFrom(), userService.getUsername())) {
             friendRequestRepository.delete(friendRequest);
         } else {

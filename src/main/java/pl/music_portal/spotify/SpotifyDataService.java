@@ -33,7 +33,7 @@ public class SpotifyDataService {
 
     public List<Item> getItems() {
         User user = userService.authTest();
-        Spotify spotifyData = spotifyRepository.getByUserUserId(user.getUserId());
+        Spotify spotifyData = spotifyRepository.findByUserUserId(user.getUserId());
         List<Item> items = spotifyData.getItems();
         return items;
     }

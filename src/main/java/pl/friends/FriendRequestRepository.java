@@ -8,9 +8,9 @@ import java.util.List;
 
 @Repository
 public interface FriendRequestRepository extends JpaRepository<FriendRequest, Long> {
-    List<FriendRequest> getAllByRequestToAndIsAcceptIsFalse(String requestTo);
+    List<FriendRequest> findAllByRequestToAndIsAcceptIsFalse(String requestTo);
 
-    List<FriendRequest> getAllByRequestToAndIsAcceptIsTrue(String requestTo);
+    List<FriendRequest> findAllByRequestToAndIsAcceptIsTrue(String requestTo);
 
-    FriendRequest getById(long id);
+    FriendRequest findById(long id);
 }
