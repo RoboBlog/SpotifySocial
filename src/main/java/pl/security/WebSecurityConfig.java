@@ -17,8 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.social.connect.ConnectionFactoryLocator;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.web.ProviderSignInController;
-import pl.social_integration.facebook.FacebookConnectionSignup;
-import pl.social_integration.facebook.FacebookSignInAdapter;
+import pl.social.facebook.FacebookConnectionSignup;
+import pl.social.facebook.FacebookSignInAdapter;
 
 
 @SuppressWarnings("SpringJavaAutowiringInspection")

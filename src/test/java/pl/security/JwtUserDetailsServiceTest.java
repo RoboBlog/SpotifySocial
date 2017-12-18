@@ -32,6 +32,5 @@ public class JwtUserDetailsServiceTest {
         JwtUserDetailsServiceImpl jwtUserDetailsService = new JwtUserDetailsServiceImpl(userRepository);
 
         UserDetails userDetails = jwtUserDetailsService.loadUserByUsername("tes1t");
-
     }
 }

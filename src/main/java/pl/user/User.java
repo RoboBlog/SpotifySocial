@@ -1,5 +1,6 @@
 package pl.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 import org.hibernate.validator.constraints.Email;
@@ -79,7 +80,8 @@ public class User {
     @JsonView(Views.Internal.class)
     private String confirmationId;
 
-    @JsonView(Views.Public.class)
+//    @JsonView(Views.Public.class)
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_authority",
@@ -133,5 +135,25 @@ public class User {
         this.accountEnabled = user.accountEnabled;
         this.activationCode = UUID.randomUUID().toString();
 
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", spotifyAccessToken='" + spotifyAccessToken + '\'' +
+                ", deezerAccessToken='" + deezerAccessToken + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", description='" + description + '\'' +
+                ", friends=" + friends +
+                ", accountEnabled=" + accountEnabled +
+                ", spotify=" + spotify +
+                ", address=" + address +
+                ", activationCode='" + activationCode + '\'' +
+                ", lastPasswordResetDate=" + lastPasswordResetDate +
+                ", posts=" + posts +
+                ", confirmationId='" + confirmationId + '\'' +
+                '}';
     }
 }
