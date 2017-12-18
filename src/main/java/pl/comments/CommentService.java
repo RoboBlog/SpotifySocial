@@ -2,20 +2,21 @@ package pl.comments;
 
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import pl.security.SecurityContextService;
 import pl.user.UserService;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
 public class CommentService {
 
     private final CommentRepository commentRepository;
-    private final UserService userService;
+    private final SecurityContextService securityContextService;
 
-    public CommentService(CommentRepository commentRepository, UserService userService) {
+
+    public CommentService(CommentRepository commentRepository, SecurityContextService securityContextService) {
         this.commentRepository = commentRepository;
-        this.userService = userService;
+        this.securityContextService = securityContextService;
     }
 
     public void deleteComment(Long id) {
@@ -23,7 +24,7 @@ public class CommentService {
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No such Comment!"));
 
-        if (!(userService.authTest().equals(comment.getAuthor()))) {
+        if (!(securityContextService.getLoggedUser().equals(comment.getAuthor()))) {
             throw new AccessDeniedException("Access denied!");
         } else {
             //TODO it is bad?

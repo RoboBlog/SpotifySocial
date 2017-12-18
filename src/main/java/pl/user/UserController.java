@@ -1,23 +1,11 @@
 package pl.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
-import org.apache.catalina.connector.Connector;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.embedded.EmbeddedWebApplicationContext;
-import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainer;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import pl.other.Views;
+import pl.security.SecurityContextService;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 //exception
@@ -29,11 +17,13 @@ public class UserController {
     private final UserService userService;
     private final UserProfileService userProfileService;
     private final PasswordResetService passwordResetService;
+    private final SecurityContextService securityContextService;
 
-    public UserController(UserService userService, UserProfileService userProfileService, PasswordResetService passwordResetService) {
+    public UserController(UserService userService, UserProfileService userProfileService, PasswordResetService passwordResetService, SecurityContextService securityContextService) {
         this.userService = userService;
         this.userProfileService = userProfileService;
         this.passwordResetService = passwordResetService;
+        this.securityContextService = securityContextService;
     }
 
 
@@ -41,7 +31,7 @@ public class UserController {
     @GetMapping("/profile")
     public User profile() {
         //TODO change name to getUser
-        User user = userService.authTest();
+        User user = securityContextService.getLoggedUser();
         return user;
     }
 

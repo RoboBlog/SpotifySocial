@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import pl.comments.Comment;
+import pl.security.SecurityContextService;
 import pl.user.User;
 import pl.user.UserService;
 
@@ -16,10 +17,12 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final UserService userService;
+    private final SecurityContextService securityContextService;
 
-    public PostService(PostRepository postRepository, UserService userService) {
+    public PostService(PostRepository postRepository, UserService userService, SecurityContextService securityContextService) {
         this.postRepository = postRepository;
         this.userService = userService;
+        this.securityContextService = securityContextService;
     }
 
 //    public Post likePost(PostI){
@@ -32,7 +35,7 @@ public class PostService {
     }
 
     public Post createNewPost(Post post) {
-        User user = userService.authTest();
+        User user = securityContextService.getLoggedUser();
         post.setUser(user);
         postRepository.save(post);
         return post;
@@ -44,7 +47,7 @@ public class PostService {
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No such Post!"));
 
-        if (!(userService.authTest().equals(post.getUser()))) {
+        if (!(securityContextService.getLoggedUser().equals(post.getUser()))) {
             throw new AccessDeniedException("Access denied!");
         }
 
@@ -61,7 +64,7 @@ public class PostService {
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No such Post!"));
 
-        if (!(userService.authTest().equals(post.getUser()))) {
+        if (!(securityContextService.getLoggedUser().equals(post.getUser()))) {
             throw new AccessDeniedException("Access denied!");
         } else {
             postRepository.delete(post);
@@ -75,7 +78,7 @@ public class PostService {
                 .orElseThrow(() -> new NoSuchElementException("No such Post!"));
         post.addComment(comment);
 
-        User user = userService.authTest();
+        User user = securityContextService.getLoggedUser();
         post.setUser(user);
 
         postRepository.save(post);

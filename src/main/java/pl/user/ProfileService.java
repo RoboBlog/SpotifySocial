@@ -1,17 +1,18 @@
 package pl.user;
 
 import org.springframework.stereotype.Service;
-import pl.user.User;
-import pl.user.UserRepository;
+import pl.security.SecurityContextService;
 
 @Service
 public class ProfileService {
     private final UserRepository userRepository;
     private final UserService userService;
+    private final SecurityContextService securityContextService;
 
-    public ProfileService(UserRepository userRepository, UserService userService) {
+    public ProfileService(UserRepository userRepository, UserService userService, SecurityContextService securityContextService) {
         this.userRepository = userRepository;
         this.userService = userService;
+        this.securityContextService = securityContextService;
     }
 
 
@@ -28,7 +29,7 @@ public class ProfileService {
     }
 
     public String getSpotifyAccessToken() {
-        User user = userService.authTest();
+        User user = securityContextService.getLoggedUser();
         return user.getSpotifyAccessToken();
     }
 

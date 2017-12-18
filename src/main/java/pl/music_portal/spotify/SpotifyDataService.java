@@ -3,6 +3,7 @@ package pl.music_portal.spotify;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import pl.security.SecurityContextService;
 import pl.user.User;
 import pl.music_portal.spotify.POJO.Item;
 import pl.music_portal.spotify.POJO.Spotify;
@@ -21,18 +22,18 @@ import java.util.stream.Collectors;
 public class SpotifyDataService {
     private final SpotifyRepository spotifyRepository;
     private final ProfileService profileService;
-    private final UserService userService;
     private final HttpClient httpClient;
+    private final SecurityContextService securityContextService;
 
-    public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, UserService userService, HttpClient httpClient) {
+    public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, HttpClient httpClient, SecurityContextService securityContextService) {
         this.spotifyRepository = spotifyRepository;
         this.profileService = profileService;
-        this.userService = userService;
+        this.securityContextService = securityContextService;
         this.httpClient = httpClient;
     }
 
     public List<Item> getItems() {
-        User user = userService.authTest();
+        User user = securityContextService.getLoggedUser();
         Spotify spotifyData = spotifyRepository.findByUserUserId(user.getUserId());
         List<Item> items = spotifyData.getItems();
         return items;

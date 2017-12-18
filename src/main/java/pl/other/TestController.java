@@ -9,6 +9,7 @@ import pl.user.User;
 import pl.user.UserRepository;
 import pl.music_portal.spotify.TrackDto;
 
+import javax.transaction.Transactional;
 import java.util.LinkedList;
 import java.util.List;
 

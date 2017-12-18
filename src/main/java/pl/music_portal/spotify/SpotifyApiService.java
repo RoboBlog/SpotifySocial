@@ -2,6 +2,7 @@ package pl.music_portal.spotify;
 
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
+import pl.security.SecurityContextService;
 import pl.user.UserRepository;
 import pl.music_portal.spotify.POJO.Spotify;
 import pl.music_portal.spotify.POJO.SpotifyRepository;
@@ -15,14 +16,14 @@ import java.util.Map;
 @Service
 public class SpotifyApiService {
 
-    private final ProfileService profileService;
+    private final SecurityContextService securityContextService;
     private final SpotifyRepository spotifyRepository;
     private final UserService userService;
     private final UserRepository userRepository;
     private final HttpClient httpClient;
 
-    public SpotifyApiService(ProfileService profileService, SpotifyRepository spotifyRepository, UserService userService, UserRepository userRepository, HttpClient httpClient) {
-        this.profileService = profileService;
+    public SpotifyApiService(SecurityContextService securityContextService, SpotifyRepository spotifyRepository, UserService userService, UserRepository userRepository, HttpClient httpClient) {
+        this.securityContextService = securityContextService;;
         this.spotifyRepository = spotifyRepository;
         this.userService = userService;
         this.userRepository = userRepository;
@@ -54,7 +55,7 @@ public class SpotifyApiService {
     public void saveTopTracks(String topTracks) {
         Gson gson = new Gson();
         Spotify spotify = gson.fromJson(topTracks, Spotify.class);
-        spotify.setUser(userService.authTest());
+        spotify.setUser(securityContextService.getLoggedUser());
         System.out.println(spotify);
         spotifyRepository.save(spotify);
     }

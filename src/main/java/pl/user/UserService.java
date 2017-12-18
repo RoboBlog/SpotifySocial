@@ -31,22 +31,11 @@ public class UserService {
         this.securityContextService = securityContextService;
     }
 
-    public String getUsername() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authentication.getName();
-    }
-
-    public User authTest() {
-        String username = securityContextService.getUsername();
-        User loggedUser = userRepository.findByUsername(username);
-        return loggedUser;
-    }
-
     public Address addAddress(String city, String country) throws IOException {
         Coordinates coordinates = googleMapsGetService.getCoordinates(city, country);
         Address address = new Address(country, city, coordinates.getLatitude(), coordinates.getLongtitude());
         addressRepository.save(address);
-        User user = authTest();
+        User user = securityContextService.getLoggedUser();
         user.setAddress(address);
         userRepository.save(user);
 
