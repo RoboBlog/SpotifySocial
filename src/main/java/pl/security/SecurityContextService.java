@@ -29,6 +29,4 @@ public class SecurityContextService {
         User loggedUser = userRepository.findByUsername(username);
         return loggedUser;
     }
-
-
 }
