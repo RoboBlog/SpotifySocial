@@ -1,12 +1,13 @@
 package pl.music_portal.spotify;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import org.springframework.stereotype.Service;
+import pl.config.JacksonConfiguration;
 import pl.security.SecurityContextService;
 import pl.user.UserRepository;
 import pl.music_portal.spotify.POJO.Spotify;
 import pl.music_portal.spotify.POJO.SpotifyRepository;
-import pl.user.ProfileService;
 import pl.user.UserService;
 import pl.util.HttpClient;
 
@@ -21,9 +22,11 @@ public class SpotifyApiService {
     private final UserService userService;
     private final UserRepository userRepository;
     private final HttpClient httpClient;
+    private final JacksonConfiguration jacksonConfiguration;
 
-    public SpotifyApiService(SecurityContextService securityContextService, SpotifyRepository spotifyRepository, UserService userService, UserRepository userRepository, HttpClient httpClient) {
-        this.securityContextService = securityContextService;;
+    public SpotifyApiService(SecurityContextService securityContextService, SpotifyRepository spotifyRepository, UserService userService, UserRepository userRepository, HttpClient httpClient, JacksonConfiguration jacksonConfiguration) {
+        this.securityContextService = securityContextService;
+        this.jacksonConfiguration = jacksonConfiguration;
         this.spotifyRepository = spotifyRepository;
         this.userService = userService;
         this.userRepository = userRepository;
@@ -62,12 +65,18 @@ public class SpotifyApiService {
 
 
     //TODO DELETE THIS
-    public void saveTopTracks(String username, String topTracks) {
-        Gson gson = new Gson();
-        Spotify spotify = gson.fromJson(topTracks, Spotify.class);
-        spotify.setUser(userRepository.findByUsername(username));
-        System.out.println(spotify);
-        spotifyRepository.save(spotify);
+//    public void saveTopTracks(String username, String topTracks) {
+//        Gson gson = new Gson();
+//        Spotify spotify = gson.fromJson(topTracks, Spotify.class);
+//        spotify.setUser(userRepository.findByUsername(username));
+//        System.out.println(spotify);
+//        spotifyRepository.save(spotify);
+//    }
+
+    public void saveTopTracks(String username, String topTracks) throws IOException {
+        ObjectMapper objectMapper = jacksonConfiguration.objectMapper();
+        Spotify spotify = objectMapper.readValue(topTracks, Spotify.class);
+        System.out.println("Spotify info object: " + spotify);
     }
 
 }
