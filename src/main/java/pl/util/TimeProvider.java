@@ -3,14 +3,22 @@ package pl.util;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Component
-public class TimeProvider implements Serializable {
+public class TimeProvider {
 
-    private static final long serialVersionUID = -3301695478208950415L;
+    public static final String DEFAULT_ZONE_NAME = "Europe/Warsaw";
+    public static final ZoneId DEFAULT_ZONE = ZoneId.of(DEFAULT_ZONE_NAME);
 
-    public Date now() {
-        return new Date();
+    public LocalDateTime now() {
+        return LocalDateTime.now(DEFAULT_ZONE);
+    }
+
+    public LocalDate today() {
+        return now().toLocalDate();
     }
 }
