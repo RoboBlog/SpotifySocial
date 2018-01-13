@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import pl.music_portal.spotify.POJO.Spotify;
+import pl.music_portal.spotify.SpotifyApiService;
 import pl.user.User;
 import pl.user.UserRepository;
 import pl.music_portal.spotify.TrackDto;
 
-import javax.transaction.Transactional;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,9 +20,11 @@ import java.util.List;
 @RestController
 public class TestController {
     private final UserRepository userRepository;
+    private final SpotifyApiService spotifyApiService;
 
-    public TestController(UserRepository userRepository) {
+    public TestController(UserRepository userRepository, SpotifyApiService spotifyApiService) {
         this.userRepository = userRepository;
+        this.spotifyApiService = spotifyApiService;
     }
 
     @GetMapping("/gettracks") //TODO put spring JAK To ogarniac request param?
@@ -60,6 +65,12 @@ public class TestController {
 
         return maciek;
 
+    }
+
+    @GetMapping("testtracks")
+    public Spotify testTracks() throws IOException {
+        Spotify spotify = spotifyApiService.saveTopTracks();
+        return spotify;
     }
 
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

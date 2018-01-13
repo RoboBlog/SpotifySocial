@@ -57,9 +57,9 @@ public class User {
     @Column(name = "enabled")
     private boolean accountEnabled;
 
-    @JsonView(Views.Public.class)
-    @OneToOne
-    private Spotify spotify;
+//    @JsonView(Views.Public.class)
+//    @OneToOne
+//    private Spotify spotify;
 
     @JsonView(Views.Internal.class)
     @OneToOne
@@ -148,7 +148,7 @@ public class User {
                 ", description='" + description + '\'' +
                 ", friends=" + friends +
                 ", accountEnabled=" + accountEnabled +
-                ", spotify=" + spotify +
+//                ", spotify=" + spotify +
                 ", address=" + address +
                 ", activationCode='" + activationCode + '\'' +
                 ", lastPasswordResetDate=" + lastPasswordResetDate +
