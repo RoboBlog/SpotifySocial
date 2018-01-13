@@ -7,7 +7,7 @@ import pl.security.SecurityContextService;
 import pl.user.User;
 import pl.music_portal.spotify.POJO.Item;
 import pl.music_portal.spotify.POJO.Spotify;
-import pl.music_portal.spotify.POJO.SpotifyRepository;
+//import pl.music_portal.spotify.POJO.SpotifyRepository;
 import pl.user.ProfileService;
 import pl.user.UserService;
 import pl.util.HttpClient;
@@ -20,24 +20,25 @@ import java.util.stream.Collectors;
 
 @Service
 public class SpotifyDataService {
-    private final SpotifyRepository spotifyRepository;
+//    private final SpotifyRepository spotifyRepository;
     private final ProfileService profileService;
     private final HttpClient httpClient;
     private final SecurityContextService securityContextService;
 
-    public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, HttpClient httpClient, SecurityContextService securityContextService) {
-        this.spotifyRepository = spotifyRepository;
+    public SpotifyDataService(ProfileService profileService, HttpClient httpClient, SecurityContextService securityContextService) {
+//    public SpotifyDataService(SpotifyRepository spotifyRepository, ProfileService profileService, HttpClient httpClient, SecurityContextService securityContextService) {
+//        this.spotifyRepository = spotifyRepository;
         this.profileService = profileService;
         this.securityContextService = securityContextService;
         this.httpClient = httpClient;
     }
 
-    public List<Item> getItems() {
-        User user = securityContextService.getLoggedUser();
-        Spotify spotifyData = spotifyRepository.findByUserUserId(user.getUserId());
-        List<Item> items = spotifyData.getItems();
-        return items;
-    }
+//    public List<Item> getItems() {
+//        User user = securityContextService.getLoggedUser();
+//        Spotify spotifyData = spotifyRepository.findByUserUserId(user.getUserId());
+//        List<Item> items = spotifyData.getItems();
+//        return items;
+//    }
 
     public List<String> getArtists(List<Item> items) {
         List<String> artistsId = new LinkedList<>();
@@ -60,21 +61,22 @@ public class SpotifyDataService {
         return response;
     }
 
-    public List<String> getFavoriteMusicGenres() throws IOException {
-        List<Item> items = getItems();
-        List<String> artistsList = getArtists(items);
-        String artistsJson = getArtistsJson(artistsList);
 
-        JSONObject js = new JSONObject(artistsJson);
-        JSONArray artists = js.getJSONArray("artists");
-        List<String> genresList = new LinkedList<>();
-
-        for (int i = 0; i < artists.length(); i++) {
-            JSONArray genres = artists.getJSONObject(i).getJSONArray("genres");
-            genres.forEach(genre -> genresList.add(genre.toString()));
-        }
-
-        return genresList;
-    } //enum?
+//    public List<String> getFavoriteMusicGenres() throws IOException {
+//        List<Item> items = getItems();
+//        List<String> artistsList = getArtists(items);
+//        String artistsJson = getArtistsJson(artistsList);
+//
+//        JSONObject js = new JSONObject(artistsJson);
+//        JSONArray artists = js.getJSONArray("artists");
+//        List<String> genresList = new LinkedList<>();
+//
+//        for (int i = 0; i < artists.length(); i++) {
+//            JSONArray genres = artists.getJSONObject(i).getJSONArray("genres");
+//            genres.forEach(genre -> genresList.add(genre.toString()));
+//        }
+//
+//        return genresList;
+//    } //enum?
 
 }

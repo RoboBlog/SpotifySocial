@@ -89,27 +89,27 @@ public class SpotifyController {
 //        spotifyGetService.saveTopTracks(topTracks);
 //        return "topTracks";
 //    }
-
-    @RequestMapping("/getfavouritemusicgenres")
-    public List<String> getAll() throws IOException {
-        List<String> favoriteMusicGenres = spotifyDataService.getFavoriteMusicGenres();
-        return favoriteMusicGenres;
-    }
-
-    //SERVICE
-    @GetMapping("/gettoptrackslist")
-    public List<TrackDto> getTopTracksList() {
-        List<Item> items = spotifyDataService.getItems();
-
-        List<TrackDto> tracksList = new LinkedList<>();
-
-        items.forEach(item -> {
-            TrackDto track = new TrackDto(item.getArtists().get(0).getName(), item.getName(), item.getId());
-            tracksList.add(track);
-        });
-
-        return tracksList;
-    }
+//
+//    @RequestMapping("/getfavouritemusicgenres")
+//    public List<String> getAll() throws IOException {
+//        List<String> favoriteMusicGenres = spotifyDataService.getFavoriteMusicGenres();
+//        return favoriteMusicGenres;
+//    }
+//
+//    //SERVICE
+//    @GetMapping("/gettoptrackslist")
+//    public List<TrackDto> getTopTracksList() {
+//        List<Item> items = spotifyDataService.getItems();
+//
+//        List<TrackDto> tracksList = new LinkedList<>();
+//
+//        items.forEach(item -> {
+//            TrackDto track = new TrackDto(item.getArtists().get(0).getName(), item.getName(), item.getId());
+//            tracksList.add(track);
+//        });
+//
+//        return tracksList;
+//    }
 
 //    @GetMapping("/getnewreleases")
 //    public String getNewReleases(){
