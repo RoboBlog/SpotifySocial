@@ -74,4 +74,19 @@ public class UserController {
     public void addDescription(@RequestParam String description) {
         userProfileService.addDescription(description);
     }
+
+    //TODO Auth plaintext password
+    public void initDeleteUserAccountProcess(String password) {
+        User user = securityContextService.getLoggedUser();
+        //test password
+        //TODO auth exception or Data type to return result
+
+        //send mail to email from user.getEmail();
+
+    }
+
+    public void confirmDeleteUserAccountProcess() {
+
+    }
+
 }
