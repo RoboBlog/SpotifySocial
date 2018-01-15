@@ -80,6 +80,8 @@ public class User {
     @JsonView(Views.Internal.class)
     private String confirmationId;
 
+    private boolean deleteProcess;
+
 //    @JsonView(Views.Public.class)
     @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)

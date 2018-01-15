@@ -2,6 +2,7 @@ package pl.user;
 
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.web.bind.annotation.*;
+import pl.email.EmailService;
 import pl.other.Views;
 import pl.security.SecurityContextService;
 
@@ -18,12 +19,14 @@ public class UserController {
     private final UserProfileService userProfileService;
     private final PasswordResetService passwordResetService;
     private final SecurityContextService securityContextService;
+    private final AccountDeletionService accountDeletionService;
 
-    public UserController(UserService userService, UserProfileService userProfileService, PasswordResetService passwordResetService, SecurityContextService securityContextService) {
+    public UserController(UserService userService, UserProfileService userProfileService, PasswordResetService passwordResetService, SecurityContextService securityContextService, AccountDeletionService accountDeletionService) {
         this.userService = userService;
         this.userProfileService = userProfileService;
         this.passwordResetService = passwordResetService;
         this.securityContextService = securityContextService;
+        this.accountDeletionService = accountDeletionService;
     }
 
 
@@ -75,18 +78,14 @@ public class UserController {
         userProfileService.addDescription(description);
     }
 
-    //TODO Auth plaintext password
-    public void initDeleteUserAccountProcess(String password) {
-        User user = securityContextService.getLoggedUser();
-        //test password
-        //TODO auth exception or Data type to return result
-
-        //send mail to email from user.getEmail();
-
+    @GetMapping("/delete/account/init")
+    public void initDeleteUserAccountProcess() throws UnknownHostException {
+        accountDeletionService.initDeleteUserAccountProcess();
     }
 
-    public void confirmDeleteUserAccountProcess() {
-
+    @GetMapping("/delete/account/confirm")
+    public void confirmDeleteUserAccountProcess(@RequestParam Long userId) {
+        accountDeletionService.confirmDeleteUserAccountProcess(userId);
     }
 
 }

@@ -3,20 +3,14 @@ package pl.user;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.CredentialsExpiredException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.email.EmailService;
+import pl.util.ServerUtil;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -28,15 +22,14 @@ public class PasswordResetService {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final PasswordEncoder passwordEncoder;
+    private final ServerUtil serverUtil;
 
-    @Value("${ver}")
-    private String apiVer;
-
-    public PasswordResetService(PasswordResetTokenRepository passwordResetTokenRepository, UserRepository userRepository, EmailService emailService, PasswordEncoder passwordEncoder) {
+    public PasswordResetService(PasswordResetTokenRepository passwordResetTokenRepository, UserRepository userRepository, EmailService emailService, PasswordEncoder passwordEncoder, ServerUtil serverUtil) {
         this.passwordResetTokenRepository = passwordResetTokenRepository;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.passwordEncoder = passwordEncoder;
+        this.serverUtil = serverUtil;
     }
 
 
@@ -50,12 +43,12 @@ public class PasswordResetService {
 
         PasswordResetToken myToken = new PasswordResetToken(token, user);
         passwordResetTokenRepository.save(myToken);
-        String resetPasswordUrl = getBaseUrl() + ":9000" + apiVer + "user/changePassword?id=" + user.getUserId() + "&token=" + token;
+        String resetPasswordUrl = serverUtil.getBaseUrl() + ":9000" + serverUtil.getApiVer() + "user/changePassword?id=" + user.getUserId() + "&token=" + token;
 
         log.info("User {} has sent request to reset password", user.getUsername());
         String message = "Reset Password: " + resetPasswordUrl;
 
-        emailService.sendSimpleMessage("robovlogg@gmail.com", "Reset Password", message);
+        emailService.sendSimpleMessage(userEmail, "Reset Password", message);
     }
 
     public void validatePasswordResetToken(String token, String password, Long id){
@@ -78,7 +71,5 @@ public class PasswordResetService {
         //delete
     }
 
-    private String getBaseUrl() throws UnknownHostException {
-        return InetAddress.getLocalHost().getHostAddress();
-    }
+
 }

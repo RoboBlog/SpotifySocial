@@ -19,6 +19,10 @@ public class UserProfileService {
         this.securityContextService = securityContextService;
     }
 
+    public void deleteUser(Long userId) {
+        userRepository.delete(userId);
+    }
+
     public void addDescription(String description) {
         User user = securityContextService.getLoggedUser();
         user.setDescription(description);
