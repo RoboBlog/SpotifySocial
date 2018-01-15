@@ -16,12 +16,10 @@ import java.util.NoSuchElementException;
 public class PostService {
 
     private final PostRepository postRepository;
-    private final UserService userService;
     private final SecurityContextService securityContextService;
 
-    public PostService(PostRepository postRepository, UserService userService, SecurityContextService securityContextService) {
+    public PostService(PostRepository postRepository, SecurityContextService securityContextService) {
         this.postRepository = postRepository;
-        this.userService = userService;
         this.securityContextService = securityContextService;
     }
 

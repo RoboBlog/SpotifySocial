@@ -4,9 +4,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 import pl.comments.Comment;
-import pl.exception.MyResourceNotFoundException;
-
-import java.util.List;
 
 @RequestMapping("${ver}/post/")
 @RestController
@@ -45,10 +42,10 @@ public class PostController {
     }
 
     @GetMapping("/get/all/{userId}")
-    public List<Post> getAllUserPosts(Pageable pageble,
+    public Page<Post> getAllUserPosts(Pageable pageble,
                                       @PathVariable Long userId) {
         Page<Post> resultPage = postService.getAllUserPostByDateAdded(pageble, userId);
-        return resultPage.getContent();
+        return resultPage;
     }
 
     @GetMapping("/get/all")

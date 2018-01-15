@@ -41,4 +41,6 @@ public class UserProfileService {
             throw new AccessDeniedException("Password not the same!");
         }
     }
+
+//    public void deleteAccount()
 }
