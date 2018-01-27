@@ -14,11 +14,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.social.connect.ConnectionFactoryLocator;
-import org.springframework.social.connect.UsersConnectionRepository;
-import org.springframework.social.connect.web.ProviderSignInController;
-import pl.social.facebook.FacebookConnectionSignup;
-import pl.social.facebook.FacebookSignInAdapter;
+//import org.springframework.social.connect.ConnectionFactoryLocator;
+//import org.springframework.social.connect.UsersConnectionRepository;
+//import org.springframework.social.connect.web.ProviderSignInController;
+//import pl.social.facebook.FacebookConnectionSignup;
+//import pl.social.facebook.FacebookSignInAdapter;
 
 
 @SuppressWarnings("SpringJavaAutowiringInspection")
@@ -28,14 +28,14 @@ import pl.social.facebook.FacebookSignInAdapter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    private ConnectionFactoryLocator connectionFactoryLocator;
-
-    @Autowired
-    private UsersConnectionRepository usersConnectionRepository;
-
-    @Autowired
-    private FacebookConnectionSignup facebookConnectionSignup;
+//    @Autowired
+//    private ConnectionFactoryLocator connectionFactoryLocator;
+//
+//    @Autowired
+//    private UsersConnectionRepository usersConnectionRepository;
+//
+//    @Autowired
+//    private FacebookConnectionSignup facebookConnectionSignup;
 
 
     private final JwtTokenUtil jwtTokenUtil;
@@ -105,9 +105,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.headers().cacheControl();
     }
 
-    @Bean
-    public ProviderSignInController providerSignInController() {
-        usersConnectionRepository.setConnectionSignUp(facebookConnectionSignup);
-        return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new FacebookSignInAdapter(jwtTokenUtil, userDetailsService));
-    }
+//    @Bean
+//    public ProviderSignInController providerSignInController() {
+//        usersConnectionRepository.setConnectionSignUp(facebookConnectionSignup);
+//        return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new FacebookSignInAdapter(jwtTokenUtil, userDetailsService));
+//    }
 }
