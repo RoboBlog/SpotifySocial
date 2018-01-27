@@ -1,15 +1,18 @@
 package pl.music_portal.spotify;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.config.JacksonConfiguration;
+import pl.music_portal.Track;
 import pl.music_portal.spotify.POJO.Item;
 import pl.music_portal.spotify.POJO.Spotify;
 import pl.user.ProfileService;
+import springfox.documentation.swagger2.mappers.ModelMapper;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -72,6 +75,26 @@ public class SpotifyController {
 
         Spotify spotify = objectMapper.readValue(topTracks, Spotify.class);
 
+        List<Item> items = spotify.getItems();
+
+//        items.forEach(item -> {
+//                    Track track = Track
+//                            .builder()
+//                            .name(item.getName())
+//                            .album()
+//                            .artist()
+//                            .durationMs()
+//                            .genre()
+//                            .imageUrl()
+//                            .build();
+//                });
+        java.lang.reflect.Type targetListType = new TypeToken<List<Item
+
+
+                        >>() {}.getType();
+
+        ModelMapper modelMapper = new ModelMapper();
+        List<Item> tracks = modelMapper.map(order, .class);
 
         //        String url = "http://localhost:8080/musicportalstatus"; //TODO FIX IT
 //        RedirectView redirectView = new RedirectView(url);
@@ -109,7 +132,7 @@ public class SpotifyController {
 //    }
 
 //    @GetMapping("/getnewreleases")
-//    public String getNewReleases(){
+ //    public String getNewReleases(){
 //        https://api.spotify.com/v1/browse/new-releases
 //    }
 

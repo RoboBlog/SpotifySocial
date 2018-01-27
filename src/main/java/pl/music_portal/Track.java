@@ -1,11 +1,13 @@
 package pl.music_portal;
 
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Builder
 @Entity
 @Data
 public class Track {
@@ -27,4 +29,5 @@ public class Track {
     private String imageUrl;
     //tags
     //spotify/deezer/.... urls.
+
 }
