@@ -8,7 +8,6 @@ import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.stereotype.Service;
 import pl.user.User;
 import pl.user.UserRepository;
-
 import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
 
 @Slf4j
@@ -27,11 +26,16 @@ public class FacebookConnectionSignup implements ConnectionSignUp {
     public String execute(Connection<?> connection) {
         log.info("New user SignUp by Facebook");
         final User user = new User();
+        user.setEmail(getEmail(connection));
         user.setUsername(connection.getDisplayName());
         user.setPassword(passwordEncoder.encode(randomAlphabetic(8)));
         user.setAccountEnabled(true);
         userRepository.save(user);
         return user.getUsername();
+    }
+
+    private String getEmail(Connection<?> connection) {
+        return connection.fetchUserProfile().getEmail();
     }
 
 }

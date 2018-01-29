@@ -3,26 +3,16 @@ package pl.social.facebook;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.social.connect.Connection;
-import org.springframework.social.connect.ConnectionFactory;
-import org.springframework.social.connect.web.ProviderSignInAttempt;
 import org.springframework.social.connect.web.SignInAdapter;
-import org.springframework.social.support.URIBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.NativeWebRequest;
-import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.servlet.view.RedirectView;
 import pl.security.JwtTokenUtil;
-import pl.security.service.JwtAuthenticationResponse;
-
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
 
 @Slf4j
 @Service
@@ -39,8 +29,6 @@ public class FacebookSignInAdapter implements SignInAdapter {
         this.userDetailsService = userDetailsService;
     }
 
-
-    //todo fix it and override class and get role
     @Override
     public String signIn(String localUserId, Connection<?> connection, NativeWebRequest request) {
         log.info("User {} sign in by facebook", localUserId);

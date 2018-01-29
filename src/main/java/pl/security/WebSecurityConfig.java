@@ -109,4 +109,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         usersConnectionRepository.setConnectionSignUp(facebookConnectionSignup);
         return new ProviderSignInController(connectionFactoryLocator, usersConnectionRepository, new FacebookSignInAdapter(jwtTokenUtil, userDetailsService));
     }
+
 }
