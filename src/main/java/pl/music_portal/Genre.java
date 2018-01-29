@@ -1,4 +1,4 @@
-package pl.music_portal;
-
-public class Genre {
-}
+//package pl.music_portal;
+//
+//public class Genre {
+//}

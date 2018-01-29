@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 import pl.other.Views;
 import pl.posts.Post;
 import pl.security.Authority;
-import pl.music_portal.spotify.POJO.Spotify;
+//import pl.music_portal.spotify.POJO.Spotify;
 
 import javax.persistence.*;
 import java.util.*;
