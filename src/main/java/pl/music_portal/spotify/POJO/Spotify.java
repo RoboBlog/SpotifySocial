@@ -16,13 +16,6 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Spotify {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Long spotifyId;
-//
-//    @OneToOne
-//    public User user;
-//    @OneToMany(cascade = CascadeType.ALL)
     @JsonProperty("items")
     public List<Item> items = null;
     @JsonProperty("total")
