@@ -74,7 +74,7 @@ dependencies {
 	compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
 
 
-
+	compile 'org.modelmapper:modelmapper:1.1.2'
 //	CHATTT
 
 	compile("org.springframework.boot:spring-boot-starter-websocket")
