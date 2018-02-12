@@ -1,26 +1,25 @@
 package pl.maps;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
+import pl.util.HttpClient;
 
 import java.io.IOException;
 
 @Service
 public class GoogleMapsGetService {
     private final String apiKey = System.getenv("GOOGLE_MAPS_API_KEY");
+    private final HttpClient httpClient;
+
+    public GoogleMapsGetService(HttpClient httpClient) {
+        this.httpClient = httpClient;
+    }
 
     public Coordinates getCoordinates(String city, String country) throws IOException {
 
         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "," + country + "&key=" + apiKey;
-        OkHttpClient client = new OkHttpClient();
 
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        String body = client.newCall(request).execute().body().string();
+        String body = httpClient.get(url, 250, 250);
 
         JSONObject googleMapsResponse = new JSONObject(body);
         JSONObject jsonObjectGoogleMapResponse = googleMapsResponse.getJSONArray("results").getJSONObject(0).getJSONObject("geometry").getJSONObject("location");
