@@ -24,13 +24,14 @@ public class Track {
     @ManyToMany
     private List<Artist> artist = new LinkedList<>();
 
-    private int durationMs;
-    //private boolean explicit
-    //private int popularity //spotify
+    @OneToOne
+    private TrackDetails details;
 
-//    private Genre genre;
     private String imageUrl;
+    private String spotifyId;
+    private String deezerId;
+//    private String lastFm;
     //tags
-    //spotify/deezer/.... urls.
+    //... urls.
 
 }

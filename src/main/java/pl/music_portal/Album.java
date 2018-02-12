@@ -18,7 +18,7 @@ public class Album {
     //copyrights
     private String imageUrl;
     private Date releaseDate;
-    @ManyToMany
+    @OneToMany
     private List<Track> track = new LinkedList<>();
     //fans/followers/popularity
     @ManyToMany

@@ -12,10 +12,10 @@ import java.util.List;
 @Entity
 @Data
 public class MusicData {
+
     @Id
     @GeneratedValue
     private Long id;
-
 //    private providers
     @ManyToMany
     private List<Track> topTracks = new LinkedList<>();
@@ -24,7 +24,7 @@ public class MusicData {
     @ManyToMany
     private List<Artist> topArtists = new LinkedList<>();
     @ManyToMany
-    private List<Album> topAlbums= new LinkedList<>();
+    private List<Album> topAlbums = new LinkedList<>();
     @ManyToMany
     private List<Track> recentlyPlayed = new LinkedList<>();
 
