@@ -1,6 +1,5 @@
 package pl;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
