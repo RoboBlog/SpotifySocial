@@ -65,7 +65,7 @@ dependencies {
 	compile 'com.google.code.gson:gson:2.8.1'
 	compile 'org.mapstruct:mapstruct:1.2.0.Final'
 	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
-	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+//	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 
 	//SECURITY
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.4.RELEASE'
