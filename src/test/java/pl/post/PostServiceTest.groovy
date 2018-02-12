@@ -1,5 +1,6 @@
 package pl.post
 
+import pl.comments.Comment
 import pl.posts.Post
 import pl.posts.PostRepository
 import pl.posts.PostService
@@ -35,4 +36,26 @@ class PostServiceTest extends Specification {
         then:
         thrown NoSuchElementException
     }
+
+    def "addComment to exist post"() {
+        given:
+        def comment = new Comment(securityContextService.getLoggedUser(), "test comment")
+        when:
+        postService.addComment(comment, 1L)
+        then:
+        def comments = postService.getPost(1L).getComments()
+        def commentFromPost = comments.iterator().next()
+        commentFromPost == comment
+    }
+
+    def "addComment to no exist post"() {
+        given:
+        def comment = new Comment(securityContextService.getLoggedUser(), "test comment")
+        when:
+        postService.addComment(comment, 2L)
+        then:
+        thrown NoSuchElementException
+    }
+
+
 }

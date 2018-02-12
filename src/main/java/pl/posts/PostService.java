@@ -40,7 +40,6 @@ public class PostService {
     }
 
     public Post editPostContent(Long id, String content) {
-        //TODO update date
         Post post = postRepository
                 .findById(id)
                 .orElseThrow(() -> new NoSuchElementException("No such Post!"));
@@ -55,8 +54,7 @@ public class PostService {
         return post;
     }
 
-
-    //TODO test it
+    //TODO test it (frontend)
     public void deletePost(Long id) {
         Post post = postRepository
                 .findById(id)
@@ -69,15 +67,13 @@ public class PostService {
         }
     }
 
-    //TODO null pointer if user is no login?
+    //auth
     public Comment addComment(Comment comment, Long postId) {
         Post post = postRepository
                 .findById(postId)
                 .orElseThrow(() -> new NoSuchElementException("No such Post!"));
+        comment.setAuthor(securityContextService.getLoggedUser());
         post.addComment(comment);
-
-        User user = securityContextService.getLoggedUser();
-        post.setUser(user);
 
         postRepository.save(post);
         return comment;

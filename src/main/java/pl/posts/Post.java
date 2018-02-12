@@ -8,6 +8,7 @@ import pl.user.User;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -28,7 +29,7 @@ public class Post {
     //image or images
 //    private Long likes;
     @OneToMany
-    private Set<Comment> comments;
+    private Set<Comment> comments = new HashSet();
     private boolean deleted;
 
     public void addComment(Comment comment) {
