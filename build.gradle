@@ -12,6 +12,7 @@ buildscript {
 
 plugins {
 	id "org.sonarqube" version "2.5"
+	id 'net.ltgt.apt' version '0.8'
 }
 
 apply plugin: 'java'
@@ -74,7 +75,10 @@ dependencies {
 	compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
 
 
-	compile group: 'org.mapstruct', name: 'mapstruct-jdk8', version: '1.2.0.Final'
+
+	compile 'org.mapstruct:mapstruct:1.2.0.Final'
+	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 
 //	CHATTT
 
