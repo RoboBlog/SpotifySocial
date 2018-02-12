@@ -1,5 +1,5 @@
-#Spotify Social
+# Spotify Social
 
-##Instalation
+## Instalation
 
-##Deployment
+## Deployment

@@ -36,52 +36,21 @@ repositories {
 		url 'https://repo.spring.io/libs-milestone'
 	}
 }
-dependencies {
-	compileOnly('org.projectlombok:lombok:1.16.18')
-	compile("org.springframework.boot:spring-boot-devtools")
-	compile("org.springframework.boot:spring-boot-starter-actuator")
 
+dependencies {
+	//WEB
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile("org.springframework.boot:spring-boot-starter-data-jpa")
-	compile('org.springframework.boot:spring-boot-starter-security')
-	compile('org.springframework.boot:spring-boot-starter-websocket')
-	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
-	compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
+	//SWAGGER
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
 
-
-	compile 'org.springframework.security:spring-security-test:4.0.1.RELEASE'
-	compile 'com.google.code.gson:gson:2.8.1'
-
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.5.3.RELEASE'
-
-
-
-	//swagger
-//	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
-//	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
-
-
 	//SOCIAL
-//	compile group: 'org.springframework.social', name: 'spring-social-core', version: '1.1.4.RELEASE'
-//	compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
-//	compile 'org.springframework.social:spring-social-core:1.1.4.RELEASE'
-
-
 	compile group: 'com.github.spring-social', name: 'spring-social-google', version: '1.1.3'
 	compile 'org.springframework.social:spring-social-core:2.0.0.M4'
-//	compile 'org.springframework.social:spring-social-facebook:2.0.0.M4'
 	compile 'org.springframework.social:spring-social-facebook:2.0.3.RELEASE'
 
-
-
-	compile 'org.mapstruct:mapstruct:1.2.0.Final'
-	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
-	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
-
-//	CHATTT
-
+	//CHAT
 	compile("org.springframework.boot:spring-boot-starter-websocket")
 	compile("org.webjars:webjars-locator")
 	compile("org.webjars:sockjs-client:1.0.2")
@@ -90,33 +59,41 @@ dependencies {
 	compile("org.webjars:jquery:3.1.0")
 	compile group: 'org.webjars', name: 'momentjs', version: '2.18.1'
 	compile group: 'org.webjars.bower', name: 'socket.io-client', version: '1.4.5'
-
-	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.4.RELEASE'
-//	compile("org.springframework.boot:spring-boot-starter-data-mongodb")
 	compile group: 'org.json', name: 'json', version: '20160810'
-	compile 'com.squareup.okhttp3:okhttp:3.9.1'
 
-//	compile('org.springframework.boot:spring-boot-starter')
-//	compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '1.5.4.RELEASE'
-//	compile group: 'org.webjars', name: 'webjars-locator', version: '0.32'
-//	compile group: 'org.webjars.bower', name: 'sockjs-client', version: '1.1.4'
-//	compile group: 'org.webjars.bower', name: 'stomp-websocket', version: '2.3.4'
-//	compile group: 'org.webjars', name: 'bootstrap', version: '3.3.7'
-//	compile group: 'org.webjars.bower', name: 'jquery', version: '3.1.0'
+	//MAPPER
+	compile 'com.google.code.gson:gson:2.8.1'
+	compile 'org.mapstruct:mapstruct:1.2.0.Final'
+	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
+	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 
+	//SECURITY
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '1.5.4.RELEASE'
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+	compile('org.springframework.boot:spring-boot-starter-security')
 
+	//LOGGER
 	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
 
-
+	//OTHER
 	compile group: 'com.google.guava', name: 'guava', version: '19.0'
+	compileOnly('org.projectlombok:lombok:1.16.18')
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	//DEV-TOOLS
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile("org.springframework.boot:spring-boot-starter-actuator")
 
-	compile 'org.spockframework.spock:spock-core:spock-1.1'
-	compile 'org.spockframework.spock:spock-spring:spock-1.1'
-
+	//DATABASE
 	runtime('mysql:mysql-connector-java')
+	compile("org.springframework.boot:spring-boot-starter-data-jpa")
 
+	//MAIL
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '1.5.3.RELEASE'
+
+	//TESTS
+	compile 'org.springframework.security:spring-security-test:4.0.1.RELEASE'
+	testCompile 'org.spockframework.spock:spock-core:spock-1.1'
+	testCompile 'org.spockframework.spock:spock-spring:spock-1.1'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 	testCompile 'org.assertj:assertj-core:3.8.0'
-	compile group: 'com.mashape.unirest', name: 'unirest-java', version: '1.3.1'
 }
