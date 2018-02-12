@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Data
 @Entity
@@ -16,14 +16,13 @@ public class Message {
     private String name;
     private String from;
     private String content;
-    private LocalDateTime createdDate;
+    private ZonedDateTime createdDate = ZonedDateTime.now();
 
 
     public Message(String name, String from, String content) {
         this.name = name;
         this.from = from;
         this.content = content;
-        this.createdDate = LocalDateTime.now();
     }
 
 }

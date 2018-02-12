@@ -7,7 +7,7 @@ import pl.comments.Comment;
 import pl.user.User;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +22,7 @@ public class Post {
     private Long id;
     @ManyToOne
     private User user;
-    private LocalDateTime dateAdded = LocalDateTime.now();
+    private ZonedDateTime dateAdded = ZonedDateTime.now();
     private String content;
     //TODO
     //html

@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 
 @Data
@@ -16,7 +16,7 @@ public class FriendRequest {
     private Long id;
     private String requestFrom;
     private String requestTo;
-    private LocalDateTime sendDate;
+    private ZonedDateTime sendDate = ZonedDateTime.now();
     private boolean isAccept;
 
     public FriendRequest(String requestTo, String requestFrom) {

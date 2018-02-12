@@ -11,6 +11,7 @@ import pl.util.ServerUtil;
 import java.net.UnknownHostException;
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
@@ -61,7 +62,7 @@ public class PasswordResetService {
         }
 
         //todo testit
-        if (passToken.getExpiryDate().isAfter(LocalDateTime.now())) {
+        if (passToken.getExpiryDate().isAfter(ZonedDateTime.now())) {
             throw new CredentialsExpiredException("Expired token!");
         }
 

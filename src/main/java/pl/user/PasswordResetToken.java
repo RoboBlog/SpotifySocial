@@ -4,7 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,7 +22,7 @@ public class PasswordResetToken {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private LocalDateTime expiryDate = LocalDateTime.now().plusDays(1);
+    private ZonedDateTime expiryDate = ZonedDateTime.now().plusDays(1);
 
     public PasswordResetToken(String token, User user) {
         this.token = token;
