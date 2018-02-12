@@ -2,10 +2,14 @@ package pl.groups;
 import lombok.Data;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
+import pl.posts.Post;
+import pl.user.User;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,13 +23,17 @@ public class Group {
     private String name;
     private String description;
     private boolean deleted;
-//    private tags
-    //backgrond, icon
-    //todo
-//    private Set<User> admins;
-//    private Set<User> moderators = new HashSet<>();
-//    private Set<User> members = new HashSet<>();
-////    private privacy level
-//    private Set<Post> posts;
-//    ///users amount
+    //private tags;
+    private String backgroundUrl;
+    private String iconUrl;
+
+    @ManyToMany
+    private Set<User> admins = new HashSet<>();
+    @ManyToMany
+    private Set<User> moderators = new HashSet<>();
+    @ManyToMany
+    private Set<User> members = new HashSet<>();
+//  private privacy level
+    @OneToMany
+    private List<Post> posts = new LinkedList<>();
 }
